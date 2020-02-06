@@ -16,4 +16,6 @@ public interface MemberService {
 	boolean searchAccount(String account);
 
 	MemberBean searchMemberBean(String account);
+	
+	public void modifyVerificationStatus(String userId); 
 }

@@ -14,7 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.protobuf.Service;
 import com.icook.member.server.MemberService;
 import com.icook.member.validator.MemberValidator;
 import com.icook.model.CustomerInfo;
@@ -68,7 +70,8 @@ public class MemberController {
 	// 註冊成功頁面
 	// 請求映射 ( 值 = "連結名稱" , 方法 = 請求方法 .POST )
 	@RequestMapping(value = "/SignUp/memberSignUp", method = RequestMethod.POST) //
-	public String RegistrationSuccess(@ModelAttribute("MemberBean") MemberBean mb, BindingResult result) {
+	public String RegistrationSuccess(@ModelAttribute("MemberBean") MemberBean mb, BindingResult result,HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		MemberValidator validator = new MemberValidator();
 		validator.validate(mb, result);
 		if (result.hasErrors()) {
@@ -80,7 +83,13 @@ public class MemberController {
 			return "signUp/memberSignUp2";
 		}
 		try {
+			//未驗證的狀態
+			mb.setCheckstatus("N");
+			session.setAttribute("verificationLetter_"+mb.getUserId(), mb.getUserId());
 			service.save(mb);
+			MemberBean temp = service.searchMemberBean(mb.getAccount());
+			service.sendOrderConfirmation(getDummyOrder(temp,"registered"));
+			
 		} catch (org.hibernate.exception.ConstraintViolationException e) {
 			result.rejectValue("account", "", "帳號已存在，請重新輸入");
 			return "signUp/memberSignUp2";
@@ -141,49 +150,53 @@ public class MemberController {
 		model.addAttribute("genderMap", genderMap);// 性別
 
 	}
+
 	// 丟空白表單
 	@RequestMapping(value = "/signUp/forgetPassword", method = RequestMethod.GET)
 	public String getforgetPassword() {
 		return "signUp/forgetPassword";
 	}
-	
+
 	@RequestMapping(value = "/signUp/forgetPassword", method = RequestMethod.POST)
 	public String getaccAccount(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String account = request.getParameter("account");
 		session.setAttribute("account", account);
 		Boolean aaa = service.searchAccount(account);
-		if(aaa == true) {
+		if (aaa == true) {
 			return "redirect:/sendmail";
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
-	
-	
-	
-	
+
+	// 導向驗證已過的頁面
+	@RequestMapping(value = "/memberCheck")
+	public String checkSuccess(@RequestParam(value = "userId", required = false) String userId) {
+		service.modifyVerificationStatus(userId);
+		return "redirect:/login/loginView";
+	}
+
 	@RequestMapping(value = "/sendmail", method = RequestMethod.GET)
 	public String sendEmail(Model model, HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		String account = (String)session.getAttribute("account");
+		String account = (String) session.getAttribute("account");
 		MemberBean temp = service.searchMemberBean(account);
-		service.sendOrderConfirmation(getDummyOrder(temp));
+		service.sendOrderConfirmation(getDummyOrder(temp,"forgetPassword"));
 		return "index";
 	}
-	
-	public static ProductOrder getDummyOrder(MemberBean memberBean){
-        ProductOrder order = new ProductOrder();
-        order.setOrderId(memberBean.getPassword());
-        order.setProductName("Thinkpad T510");
-        order.setStatus("confirmed");
-         
-        CustomerInfo customerInfo = new CustomerInfo();
-        customerInfo.setName("這是測試這是測試");
-        customerInfo.setAddress("WallStreet");
-        customerInfo.setEmail(memberBean.getAccount());
-        order.setCustomerInfo(customerInfo);
-        return order;
-    }
+
+	public static ProductOrder getDummyOrder(MemberBean memberBean,String purpose) {
+		ProductOrder order = new ProductOrder();
+		order.setOrderId(memberBean.getPassword());
+		order.setProductName(purpose);
+		System.out.println(String.valueOf(memberBean.getUserId()));
+		order.setStatus(String.valueOf(memberBean.getUserId()));
+		CustomerInfo customerInfo = new CustomerInfo();
+		customerInfo.setName(memberBean.getNickname());
+		customerInfo.setAddress("WallStreet");
+		customerInfo.setEmail(memberBean.getAccount());
+		order.setCustomerInfo(customerInfo);
+		return order;
+	}
 }

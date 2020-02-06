@@ -64,5 +64,11 @@ public class MemberServiceImpl implements MemberService {
 	public MemberBean searchMemberBean(String account) {
 		return dao.searchMemberBean(account);
 	}
-   
+	
+	@Transactional
+	@Override
+	public void modifyVerificationStatus(String userId) {
+		dao.verificationLetter(userId);
+	}
+	
 }

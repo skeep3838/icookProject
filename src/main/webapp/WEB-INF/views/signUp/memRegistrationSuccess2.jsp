@@ -59,7 +59,9 @@
 	<div class="login">
 		<div class="container">
 			<h6>註冊成功</h6>
-
+			<br>
+			<h3>請於信箱內，點擊您的驗證信，完成最後認證</h3>
+			
 			<jsp:useBean id="mem" scope="request"
 				class="com.icook.model.MemberBean" />
 

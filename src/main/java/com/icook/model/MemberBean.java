@@ -25,8 +25,9 @@ public class MemberBean implements Serializable {
 	String gender;
 	String phone;
 	String address;
+	String checkstatus;
 	
-	public MemberBean(Integer userId, String account, String password, String lastname, String firstname, String nickname, String birthday, String gender, String phone, String address) {
+	public MemberBean(Integer userId, String account, String password, String lastname, String firstname, String nickname, String birthday, String gender, String phone, String address, String checkstatus) {
 		this.userId = userId;
 		this.account = account;
 		this.password = password;
@@ -37,9 +38,17 @@ public class MemberBean implements Serializable {
 		this.gender = gender;
 		this.phone = phone;
 		this.address = address;
-		
+		this.checkstatus = checkstatus;
 	}
 	
+	public String getCheckstatus() {
+		return checkstatus;
+	}
+
+	public void setCheckstatus(String checkstatus) {
+		this.checkstatus = checkstatus;
+	}
+
 	public MemberBean() {
 		super();
 	}

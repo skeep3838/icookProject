@@ -42,8 +42,14 @@ public class MailServiceImpl implements mailService{
                 mimeMessage.setFrom(test);
                 mimeMessage.setRecipient(Message.RecipientType.TO,
                         new InternetAddress(order.getCustomerInfo().getEmail()));
-                mimeMessage.setText("Dear " + order.getCustomerInfo().getName()
-                        + ", thank you for placing order. Your order id is " + order.getOrderId() + ".  http://localhost:8080/icookProjectSpringMVC200203/");
+                if(order.getProductName() == "forgetPassword") {
+                	mimeMessage.setText("Dear " + order.getCustomerInfo().getName()
+                            + ", thank you for placing order. Your order id is " + order.getOrderId() + ".");
+                }
+                else {
+                	mimeMessage.setText("Dear " + order.getCustomerInfo().getName()
+                            + ", 您的帳號已註冊成功  請點擊以下網址" + "http://localhost:8080/icookProjectSpringMVC200203/memberCheck?userId="+ order.getStatus());
+                }
                 mimeMessage.setSubject("Your order on Demoapp");
             }
         };

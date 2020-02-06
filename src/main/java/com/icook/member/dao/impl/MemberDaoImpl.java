@@ -1,6 +1,5 @@
 package com.icook.member.dao.impl;
 
-
 import java.util.List;
 
 import org.hibernate.Session;
@@ -10,13 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import com.icook.member.dao.MemberDao;
 import com.icook.model.MemberBean;
- 
-
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
 	SessionFactory factory;
-	
 
 	@Autowired
 	public void setFactory(SessionFactory factory) {
@@ -34,25 +30,26 @@ public class MemberDaoImpl implements MemberDao {
 		Session session = factory.getCurrentSession();
 		session.update(memberBean);
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public boolean searchAccount(String account) {// 搜尋會員資料
 		Session session = factory.getCurrentSession();
 		String hql = "from MemberBean m where m.account = :mid";
-		List<MemberBean> temp = (List<MemberBean>)session.createQuery(hql).setParameter("mid",account).getResultList();
-		if(temp != null){
+		List<MemberBean> temp = (List<MemberBean>) session.createQuery(hql).setParameter("mid", account)
+				.getResultList();
+		if (temp != null) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public MemberBean searchMemberBean(String account) {// 搜尋會員資料
 		Session session = factory.getCurrentSession();
 		String hql = "from MemberBean m where m.account = :mid";
-		MemberBean memberBean = (MemberBean)session.createQuery(hql).setParameter("mid",account).getSingleResult();
+		MemberBean memberBean = (MemberBean) session.createQuery(hql).setParameter("mid", account).getSingleResult();
 		return memberBean;
 
 	}
@@ -61,5 +58,19 @@ public class MemberDaoImpl implements MemberDao {
 	public void InquireMem(MemberBean memberBean) {// 查詢
 		Session session = factory.getCurrentSession();
 
+	}
+
+	@Override
+	public void verificationLetter(String userId) {
+		Session session = factory.getCurrentSession();
+		try {
+			System.out.println(userId);
+			String hql = "update MemberBean m set m.checkstatus = :checksta where m.userId = :mid";
+			session.createQuery(hql).setParameter("checksta","Y").setParameter("mid", Integer.parseInt(userId)).executeUpdate();
+			System.out.println("--------------CORRECT---------------");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("--------------ERROR---------------");
+		}
 	}
 }
