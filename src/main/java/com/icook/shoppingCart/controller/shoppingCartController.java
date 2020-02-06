@@ -37,15 +37,16 @@ public class shoppingCartController {
 			HttpServletResponse response,Model model) {
 		HttpSession session = request.getSession();
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("ShoppingCart");
+		ShoppingCart cart2 =(ShoppingCart) session.getAttribute("ShoppingCart2");
 		List<orderDetail> list = new LinkedList<>();
-		int n=0;
+		int k=0;
 		for (Object key : cart.getContent().keySet()) {
 			orderDetail ord = new orderDetail(null,null,cart.getContent().get(key).getProductId(),
 					cart.getContent().get(key).getDescribe(),cart.getContent().get(key).getQty(),
 					cart.getContent().get(key).getUnitPrice(),cart.getContent().get(key).getDiscount(),
 					cart.getContent().get(key).getTypeId());
-            list.add(n, ord);
-            n++;
+            list.add(k, ord);
+            k++;
         }
 //		orderDetail ord1 = new orderDetail(null,null,1,"雞胸肉",5,60,"9.0000",1);
 //		orderDetail ord2 = new orderDetail(null,null,2,"平底鍋 紅色",2,500,null,2);
@@ -55,6 +56,10 @@ public class shoppingCartController {
 //		list.add(1, ord2);
 //		list.add(2, ord3);
 		
+//		將未check商品還原
+		cart.clearCart();
+		cart.getContent().putAll(cart2.getContent());
+		cart2.clearCart();	
 		
 		double total=0,allTotal=0;;
 		for (int i = 0; i < list.size(); i++) {
@@ -142,7 +147,8 @@ public class shoppingCartController {
 					return "index";
 				}
 			}
-		}
+			
+		}	
 	}
 	
 }
