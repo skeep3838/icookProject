@@ -1,8 +1,10 @@
 package com.icook.shoppingCart.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,10 +52,14 @@ public class ProductListController {
 		System.out.println("進入controller1");
 		HttpSession session = request.getSession(false);
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("ShoppingCart");
-		System.out.println("cart0:" + cart);
+		ShoppingCart cart2 = (ShoppingCart) session.getAttribute("ShoppingCart2");
 		if (cart == null) {
 			cart = new ShoppingCart();
 			session.setAttribute("ShoppingCart", cart);
+		}
+		if (cart2 == null) {
+			cart2 = new ShoppingCart();
+			session.setAttribute("ShoppingCart2", cart2);
 		}
 		String productName = request.getParameter("productName");
 		List<ProductBean> products = new LinkedList<ProductBean>();
@@ -117,6 +123,7 @@ public class ProductListController {
 		System.out.println("進入controller加入購物車");
 		HttpSession session = request.getSession(false);
 		String productName = request.getParameter("productName");
+		System.out.println("產品名:"+oib.getDescribe());
 		
 //		處理將空字串轉為null
 		if(oib.getDiscount().isEmpty() && oib.getDiscount().length()==0) {
@@ -127,14 +134,35 @@ public class ProductListController {
 			oib.setDiscount(discount.toString());
 		}
 		
+		System.out.println("折扣:"+oib.getDiscount());
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("ShoppingCart");
 		System.out.println("cart:" + cart);
 		if (cart == null) {
 			cart = new ShoppingCart();
 			session.setAttribute("ShoppingCart", cart);
 		}
+		// productId和TypeId的型態都是Integer，我Map的Key需求是要上述2個字串以底線( "_" )串接。
 		String MapKey = oib.getProductId() + "_" + oib.getTypeId();
+		System.out.println("MapKey" + MapKey);
 		cart.addToCart(MapKey, oib);
+		System.out.println(request.getLocalPort());
+		System.out.println(request.getMethod());
+		System.out.println(request.getLocalAddr());
+		System.out.println(request.getPathInfo());
+		System.out.println(request.getQueryString());
+		System.out.println(request.getCookies());
+		System.out.println(request.getProtocol());
+		System.out.println(request.getServletPath());
+		System.out.println(request.getContextPath());
+		System.out.println("headernames:"+request.getHeaderNames());
+//		if(productName!=null) {
+////			呼叫StringToHex(中文字串)，將中文字串轉16進制
+//			mv.setViewName("redirect:productList?productName="+StringToHex(productName));
+//			return mv;
+//		}else{
+//			mv.setViewName("shoppingCart/productList");
+//			return mv;
+//		}
 		return cart.getItemNumber();
 	}
 
@@ -144,7 +172,9 @@ public class ProductListController {
 			HttpServletRequest request,
 			HttpServletResponse response) {
 		System.out.println("進入controller");
+//		ProductBean pb = service.getProduct("1");
 		ModelAndView modelAndView = new ModelAndView("shoppingCart/productDetail");
+//		modelAndView.addObject("prob", pb);
 		return modelAndView;
 	}
 
@@ -152,6 +182,7 @@ public class ProductListController {
 	public String shoppingCart(Model model, @ModelAttribute("orderItem") orderItem oib, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("ShoppingCart");
+		System.out.println("cart:" + cart);
 
 		if (cart == null) {
 			cart = new ShoppingCart();
@@ -165,8 +196,8 @@ public class ProductListController {
 
 	@PostMapping(value = "shoppingCart/shopCart" ,produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String UpdateICookServlet(Model model, @ModelAttribute("orderItem") orderItem oib,
-			HttpServletRequest request, HttpServletResponse response) {
+	public String UpdateICookServlet(
+	 Model model,HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(false);
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("ShoppingCart");
 		System.out.println("cart:" + cart);
@@ -174,16 +205,22 @@ public class ProductListController {
 			cart = new ShoppingCart();
 			session.setAttribute("ShoppingCart", cart);
 		}
+		ShoppingCart cart2 = (ShoppingCart) session.getAttribute("ShoppingCart2");
+		System.out.println("cart2:" + cart2);
+		if (cart2 == null) {
+			cart2 = new ShoppingCart();
+			session.setAttribute("ShoppingCart2", cart2);
+		}
 		Gson gson = new Gson();
 		String cmd = request.getParameter("cmd");
-		
-//		String pid_ptyStr = request.getParameter("mapKey");
-//		String pid_pty = pid_ptyStr.trim();
+//		
 		String itemNumber = "";
+		System.out.println(request.getServletPath());
+		System.out.println(request.getContextPath());
 		if (cmd.equalsIgnoreCase("DEL")) {
 			String pid_ptyStr = request.getParameter("mapKey");
+			//↑接收前端的JSON字串,之後用gson轉成List↓
 			List<String> pid_ptyStrList = gson.fromJson(pid_ptyStr, new TypeToken<List<String>>() {}.getType());
-			
 			for(int i=0;i<pid_ptyStrList.size();i++) {
 				cart.deleteProduct(pid_ptyStrList.get(i));
 			}
@@ -198,7 +235,49 @@ public class ProductListController {
 			itemNumber = String.valueOf(cart.getItemNumber());
 			System.out.println("itemNumber:"+itemNumber);
 			return itemNumber;
+		} else if (cmd.equalsIgnoreCase("MOD2")) {
+			System.out.println("來MOD2");
+			Map<String, orderItem> cartMap = new LinkedHashMap<>();
+			cartMap = cart.getContent();
+			Map<String, orderItem> cart2Map = new LinkedHashMap<>();
+			cart2Map = cart2.getContent();
+			cart2Map.putAll(cartMap);
+			//Map之間的複製一定要用putAll,用等號會給到位址,只會讓2個map同步
+			
+			String mapKey = request.getParameter("mapKey");
+			List<String> mapKeyList = gson.fromJson(mapKey, new TypeToken<List<String>>() {}.getType());
+			// cart2刪除check商品
+			for(int del=0;del<mapKeyList.size();del++) {
+				cart2.deleteProduct(mapKeyList.get(del).trim());
+			}
+			// cart2修改uncheck商品數量
+			String uncheckQuantity = request.getParameter("uncheckQuantity");
+			List<String> uncheckQuantityList = gson.fromJson(uncheckQuantity, new TypeToken<List<String>>() {}.getType());	
+			String uncheckMapKey = request.getParameter("uncheckMapKey");
+			List<String> uncheckMapKeyList = gson.fromJson(uncheckMapKey, new TypeToken<List<String>>() {}.getType());
+			
+			for(int unq=0;unq<uncheckQuantityList.size();unq++) {
+				int uncheckQty = Integer.parseInt(uncheckQuantityList.get(unq).trim());
+				cart2.modifyQty(uncheckMapKeyList.get(unq).trim(), uncheckQty);
+			}
+			
+			// cart修改並保存check商品
+			String newQtyStr = request.getParameter("qty");
+			List<String> newQtyStrList = gson.fromJson(newQtyStr, new TypeToken<List<String>>() {}.getType());	
+			for(int m=0;m<mapKeyList.size();m++) {
+				int newQty = Integer.parseInt(newQtyStrList.get(m).trim());
+				cart.modifyQty(mapKeyList.get(m).trim(), newQty);
+			}
+			
+
+			// cart刪除uncheck商品
+			for(int un=0;un<uncheckMapKeyList.size();un++) {
+				cart.deleteProduct(uncheckMapKeyList.get(un).trim());
+			}
+			itemNumber = String.valueOf(cart.getItemNumber());
+			return itemNumber;
 		}
+//		return "redirect:shopCart";
 		return itemNumber;
 	}
 	
