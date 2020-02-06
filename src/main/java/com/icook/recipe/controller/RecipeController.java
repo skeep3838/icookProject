@@ -60,7 +60,16 @@ public class RecipeController {
 
 	@RequestMapping("/recipe")
 	public String getRecipeByRecipeNo(@RequestParam("no") Integer recipeNo, Model model) {
-		model.addAttribute("recipe", service.getRecipeByRecipeNo(recipeNo));
+		RecipeBean rb = service.getRecipeByRecipeNo(recipeNo);
+		ArrayList<String[]> ingredList = stringToList(rb.getIngredName(), rb.getIngredQty());
+		ArrayList<String[]> group1List = stringToList(rb.getGroup1IngredName(), rb.getGroup1IngredQty());
+		ArrayList<String[]> group2List = stringToList(rb.getGroup2IngredName(), rb.getGroup2IngredQty());
+		ArrayList<String[]> group3List = stringToList(rb.getGroup3IngredName(), rb.getGroup3IngredQty());
+		model.addAttribute("ingredList", ingredList);
+		model.addAttribute("group1List", group1List);
+		model.addAttribute("group2List", group2List);
+		model.addAttribute("group3List", group3List);
+		model.addAttribute("recipe", rb);
 		return "recipe/RecipeDetail";
 	}
 
@@ -350,6 +359,7 @@ public class RecipeController {
 		}
 		return list;
 	}
+	
 
 	@RequestMapping(value = "/recipes/deleteRecipe", method = RequestMethod.GET)
 	public String deleteRecipe(@RequestParam("no") Integer recipeNo, Model model) {
