@@ -53,7 +53,7 @@ public class loginController {
 	// 登入成功後進入首頁
 	// 登入失敗還沒設定
 	@PostMapping(value = "/login/loginView")
-	public void loginCheck(@RequestParam("account") String account, 
+	public String loginCheck(@RequestParam("account") String account, 
 							@RequestParam("password") String password,
 							HttpServletRequest request,
 							HttpServletResponse response) {
@@ -99,9 +99,11 @@ public class loginController {
 				requestURI = (requestURI.length() == 0 ? request.getContextPath() : requestURI);
 				try {
 					response.sendRedirect(response.encodeRedirectURL(requestURI));
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				return requestURI;
 			} else {
 				try {
 					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
@@ -109,9 +111,9 @@ public class loginController {
 					e.printStackTrace();
 				}
 			}
-		} else {
-			// 如果errorMsgMap不是空的，表示有錯誤，交棒給login.jsp
 		}
+		return "login/loginView";
+		
 	}
 		
 		@RequestMapping("/login/logout")
