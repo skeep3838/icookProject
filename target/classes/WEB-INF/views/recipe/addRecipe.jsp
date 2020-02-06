@@ -148,8 +148,7 @@
 								<tr>
 									<th><input name="group1" type="text" class="form-control"
 												placeholder="分組名稱" /></th>
-									<th></th>
-									<th></th>
+									<th>分組</th>
 								</tr>
 							</thead>
 							<tbody id='foodtbody1'>

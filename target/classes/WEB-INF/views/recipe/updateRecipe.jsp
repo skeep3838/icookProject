@@ -113,7 +113,10 @@
 									path="RecipeImage" onchange="readURL(this)"
 									style="display: none;" type="file" accept="image/jpg" /> <i
 								class="fa fa-photo"></i> 上傳封面圖片 </label>
-							<div id="upload_img"></div>
+							<div id="upload_img">
+								<img src="<c:url value='/getPicture/${recipeBean.recipeNo}' />"
+									alt=" " class="img-responsive" />
+							</div>
 						</div>
 					</div>
 					<table class="table" style="width: 90%" id='table0'>
@@ -154,8 +157,7 @@
 								<tr>
 									<th><input name="group1" type="text" class="form-control"
 										value="${recipeBean.group1}" /></th>
-									<th></th>
-									<th></th>
+									<th>分組</th>
 								</tr>
 							</thead>
 							<tbody id='foodtbody1'>
@@ -181,11 +183,9 @@
 								</tr>
 							</tfoot>
 						</table>
-					</div>
 
-					<c:if test="${recipeBean.group2!=null}">
-						<div id='group'>
-							<table class="table" style="width: 90%" id='table1'>
+						<c:if test="${recipeBean.group2!=null}">
+							<table class="table" style="width: 90%" id='table2'>
 								<thead>
 									<tr>
 										<th><input name="group2" type="text" class="form-control"
@@ -194,7 +194,7 @@
 										<th></th>
 									</tr>
 								</thead>
-								<tbody id='foodtbody1'>
+								<tbody id='foodtbody2'>
 									<c:forEach var="group2List" items="${group2List}">
 										<tr>
 											<td style="width: 50%"><input name="group2IngredName"
@@ -202,7 +202,7 @@
 											<td style="width: 25%"><input name="group2IngredQty"
 												type="text" class="form-control" value="${group2List[1]}" /></td>
 											<td><button type="button" class="btn btn-danger"
-													onclick="delRow(this,'foodtbody',1,0)">
+													onclick="delRow(this,'foodtbody',2,0)">
 													<i class="fa fa-trash"></i>
 												</button></td>
 										</tr>
@@ -217,12 +217,10 @@
 									</tr>
 								</tfoot>
 							</table>
-						</div>
-					</c:if>
+						</c:if>
 
-					<c:if test="${recipeBean.group3!=null}">
-						<div id='group'>
-							<table class="table" style="width: 90%" id='table1'>
+						<c:if test="${recipeBean.group3!=null}">
+							<table class="table" style="width: 90%" id='table3'>
 								<thead>
 									<tr>
 										<th><input name="group3" type="text" class="form-control"
@@ -231,7 +229,7 @@
 										<th></th>
 									</tr>
 								</thead>
-								<tbody id='foodtbody1'>
+								<tbody id='foodtbody3'>
 									<c:forEach var="group3List" items="${group3List}">
 										<tr>
 											<td style="width: 50%"><input name="group3IngredName"
@@ -239,7 +237,7 @@
 											<td style="width: 25%"><input name="group3IngredQty"
 												type="text" class="form-control" value="${group3List[1]}" /></td>
 											<td><button type="button" class="btn btn-danger"
-													onclick="delRow(this,'foodtbody',1,0)">
+													onclick="delRow(this,'foodtbody',3,0)">
 													<i class="fa fa-trash"></i>
 												</button></td>
 										</tr>
@@ -254,9 +252,8 @@
 									</tr>
 								</tfoot>
 							</table>
-						</div>
-					</c:if>
-
+						</c:if>
+					</div>
 					<table class="table" style="width: 90%">
 						<tr>
 							<td><button type="button" class="btn btn-default"
@@ -275,7 +272,8 @@
 							</tr>
 						</thead>
 						<tbody id='picture0'>
-							<c:forTokens var="step" varStatus="i" delims="," items="${recipeBean.step}">
+							<c:forTokens var="step" varStatus="i" delims=","
+								items="${recipeBean.step}">
 								<tr id='tr${i.index+1}'>
 									<td style="width: 50%">
 										<h2 id='h2Number${i.index+1}'>${i.index+1}</h2> <textarea
@@ -289,9 +287,7 @@
 											style="display: none;" type="file" accept="image/jpg" /> <i
 											class="fa fa-photo"></i> 上傳步驟照片
 									</label>
-										<div id="stepImg${i.index+1}">
-										<img src="<c:url value='/getPicture/${recipeBean.recipeNo}/stepPic${i.index+1}'/>" alt=" " class="img-responsive" />
-										</div></td>
+										<div id="stepImg${i.index+1}"></div></td>
 									<td style="vertical-align: middle" id='deltd${i.index+1}'><button
 											type="button" class="btn btn-danger"
 											onclick="delRow(this,'picture',0, ${i.index+1})">
@@ -318,6 +314,7 @@
 				</div>
 				<div style="text-align: center">
 					<form:hidden path="userId" value="${LoginOK.userId}" />
+					<form:hidden path="recipeNo" value="${recipeBean.recipeNo}" />
 					<button type="submit" class="btn btn-default">送出</button>
 
 					<span>&emsp;</span>

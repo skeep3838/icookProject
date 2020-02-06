@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -220,11 +218,11 @@ public class RecipeController {
 		ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
 		return responseEntity;
 	}
-	
+
 //	做到一半，還不能辨別要取哪張圖片
 	@RequestMapping(value = "/getPicture/{recipeNo}/{step}", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> getStepPicture(HttpServletResponse response, @PathVariable Integer recipeNo
-												, @PathVariable String step) {
+	public ResponseEntity<byte[]> getStepPicture(HttpServletResponse response, @PathVariable Integer recipeNo,
+			@PathVariable String step) {
 		String filePath = "/WEB-INF/views/images/food1.jpg";
 		byte[] media = null;
 		HttpHeaders headers = new HttpHeaders();
@@ -339,7 +337,7 @@ public class RecipeController {
 
 //	把字串資料取出來，轉成陣列
 	public ArrayList<String[]> stringToList(String name, String qty) {
-		if(name==null||qty==null) {
+		if (name == null || qty == null) {
 			return null;
 		}
 		ArrayList<String> ingredNameList = new ArrayList<>(Arrays.asList(name.split(",")));
@@ -360,18 +358,6 @@ public class RecipeController {
 		model.addAttribute("userId", userId);
 		service.deleteRecipe(recipeNo);
 		return "redirect:/recipes";
-	}
-
-	@ModelAttribute("cookingTimeList")
-	public List<String> cookingTimeList() {
-		List<String> list = new ArrayList<>(Arrays.asList("5", "10", "15", "30", "45", "60", "90", "120", "180"));
-		return list;
-	}
-
-	@ModelAttribute("servingList")
-	public List<String> servingList() {
-		List<String> list = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
-		return list;
 	}
 
 }
