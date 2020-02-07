@@ -99,7 +99,7 @@ public class RecipeController {
 
 	@PostMapping("/recipes/updateRecipe")
 	public String updateRecipe(@ModelAttribute("recipeBean") RecipeBean rb,
-			@RequestParam("StepImage") MultipartFile[] stepImg, HttpServletRequest request) {
+			@RequestParam("StepImage") MultipartFile[] stepImg, HttpServletRequest request, Model model) {
 		MultipartFile coverImg = rb.getRecipeImage();
 		RecipeBean rb0 = service.getRecipeByRecipeNo(rb.getRecipeNo());
 		System.out.println("-------" + coverImg.isEmpty());
@@ -193,7 +193,9 @@ public class RecipeController {
 //		rb.setIngredName(listToString(rb.getIngredNameList()));
 //		rb.setIngredQty(listToString(rb.getIngredQtyList()));
 		service.updateRecipe(rb);
-		return "redirect:/recipes";
+		String status = "修改完成";
+		model.addAttribute("status", status);
+		return "recipe/status";
 	}
 
 	@RequestMapping(value = "/getPicture/{recipeNo}", method = RequestMethod.GET)
@@ -302,7 +304,7 @@ public class RecipeController {
 	@RequestMapping(value = "/recipes/add", method = RequestMethod.POST)
 	public String getAddNewRecipeForm(@ModelAttribute("recipeBean") RecipeBean rb,
 //			@RequestParam("ingredNameList") String[] ingredNameList, @RequestParam("ingredQtyList") String[] ingredQtyList,
-			@RequestParam("StepImage") MultipartFile[] stepImg, HttpServletRequest request) {
+			@RequestParam("StepImage") MultipartFile[] stepImg, HttpServletRequest request, Model model) {
 		MultipartFile coverImg = rb.getRecipeImage();
 		if (coverImg != null && !coverImg.isEmpty()) {
 			byte[] b;
@@ -346,7 +348,9 @@ public class RecipeController {
 		System.out.println(date);
 		rb.setLastUpdated(date);
 		service.addRecipe(rb);
-		return "redirect:/recipes";
+		String status = "新增完成";
+		model.addAttribute("status", status);
+		return "recipe/status";
 	}
 
 //	陣列轉成字串，暫時沒有用到
@@ -386,7 +390,9 @@ public class RecipeController {
 		Integer userId = rb.getUserId();
 		model.addAttribute("userId", userId);
 		service.deleteRecipe(recipeNo);
-		return "redirect:/recipes";
+		String status = "刪除完成";
+		model.addAttribute("status", status);
+		return "recipe/status";
 	}
 
 }
