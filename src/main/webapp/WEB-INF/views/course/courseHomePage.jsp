@@ -41,8 +41,11 @@
 						<span class="image"><img src="../css/images/pic01.jpg" alt="" /></span>
 						<div class="content">
 							<h2>${course.courseName}</h2>
+							<br>
 							<p>${course.courseCategory}</p>
-							<p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est.</p>
+							<br>
+							<p>${course.courseIntrod}</p>
+							<br>
 							<ul class="actions">
 								<li>
 									<a href="<spring:url value='/courseOrder/courseInfo?id=${course.courseId}' />" class="button alt">詳細資料</a>

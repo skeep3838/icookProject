@@ -38,7 +38,7 @@
 			<div class="services-breadcrumb">
 				<div class="container">
 					<ul>
-						<li><a href="<c:url value='/courseOrder/courseCart' />">購物車</a><i>|</i></li>
+<%-- 						<li><a href="<c:url value='/courseOrder/courseCart' />">購物車</a><i>|</i></li> --%>
 						<li><a href="<c:url value='/course/courseHomePage' />">返回列表</a></li>
 					</ul>
 				</div>
