@@ -185,7 +185,7 @@
 							<c:forTokens var="step" varStatus="i" delims="," items="${recipe.step}">
 							<tr>
 								<td style="width: 30%; padding: 20px">
-								<img src="${pageContext.request.contextPath}/image/step1.jpg"
+								<img src="<c:url value='/getPicture/${recipe.recipeNo}/${i.index+1}'/>"
 									alt=" " class="img-responsive" /></td>
 								<td>
 									<h2>${i.index+1}</h2>
@@ -194,6 +194,12 @@
 							</tr>
 							</c:forTokens>
 						</tbody>
+						<tfoot>
+						<tr><td colspan="2">
+						<h2>備註</h2><hr>
+						<p>${recipe.remark}</p>
+						</td></tr>
+						</tfoot>
 					</table>
 				</div>
 			</div>

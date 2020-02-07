@@ -231,14 +231,34 @@ public class RecipeController {
 //	做到一半，還不能辨別要取哪張圖片
 	@RequestMapping(value = "/getPicture/{recipeNo}/{step}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getStepPicture(HttpServletResponse response, @PathVariable Integer recipeNo,
-			@PathVariable String step) {
+			@PathVariable Integer step) {
 		String filePath = "/WEB-INF/views/images/food1.jpg";
 		byte[] media = null;
 		HttpHeaders headers = new HttpHeaders();
 		int len = 0;
 		RecipeBean bean = service.getRecipeByRecipeNo(recipeNo);
-		if (bean != null) {
-			Blob blob = bean.getCoverImg();
+		Blob blob = null;
+		if (step.equals(1)) {
+			blob = bean.getStepPic01();
+		}else if (step.equals(2)) {
+			blob = bean.getStepPic02();
+		}else if (step.equals(3)) {
+			blob = bean.getStepPic03();
+		}else if (step.equals(4)) {
+			blob = bean.getStepPic04();
+		}else if (step.equals(5)) {
+			blob = bean.getStepPic05();
+		}else if (step.equals(6)) {
+			blob = bean.getStepPic06();
+		}else if (step.equals(7)) {
+			blob = bean.getStepPic07();
+		}else if (step.equals(8)) {
+			blob = bean.getStepPic08();
+		}else if (step.equals(9)) {
+			blob = bean.getStepPic09();
+		}else if (step.equals(10)) {
+			blob = bean.getStepPic10();
+		}
 			if (blob != null) {
 				try {
 					len = (int) blob.length();
@@ -249,7 +269,7 @@ public class RecipeController {
 			} else {
 				media = toByteArray(filePath);
 			}
-		}
+		
 		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 		MediaType mediaType = MediaType.IMAGE_JPEG;
 		headers.setContentType(mediaType);
@@ -359,7 +379,6 @@ public class RecipeController {
 		}
 		return list;
 	}
-	
 
 	@RequestMapping(value = "/recipes/deleteRecipe", method = RequestMethod.GET)
 	public String deleteRecipe(@RequestParam("no") Integer recipeNo, Model model) {
