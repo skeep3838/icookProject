@@ -31,9 +31,11 @@ public class RootAppConfig {
 	  mailSender.setHost("smtp.gmail.com");
 	  mailSender.setPort(587);
 	  mailSender.setUsername("u4ek7bp6d8zo@gmail.com");
-	  mailSender.setPassword("homeoaxejcrcrpbv");//gmail�H�c�H�H���v�K�X
+	  mailSender.setPassword("Aoqoghteeuosdbdw");
+//	  mailSender.setPassword("homeoaxejcrcrpbv");
 
 	  Properties javaMailProperties = new Properties();
+	  javaMailProperties.put("mail.smtp.ssl.trust", "*");
 	  javaMailProperties.put("mail.smtp.starttls.enable", "true");
 	  javaMailProperties.put("mail.smtp.auth", "true");
 	  javaMailProperties.put("mail.transport.protocol", "smtp");
