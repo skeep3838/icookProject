@@ -84,8 +84,8 @@
 										<li><a href=<c:url value='/shoppingCart/productList' />><span data-hover="Market">市集</span></a></li>
 										<li><a href=<c:url value='/MyOrders/Orders?page=1'/>><span data-hover="Order">訂單</span></a></li>
 										<li><a href=<c:url value='/shoppingCart/shopCart' />><span data-hover="Car">購物車<span class="badge" id="cartNo"></span></span></a></li>
-										<li><a href=<c:url value='/course/courseHomePage' />><span data-hover="course ">課程</span></a></li>
-										
+										<li><a href=<c:url value='/course/courseHomePage' />><span data-hover="Course">課程</span></a></li>
+										<li><a href=<c:url value='/helpQuestion' />><span data-hover="Help">聯絡我們</span></a></li>
 									</ul>
 								</nav>
 							</div>
