@@ -24,7 +24,7 @@ public class MemberValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		MemberBean mb = (MemberBean)target;
 		ValidationUtils.rejectIfEmptyOrWhitespace
-			(errors, "account", "member.account.not.empty","帳號欄不能空白(預設值)");
+			(errors, "account", "member.account.not.empty","信箱欄不能空白(預設值)");
 		ValidationUtils.rejectIfEmptyOrWhitespace
 			(errors, "nickname", "member.name.not.empty","暱稱欄不能空白(預設值)");
 		ValidationUtils.rejectIfEmptyOrWhitespace

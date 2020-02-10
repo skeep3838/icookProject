@@ -19,20 +19,69 @@
 	#phone, #account, #address {
 	margin: 14px 0px;
 }
+
 span.error {
 	color: red;
 	display: inline-block;
-	font-size: 5pt;
+	font-size: 1em;
 }
+#confirm{
+    background: #ff9900;
+    color: #FFF;
+    font-size: 1em;
+    padding: 10px 0;
+    width: 100%;
+    outline: none;
+    border: none;
+    
+}
+#confirm.header{
+background:black;
+transition: .5s ease-in;
+    -webkit-transition: .5s ease-in;
+    -moz-transition: .5s ease-in;
+    -o-transition: .5s ease-in;
+    -ms-transition: .5s ease-in;
+    }
 </style>
+
 <script type="text/javascript">
 $(document).ready(function(){
+	//一鍵輸入正確資料
+	$("#correctmem").click(function(){
+		$("#account").val("aaa123@gmail.com");
+		$("#pw1").val("aA123456");
+		$("#pw2").val("aA123456");
+		$("#lastname").val("Ga");
+		$("#firstname").val("One");
+		$("#nickname").val("臺中彭于晏");
+		$("#birthday").val("1995-05-04");
+		$("#gender").val("男生");
+		$("#phone").val("0977302207");
+		$("#address").val("臺中市豐原區豐東路190號");
+	});
+	//一鍵輸入錯誤資料
+	$("#errormem").click(function(){
+		$("#account").val("aaa123@gmail.com");
+		$("#pw1").val("00000");
+		$("#pw2").val("00000");
+		$("#lastname").val("");
+		$("#firstname").val("");
+		$("#nickname").val("");
+		$("#birthday").val("");
+		$("#gender").val("");
+		$("#phone").val("0900000000");
+		$("#address").val("");
+	});
 	
-		$("#confirm").click(function(){
+	$("#confirm").click(function(){
 			
 			var account = $("#account").val();
 			var password = $("#pw1").val();
 			var password2 = $("#pw2").val();
+// 			var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+// 			var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+// 			var enoughRegex = new RegExp("(?=.{6,}).*", "g");
 // 			var lastname = $("#lastname").val();
 // 			var firstname = $("#firstname").val();
 // 			var nickname = $("#nickname").val();
@@ -47,19 +96,24 @@ $(document).ready(function(){
 // 			}
 			
 	 		if((password !="") && (password2 !="")){
-	 			
-	 			if(password == password2){
-		 			$("#p1").html("<span style='color:green'>密碼一致</span>");
-		 			//$("#p2").html("<span style='color:green'>密碼一致</span>");
-		 		$("#submit").click();
-	 			}
-				else {
-					//e.preventDefault();
-					$("#p1").html("<span style='color:red'>密碼不一致</span>");
+	 	//		if(password.length>8 && ){
+	 				if(password == password2){
+		 				$("#p1").html("<span style='color:green'>密碼一致</span>");
+		 				//$("#p2").html("<span style='color:green'>密碼一致</span>");
+		 			$("#submit").click();
+	 				}
+					else {
+						//e.preventDefault();
+						$("#p1").html("<span style='color:red'>密碼不一致</span>");
 					
-//					document.getElementById("pw1").value = "";
-//					document.getElementById("pw2").value = "";
-				}
+//						document.getElementById("pw1").value = "";
+//						document.getElementById("pw2").value = "";
+					}
+	 	//		}
+	// 			else{
+//	 				$("#p1").html("<span style='color:red'>密碼必須超過8碼</span>");
+	// 			}
+	 			
 	 		}
  	 		if(password ==""){
  	 			//e.preventDefault();
@@ -108,8 +162,16 @@ $(document).ready(function(){
 
 
 <script type="application/x-javascript">
+	
+	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 			function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
+
 </script>
 <!-- //for-mobile-apps ${pageContext.request.contextPath}-->
 <link href="${pageContext.request.contextPath}/css/bootstrap.css"
@@ -161,59 +223,61 @@ $(document).ready(function(){
 						<tr>
 							<td>信箱<span style="color: red;">*</span>:
 							</td>
-							<td><form:input type="email" class="form-control" path='account' /><br> 
-							<form:errors path="account" cssClass="error" /></td>
+							<td><form:input type="email" class="form-control"
+									path='account' id='account' /><br> <form:errors
+									path="account" cssClass="error" /></td>
 						</tr>
 					</c:if>
 					<c:if test='${mb.userId != null}'>
 						<tr>
 							<td>信箱<span style="color: red;">*</span>:
 							</td>
-							<td><form:hidden path='account'/> ${mb.account}<br></td>
+							<td><form:hidden path='account' /> ${mb.account}<br></td>
 						</tr>
 					</c:if>
 					<tr>
 						<td>密碼<span style="color: red;">*</span>:
 						</td>
-						<td><form:input type="password" path='password' class="form-control"
-								name="password" id="pw1"/><span id="p1"> </span></td>
+						<td><form:input type="password" path='password'
+								class="form-control" name="password" id="pw1" /><span id="p1">
+						</span></td>
 
 					</tr>
 					<tr>
-						<td>確認密碼<span  style="color: red;">*</span>:
+						<td>確認密碼<span style="color: red;">*</span>:
 						</td>
 						<td><input type="password" class="form-control"
-								name="password2" id="pw2"/><span id="p2"> </span></td>
+							name="password2" id="pw2" /><span id="p2"> </span></td>
 					</tr>
 					<tr>
 						<td>姓<span style="color: red;">*</span> :
 						</td>
 						<td><form:input path="lastname" class="form-control"
-								name="lastname" id="lastname"/>
-						<form:errors path="lastname" cssClass="error" /></td>
+								name="lastname" id="lastname" /> <form:errors path="lastname"
+								cssClass="error" /></td>
 					</tr>
 					<tr>
 						<td>名<span style="color: red;">*</span> :
 						</td>
 						<td><form:input path="firstname" class="form-control"
-								name="firstname" id="firstname"/>
-						<form:errors path="firstname" cssClass="error" /></td>
+								name="firstname" id="firstname" /> <form:errors
+								path="firstname" cssClass="error" /></td>
 					</tr>
 
 					<tr>
 						<td>暱稱<span style="color: red;">*</span> :
 						</td>
 						<td><form:input path="nickname" class="form-control"
-								name="nickname" id="nickname" />
-						<form:errors path="nickname" cssClass="error" /></td>
+								name="nickname" id="nickname" /> <form:errors path="nickname"
+								cssClass="error" /></td>
 					</tr>
 
 					<tr>
 						<td>生日<span style="color: red;">*</span>:
 						</td>
 						<td><form:input type="date" path="birthday"
-								class="form-control" name="birthday" id="birthday" />
-						<form:errors path="birthday" cssClass="error" /></td>
+								class="form-control" name="birthday" id="birthday" /> <form:errors
+								path="birthday" cssClass="error" /></td>
 					</tr>
 
 					<tr>
@@ -225,23 +289,26 @@ $(document).ready(function(){
 					<tr>
 						<td>連絡電話<span style="color: red;">*</span>:
 						</td>
-						<td><form:input type="tel" class="form-control" path="phone" name="phone" pattern="[0-9]{10}" id="phone" /> 
-							<form:errors path="phone" cssClass="error" /></td>
+						<td><form:input type="tel" class="form-control" path="phone"
+								name="phone" pattern="[0-9]{10}" id="phone" /> <form:errors
+								path="phone" cssClass="error" /></td>
 					</tr>
 
 					<tr>
 						<td>地址<span style="color: red;">*</span>:
 						</td>
 						<td><form:input path="address" class="form-control"
-								name="address" id="address" />
-								<form:errors path="address" cssClass="error" /></td>
+								name="address" id="address" /> <form:errors path="address"
+								cssClass="error" /></td>
 					</tr>
 
 				</table>
 				<br>
 				<input type="button" id="confirm" value="註冊" />
-				<input type="submit" id="submit" value="註冊"  style='display: none' />
-				
+				<input type="submit" id="submit" value="註冊" style='display: none' />
+				<input type="button" id="errormem" value="一鍵輸入錯誤資料" />
+				<input type="button" id="correctmem" value="一鍵輸入正確資料" />
+
 			</form:form>
 
 			<div class="agile_back_home">

@@ -24,7 +24,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @ComponentScan(basePackages = "com.websystique.spring")
 public class RootAppConfig {
 	
-	@Bean//gmail�H�c�H�H
+	@Bean//gmail驗證碼
 	 public JavaMailSender getMailSender() {
 	  JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 	  // Using gmail
