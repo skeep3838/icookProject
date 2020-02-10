@@ -59,6 +59,11 @@
 					<br> <br>
 					<h4>課程費用</h4>
 					<h5>${course.coursePrice}</h5>
+					<br> <br>
+					<iframe
+			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14459.209555474516!2d121.54840684864891!3d25.040779468751495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abd379a5ec97%3A0xedc006d25a9e35df!2z6LOH562W5pyDIOaVuOS9jeaVmeiCsueglOeptuaJgCDmlbjkvY3kurrmiY3ln7nogrLkuK3lv4M!5e0!3m2!1szh-TW!2stw!4v1578560581668!5m2!1szh-TW!2stw"
+			frameborder="0" style="border: 0; text-align: center; width: 500px;"
+			allowfullscreen=""></iframe>
 				</div>
 				<div class="col-md-4">
 					<br> <br>
@@ -77,8 +82,8 @@
 											style="height: 30px; width: 100px;"
 											onchange="calPrice(${course.coursePrice})" name="orderQty"
 											id="orderQty">
-											<option selected>訂購數量</option>
-											<c:forEach var="i" begin="0" end="${courseStock}">
+											<option disable selected hidden>訂購數量</option>
+											<c:forEach var="i" begin="1" end="${courseStock}">
 												<option value="${i}">${i}</option>
 											</c:forEach>
 										</select>
@@ -90,6 +95,7 @@
 <!-- 									class="btn btn-primary">結帳</a>  																	 -->
 								<input type="submit" class="btn btn-primary" id="addCourseVart" value="結帳"></a> 
 							</form>
+							
 						</div>
 					</div>
 				</div>
@@ -99,10 +105,7 @@
 
 	<!-- 		google地圖 -->
 	<div class="w3ls_map align-items-center">
-		<iframe
-			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14459.209555474516!2d121.54840684864891!3d25.040779468751495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abd379a5ec97%3A0xedc006d25a9e35df!2z6LOH562W5pyDIOaVuOS9jeaVmeiCsueglOeptuaJgCDmlbjkvY3kurrmiY3ln7nogrLkuK3lv4M!5e0!3m2!1szh-TW!2stw!4v1578560581668!5m2!1szh-TW!2stw"
-			frameborder="0" style="border: 0; text-align: center; width: 500px;"
-			allowfullscreen=""></iframe>
+		
 	</div>
 
 	<!-- Footer -->

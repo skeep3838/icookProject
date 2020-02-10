@@ -10,7 +10,7 @@ $(document).ready(function() {
 		
 // 		======================p分頁p==========================
 		
-		var pageSet = 8;//tip:每個分頁顯示的商品數量
+		var pageSet = 4;//tip:每個分頁顯示的商品數量
 		console.log( typeof(pageSet));//tip:typeof(pageSet)查看型態
 		var proCount = $("#proCount").val();//tip:商品數量
 		
