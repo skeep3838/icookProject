@@ -51,6 +51,7 @@ public class RecipeController {
 		this.context = context;
 	}
 
+//	取得所有的食譜，傳回食譜列表
 	@RequestMapping("/recipes")
 	public String allRecipesList(Model model) {
 		List<RecipeBean> list = service.getAllRecipes();

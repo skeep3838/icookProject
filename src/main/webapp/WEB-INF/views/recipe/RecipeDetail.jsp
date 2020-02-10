@@ -47,7 +47,7 @@
 		<div class="container" style="margin-left: 150px;">
 			<div class="col-md-4 agile_single_left">
 				<div class="agileits_recent_posts">
-					<h3>Recent Posts</h3>
+					<h3>Most Popular Recipes</h3>
 					<div class="agileits_recent_posts_grid">
 						<div class="agileits_recent_posts_gridl">
 							<img src="${pageContext.request.contextPath}/image/food1.jpg"
@@ -116,13 +116,14 @@
 				<div class="w3_comments">
 					<h3>${recipe.recipeName}</h3>
 					<ul>
-						<li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-						<fmt:formatDate value="${recipe.lastUpdated}" pattern="yyyy-MM-dd HH:mm" /></li>
 						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
-							href="#">${recipe.memberBean.nickname}</a></li>
-						<!-- 						<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="#">2 Comments</a></li> -->
-<!-- 						<li><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> -->
-<!-- 						<a href="#">3 Tags</a></li> -->
+							href="#">作者 : ${recipe.memberBean.nickname}</a></li>
+						<li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>更新時間 : 
+						<fmt:formatDate value="${recipe.lastUpdated}" pattern="yyyy-MM-dd HH:mm" /></li>
+<!-- 						<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> -->
+<!-- 						<a href="#">2 Comments</a></li> -->
+						<li><span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+						<a href="#">觀看次數 : 次</a></li>
 					</ul>
 				</div><br>
 
@@ -194,12 +195,14 @@
 							</tr>
 							</c:forTokens>
 						</tbody>
+						<c:if test="${recipe.remark!=null}">
 						<tfoot>
 						<tr><td colspan="2">
-						<h2>備註</h2><hr>
+						<h4>備註</h4><hr>
 						<p>${recipe.remark}</p>
 						</td></tr>
 						</tfoot>
+						</c:if>
 					</table>
 				</div>
 			</div>

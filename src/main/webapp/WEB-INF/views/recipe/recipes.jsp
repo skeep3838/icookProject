@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 	<meta charset="UTF-8">
-	<title>熱門食譜</title>
+	<title>食譜列表</title>
 	<!-- for-mobile-apps -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -38,8 +38,8 @@
 
 	<div class="special-services">
 		<div class="container">
-			<h3>熱門食譜</h3>
-			<p class="quia">Popular Recipes</p>
+			<h3>食譜列表</h3>
+			<p class="quia">Recipes List</p>
 			<div class="wthree_special_services">
 			<c:forEach var="recipe" items="${recipes}">
 				<div class="col-md-4 wthree_special_service_left" style="height: 400px">

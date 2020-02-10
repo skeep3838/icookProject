@@ -26,7 +26,7 @@ public class RecipeDaoImpl implements RecipeDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<RecipeBean> getAllRecipes() {
-		String hql = "From RecipeBean";
+		String hql = "From RecipeBean order by lastUpdated desc";
 		Session session = factory.getCurrentSession();
 		List<RecipeBean> list = new ArrayList<>();
 		list = session.createQuery(hql).getResultList();
@@ -43,7 +43,7 @@ public class RecipeDaoImpl implements RecipeDao {
 	@Override
 	public void addRecipe(RecipeBean recipe) {
 		Session session = factory.getCurrentSession();
-		MemberBean mb = getMemberId(recipe.getUserId());  //要把userId加進來
+		MemberBean mb = getMemberId(recipe.getUserId());  //把userId加進來
 		recipe.setMemberBean(mb);
 		session.save(recipe);
 	}
@@ -59,7 +59,7 @@ public class RecipeDaoImpl implements RecipeDao {
 	@Override
 	public void updateRecipe(RecipeBean recipe) {
 		Session session = factory.getCurrentSession();
-		MemberBean mb = getMemberId(recipe.getUserId());  //要把userId加進來
+		MemberBean mb = getMemberId(recipe.getUserId());  //把userId加進來
 		recipe.setMemberBean(mb);
 		session.update(recipe);
 	}
