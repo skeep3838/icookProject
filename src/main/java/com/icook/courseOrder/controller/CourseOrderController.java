@@ -5,24 +5,29 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.icook.course.service.CourseService;
-import com.icook.model.CourseBean;
-import com.icook.model.CourseOrderBean;
-import com.icook.model.MemberBean;
-import com.icook.model.orderBean;
-import com.icook.shoppingCart.service.OrderServiceDao;
+import java.text.SimpleDateFormat; 
+import java.util.ArrayList; 
+import java.util.Date; 
+import java.util.List; 
+ 
+import javax.servlet.ServletContext; 
+import javax.servlet.http.HttpServletRequest; 
+import javax.servlet.http.HttpServletResponse; 
+import javax.servlet.http.HttpSession; 
+ 
+import org.springframework.beans.factory.annotation.Autowired; 
+import org.springframework.stereotype.Controller; 
+import org.springframework.ui.Model; 
+import org.springframework.web.bind.annotation.GetMapping; 
+import org.springframework.web.bind.annotation.PostMapping; 
+import org.springframework.web.bind.annotation.RequestParam; 
+ 
+import com.icook.course.service.CourseService; 
+import com.icook.model.CourseBean; 
+import com.icook.model.CourseOrderBean; 
+import com.icook.model.MemberBean; 
+import com.icook.model.orderBean; 
+import com.icook.shoppingCart.service.OrderServiceDao; 
 
 @Controller
 public class CourseOrderController {
@@ -194,7 +199,7 @@ public class CourseOrderController {
 				if(invoiceTitle == "") {
 					invoiceTitle = null;
 				}
-				double total =(double)cb.getCoursePrice()*cb.getCourseDiscount()*orderQty;
+				double total =(double)(cb.getCoursePrice() *cb.getCourseDiscount()*orderQty);
 				System.out.println("total: " + total);
 				//取得總金額
 				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS");
