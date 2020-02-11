@@ -280,12 +280,14 @@
 											name="step" class="form-control" rows="5"><c:out
 												value='${step}' /></textarea>
 									</td>
-									<td style="width: 25%; text-align: center"><label
-										class="btn btn-info" id="uploadImg${i.index+1}"> <input
+									<td style="width: 25%; text-align: center">
+									<label
+										class="btn btn-info" id="uploadImg${i.index+1}"> 
+										<input
 											name="StepImage" class="stepUpl" id="upload_img"
 											onchange="ShowStepImg(this,${i.index+1})"
-											style="display: none;" type="file" accept="image/jpg" /> <i
-											class="fa fa-photo"></i> 上傳步驟照片
+											style="display: none;" type="file" accept="image/jpg" /> 
+											<i class="fa fa-photo"></i> 上傳步驟照片
 									</label>
 										<div id="stepImg${i.index+1}">
 										<img src="<c:url value='/getPicture/${recipeBean.recipeNo}/${i.index+1}' />"

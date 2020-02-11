@@ -194,6 +194,7 @@ public class CourseOrderController {
 				if(invoiceTitle == "") {
 					invoiceTitle = null;
 				}
+				Integer price = cb.getCoursePrice();
 				double total =(double)cb.getCoursePrice()*cb.getCourseDiscount()*orderQty;
 				System.out.println("total: " + total);
 				//取得總金額

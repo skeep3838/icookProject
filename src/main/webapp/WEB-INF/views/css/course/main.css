@@ -2739,6 +2739,7 @@
 
 			.feature .image img {
 				max-width: 100%;
+				margin-left: 10px;
 			}
 
 		.feature .content {
@@ -2772,7 +2773,7 @@
 			}
 
 				.feature .image img {
-					width: 100%;
+					height: 215px;
 				}
 
 			.feature .content {
@@ -2790,6 +2791,7 @@
 
 				.feature .content {
 					padding: 2em 1em 0.1em 1em;
+					height: 240px;
 				}
 
 		}
@@ -2850,11 +2852,12 @@
 	.wrapper {
 		padding: 8em 0 6em 0;
 		position: relative;
+		
 	}
 
 		.wrapper > .inner {
 			margin: 0 auto;
-			width: 70em;
+			width: 80%;
 		}
 
 		.wrapper.style1 {

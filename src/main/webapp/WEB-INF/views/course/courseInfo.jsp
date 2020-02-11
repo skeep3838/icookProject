@@ -30,7 +30,7 @@
 			<header class="major special">
 				<h2>${course.courseName}</h2>
 				<br>
-				<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
+				<p></p>
 			</header>
 			<!-- 					卡車套件 -->
 			<a href="#" class="image fit"><img src="../css/images/pic11.jpg"
@@ -70,7 +70,9 @@
 					<div class="card"
 						style="width: 18rem; -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);">
 						<div class="card-body">
-							<h3 class="card-title">立即購買</h3>
+						<c:choose>
+							<c:when test="${courseStock>0}">
+								<h3 class="card-title">立即購買</h3>
 							<br>
 							<h4>剩餘座位: ${courseStock}</h4>
 							<p class="card-text"></p>
@@ -95,7 +97,14 @@
 <!-- 									class="btn btn-primary">結帳</a>  																	 -->
 								<input type="submit" class="btn btn-primary" id="addCourseVart" value="結帳"></a> 
 							</form>
-							
+							</c:when>
+							<c:otherwise>
+								<br><br>
+								<h3 class="card-title">已完售</h3>
+								<br><br>
+							</c:otherwise>
+						</c:choose>
+								
 						</div>
 					</div>
 				</div>

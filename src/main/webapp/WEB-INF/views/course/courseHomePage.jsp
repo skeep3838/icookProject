@@ -22,7 +22,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/fragment/TopNav.jsp" />	
 	<!-- 搜尋功能 -->
-	<div class="contain align-items-center">
+	<div class="inner">
 		<fieldset >
 			<form method="POST" class="form-horizontal" style="text-align: center">
 				<div class="form-group row">
@@ -34,17 +34,21 @@
 		</fieldset>
 	</div>	
 			
-		<section id="one" class="wrapper style1">
-			<div class="inner">
-				<c:forEach var='course' items='${courses}'>
+		<section id="one" class="wrapper style1 justify-content-center">
+			<div class="inner" >
+			<div class="container-fluid">     
+    <div class="row">
+      
+      	<c:forEach var='course' items='${courses}'>
+		  <div class="col-6 col-sm-6" style="width:80%;height: 100px;" >
 					<article class="feature left">
 						<span class="image"><img src="../css/images/pic01.jpg" alt="" /></span>
 						<div class="content">
 							<h2>${course.courseName}</h2>
 							<br>
-							<p>${course.courseCategory}</p>
+							<h3>${course.courseCategory}</p>
 							<br>
-							<p>${course.courseIntrod}</p>
+							<h5>${course.courseIntrod}</p>
 							<br>
 							<ul class="actions">
 								<li>
@@ -53,7 +57,12 @@
 							</ul>
 						</div>
 					</article>
+					</div>
 				</c:forEach> 
+      
+    </div>
+  </div>
+				
 			</div>
 		</section>
 	

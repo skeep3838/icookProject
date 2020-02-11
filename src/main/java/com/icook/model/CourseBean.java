@@ -1,15 +1,17 @@
 package com.icook.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.sql.Blob;
+import java.util.Date;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 
 @Entity
@@ -20,24 +22,30 @@ public class CourseBean implements Serializable {
 	//請依資料表欄位名稱取名
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
-		Integer courseId;
-		Integer hostId;
-		String courseName;
-		String courseCategory;
-		String courseImage; //資料類型待確認
-		String hostName;
-		Date courseStartDate;
-		Date courseEndDate;
-		String courseIntrod;
-		Integer coursePrice;
-		Date saleStartDate;
-		Date saleEndDate;
-		String coursePhone;
-		String courseMail;
-		Double courseDiscount;
-		
+		private Integer courseId;
+		private Integer hostId;
+		@Expose
+		@SerializedName("title")
+		private String courseName;
+		private String courseCategory;
+		private Blob courseImage; //資料類型待確認
+		private String hostName;
+		@Expose
+		@SerializedName("start")
+		private String courseStartDate;
+		@Expose
+		@SerializedName("end")
+		private String courseEndDate;
+		private String courseIntrod;
+		private Integer coursePrice;
+		private String coursePhone;
+		private String courseMail;
+		private Double courseDiscount;
+		private Date updateTime;
 //		課程多 => 教室一
-		String roomNo;
+		@Expose
+		@SerializedName("className")
+		private String roomNo;
 //		@ManyToOne
 //		@JoinColumn(name = "roomNo")
 //		ClassRoomBean classRoomBean;
@@ -51,23 +59,29 @@ public class CourseBean implements Serializable {
 		
 		public CourseBean() {}
 		
+		public CourseBean( String courseName, String courseStartDate, 
+				String courseEndDate) {
+			this.courseName = courseName;
+			this.courseStartDate = courseStartDate;
+			this.courseEndDate = courseEndDate;
+		}
+		
 		public CourseBean(
 			Integer courseId,
 			Integer hostId,
 			String courseName,
 			String courseCategory,
-			String courseImage, //資料類型待確認
+			Blob courseImage, //資料類型待確認
 			String hostName,
-			Date courseStartDate,
-			Date courseEndDate,
+			String courseStartDate,
+			String courseEndDate,
 			String roomNo,
 			String courseIntrod,
 			Integer coursePrice,
-			Date saleStartDate,
-			Date saleEndDate,
 			String coursePhone,
 			String courseMail,
-			Double courseDiscount) {
+			Double courseDiscount,
+			Date updateTime) {
 				this.courseId = courseId;
 				this.hostId = hostId;
 				this.courseName = courseName;
@@ -79,15 +93,15 @@ public class CourseBean implements Serializable {
 				this.roomNo = roomNo;
 				this.courseIntrod = courseIntrod;
 				this.coursePrice = coursePrice;
-				this.saleStartDate = saleStartDate;
-				this.saleEndDate = saleEndDate;
 				this.coursePhone = coursePhone;
 				this.courseMail = courseMail;
 				this.courseDiscount = courseDiscount;
+				this.updateTime = updateTime;
 		}
 		
 		
 		
+
 		public Integer getCourseId() {
 			return courseId;
 		}
@@ -113,10 +127,10 @@ public class CourseBean implements Serializable {
 		public void setCourseCategory(String courseCategory) {
 			this.courseCategory = courseCategory;
 		}
-		public String getCourseImage() {
+		public Blob getCourseImage() {
 			return courseImage;
 		}
-		public void setCourseImage(String courseImage) {
+		public void setCourseImage(Blob courseImage) {
 			this.courseImage = courseImage;
 		}
 		public String getHostName() {
@@ -125,16 +139,16 @@ public class CourseBean implements Serializable {
 		public void setHostName(String hostName) {
 			this.hostName = hostName;
 		}
-		public Date getCourseStartDate() {
+		public String getCourseStartDate() {
 			return courseStartDate;
 		}
-		public void setCourseStartDate(Date courseStartDate) {
+		public void setCourseStartDate(String courseStartDate) {
 			this.courseStartDate = courseStartDate;
 		}
-		public Date getCourseEndDate() {
+		public String getCourseEndDate() {
 			return courseEndDate;
 		}
-		public void setCourseEndDate(Date courseEndDate) {
+		public void setCourseEndDate(String courseEndDate) {
 			this.courseEndDate = courseEndDate;
 		}
 		public String getRoomNo() {
@@ -155,18 +169,7 @@ public class CourseBean implements Serializable {
 		public void setCoursePrice(Integer coursePrice) {
 			this.coursePrice = coursePrice;
 		}
-		public Date getSaleStartDate() {
-			return saleStartDate;
-		}
-		public void setSaleStartDate(Date saleStartDate) {
-			this.saleStartDate = saleStartDate;
-		}
-		public Date getSaleEndDate() {
-			return saleEndDate;
-		}
-		public void setSaleEndDate(Date saleEndDate) {
-			this.saleEndDate = saleEndDate;
-		}
+		
 		public String getCoursePhone() {
 			return coursePhone;
 		}
@@ -189,6 +192,14 @@ public class CourseBean implements Serializable {
 
 		public void setCourseDiscount(Double courseDiscount) {
 			this.courseDiscount = courseDiscount;
+		}
+
+		public Date getUpdateTime() {
+			return updateTime;
+		}
+
+		public void setUpdateTime(Date updateTime) {
+			this.updateTime = updateTime;
 		}
 		
 		
