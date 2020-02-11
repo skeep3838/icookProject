@@ -15,7 +15,8 @@ public class LogoutBean {
 	}
 
 	public Integer getLogout() { // logout 
-		session.invalidate();
+//		session.invalidate();
+//		session.removeAttribute("LoginOK");
 		return 0;
 	}
 }

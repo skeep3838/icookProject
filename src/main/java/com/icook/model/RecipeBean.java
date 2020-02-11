@@ -52,6 +52,7 @@ public class RecipeBean implements Serializable {
 	private Blob stepPic10;
 	private String remark;
 	private Date lastUpdated;
+	private Integer pageView;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="userId") 	
@@ -63,9 +64,6 @@ public class RecipeBean implements Serializable {
 	@Transient
 	MultipartFile RecipeImage;
 	
-//	@Transient
-//	MultipartFile[] StepImage;
-	
 	public RecipeBean() {
 	}
 	public RecipeBean(Integer recipeNo,String recipeName, String cookingTime, String serving
@@ -75,7 +73,7 @@ public class RecipeBean implements Serializable {
 	, String step, String remark, Date lastUpdated
 	, Blob stepPic01, Blob stepPic02, Blob stepPic03, Blob stepPic04, Blob stepPic05
 	, Blob stepPic06, Blob stepPic07, Blob stepPic08, Blob stepPic09, Blob stepPic10
-	, Integer userId) {
+	, Integer userId, Integer pageView) {
 		this.recipeNo = recipeNo;
 		this.recipeName = recipeName;
 		this.cookingTime = cookingTime;
@@ -107,6 +105,7 @@ public class RecipeBean implements Serializable {
 		this.remark = remark;
 		this.lastUpdated = lastUpdated;
 		this.userId = userId;
+		this.pageView = pageView;
 	}
 	
 	public RecipeBean(Integer recipeNo, MemberBean memberBean) {
@@ -299,6 +298,12 @@ public class RecipeBean implements Serializable {
 	}
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
+	}
+	public Integer getPageView() {
+		return pageView;
+	}
+	public void setPageView(Integer pageView) {
+		this.pageView = pageView;
 	}
 	public MultipartFile getRecipeImage() {
 		return RecipeImage;

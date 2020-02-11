@@ -45,6 +45,7 @@ public class RecipeDaoImpl implements RecipeDao {
 		Session session = factory.getCurrentSession();
 		MemberBean mb = getMemberId(recipe.getUserId());  //把userId加進來
 		recipe.setMemberBean(mb);
+		recipe.setPageView(0);
 		session.save(recipe);
 	}
 
@@ -84,6 +85,27 @@ public class RecipeDaoImpl implements RecipeDao {
 		RecipeBean rb = new RecipeBean();
 		rb.setRecipeNo(recipeNo);
 		session.delete(rb);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RecipeBean> getTop3RecipesByPV() {
+		Session session = factory.getCurrentSession();
+		String hql = "From RecipeBean order by pageView desc";
+		List<RecipeBean> list = new ArrayList<>();
+		list = session.createQuery(hql).setMaxResults(3).getResultList();
+		return list;
+	}
+
+	@Override
+	public void updatePageView(int recipeNo, int pageView) {
+		Session session = factory.getCurrentSession();
+		String hql = "Update RecipeBean set pageView = :pageView Where recipeNo = :no";
+		
+		int n = session.createQuery(hql)
+				.setParameter("pageView", pageView)
+				.setParameter("no", recipeNo)
+				.executeUpdate();
 	}
 
 		
