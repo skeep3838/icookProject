@@ -1,7 +1,10 @@
 $(document).ready(function() {
 	var pageContext = $("#pageContext").val();
+//		======================輪播圖設定==========================	
+	//邊邊不露白
+	$('.coverflow').css('max-width',$('.coverflow img').width());
 //		======================輸入商品數量select==========================		
-	//輸入商品數量
+	//設定select選單的商品數量
 		var optionList='';
 		for(var optionSet=1;optionSet<=10;optionSet++){
 			optionList+='<option>'+optionSet+'</option>';
@@ -11,7 +14,6 @@ $(document).ready(function() {
 // 		======================p分頁p==========================
 		
 		var pageSet = 8;//tip:每個分頁顯示的商品數量
-		console.log( typeof(pageSet));//tip:typeof(pageSet)查看型態
 		var proCount = $("#proCount").val();//tip:商品數量
 		
 		//總頁數 , Math.ceil()=無條件進位
@@ -224,7 +226,7 @@ $(document).ready(function() {
 //	console.log($("select").text());
 	var nowIndex = 0 ;
 //	設定modal內容的type切換(未完成,切換過去時的option selected不正確)
-	$("select").change(function(){
+	$("select[id*=proSelect]").change(function(){
 		var targetIndex = $(this).get(0).selectedIndex;//取得被選中項目的索引
 		console.log("nowIndex:"+nowIndex);
 		console.log("targetIndex:"+targetIndex);
@@ -375,9 +377,6 @@ $(document).ready(function() {
 			console.log("加入購物車成功");
 //			$("#cartNo").load("");
 		})
-// 		=======================s每x毫秒刷新頁面s==========================			
-		
-// 		使用ajax不刷新頁面執行控制器or前端(未實驗)
 		function doAjax(targetUrl,inputData,outputData){
 			$.ajax({
 				url:targetUrl,//後端controller的URL
