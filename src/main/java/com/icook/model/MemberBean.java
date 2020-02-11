@@ -7,9 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="member")
+@Table(name="member", uniqueConstraints = { @UniqueConstraint(columnNames = "account") })
 public class MemberBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//請依資料表欄位名稱取名

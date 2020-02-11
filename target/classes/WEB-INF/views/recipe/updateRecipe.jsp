@@ -287,7 +287,10 @@
 											style="display: none;" type="file" accept="image/jpg" /> <i
 											class="fa fa-photo"></i> 上傳步驟照片
 									</label>
-										<div id="stepImg${i.index+1}"></div></td>
+										<div id="stepImg${i.index+1}">
+										<img src="<c:url value='/getPicture/${recipeBean.recipeNo}/${i.index+1}' />"
+									alt=" " class="img-responsive" />
+										</div></td>
 									<td style="vertical-align: middle" id='deltd${i.index+1}'><button
 											type="button" class="btn btn-danger"
 											onclick="delRow(this,'picture',0, ${i.index+1})">

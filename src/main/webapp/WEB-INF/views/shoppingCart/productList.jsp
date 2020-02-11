@@ -98,8 +98,8 @@
     				<button name="cmd" id="press${proCount}" class="addToCar btn btn-primary">
 							Add To Car
 					</button>
- 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal${proCount}">詳細資訊</button>
-
+ 					<button type="button" class="myModal btn btn-primary" data-toggle="modal" data-target="#myModal${proCount}">詳細資訊</button>
+					購買數量<p><input style="margin:5px;" type="number" class="products${proCount} quantity${proCount}" id="qty${proCount}" value="1" min="1" max="99" /></p>
 				</div>
 				
 
@@ -121,27 +121,27 @@
 						<input type="hidden" id="typeCount${proCount}" value="${typeCount}"/>
 					  	
       					<!-- Modal content商品明細內容-->
-      					<div class="modal-content modalContent" id="modalContent${proContentCount}">
+      					<div class="modal-content modalContent" id="modalContent${proContentCount}" style="height:800px;">
         					<div class="modal-header">
           						<button type="button" class="close" data-dismiss="modal">&times;</button>
           						<h4 class="modal-title">${pros.productName}(${pbt.typeTitle})</h4>
         					</div>
-        					<div class="modal-body" data-ride="carousel">
+        					<div class="modal-body" data-ride="carousel" style="height:600px">
 <!--         						<div id="myCarousel" class="" data-ride="carousel"> -->
  								<!-- Wrapper for slides -->
 <!--     							<div class="carousel-inner" role="listbox"> -->
 								
       								<div class="item">
       									<div class="proPicture" style="float:left;width:60%;">
-      										<div class="targetImg" id="targetImg${proContentCount}" style="text-align:center;">
-<%--       											<img src="${pageContext.request.contextPath}/${imgArray[0]}" width="200px"> --%>
+      										<div class="targetImg" id="targetImg${proContentCount}" style="height:300px;text-align:center;">
+      											<img src="${pageContext.request.contextPath}/${imgArray[0]}" width="200px">
       										</div>
       										<!-- picCount是紀錄圖片數量,並作為索引代號 -->
 											<c:set var="picCount" value="${picCount+1}" />
       										<c:forEach items="${imgArray}" var="prodImg" varStatus="vsImg">
-      											<input type="hidden" id="testImggg${picCount+vsImg.index}" value="${prodImg}"/>
-        										<div class="hoverProdImg" id="prodImg${picCount+vsImg.index}" style="float:left;margin:2px;">
-        											<img class="smallImg" id="smallImg${picCount+vsImg.index}" src="${pageContext.request.contextPath}/${prodImg}" width="100px">
+      											<input type="hidden" id="testImggg${picCount}" value="${prodImg}"/>
+        										<div class="hoverProdImg smallImgBox" id="prodImg${picCount}" style="float:left;margin:2px;">
+        											<img class="smallImg" id="smallImg${picCount}" src="${pageContext.request.contextPath}/${prodImg}" width="100px">
       											</div>
       										</c:forEach>
       									</div>
@@ -171,7 +171,7 @@
 													<p><h4 style="text-decoration:line-through;">原價:${pbt.unitPrice}</h4></p>
    												</c:otherwise>
    											</c:choose>
-   											<p><input style="margin:5px;" type="number" class="products${proContentCount} quantity${proContentCount}" id="qty${proContentCount}" value="1" min="1" max="99" /></p>
+   											購買數量<p><input style="margin:5px;" type="number" class="products${proContentCount} quantity${proContentCount}" id="qty${proContentCount}" value="1" min="1" max="99" /></p>
    											<p>庫存${pbt.unitStock}</p>
    											<button name="cmd" id="press${proContentCount}" class="addToCar btn btn-primary">
 												Add To Car
@@ -190,7 +190,7 @@
 <!--     							</div> -->
     													
 <!--         					</div> -->
-        					</div>
+        					</div>	
         					<div class="modal-footer">
           						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         					</div>

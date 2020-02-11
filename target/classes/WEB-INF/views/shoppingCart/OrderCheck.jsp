@@ -121,6 +121,9 @@
 								<c:when test="${empty shopping.discount}">
 									<td>${shopping.discount}
 								</c:when>
+								<c:when test="${shopping.discount==10.0}">
+									<td>
+								</c:when>
 								<c:otherwise>
 									<td>${shopping.discount} 折
 								</c:otherwise>

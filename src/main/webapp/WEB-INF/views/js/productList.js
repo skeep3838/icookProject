@@ -185,14 +185,9 @@ $(document).ready(function() {
 // ========================Modal content商品內容=========================	
 		
 		
-//	初始設定開啟指定的modal內容
-	var modalContent = $(".modalContent");
-	modalContent.css("display","none");
-	$("div[id*=modalContent1]").css("display","block");
-	$("div[id*=modalContent4]").css("display","block");
-	$("div[id*=modalContent7]").css("display","block");
+//	初始關閉所有modal內容
+	$(".modalContent").css("display","none");
 
-	
 	
 //	動態寫入type的數量、內容(完成,但想試著用ajax寫看看)
 	setSelectType();
@@ -210,7 +205,7 @@ $(document).ready(function() {
 		var typeTitleIndex=0;//產品type的索引
 		for(var prod=1;prod<=prods;prod++){
 			for(var typeNo=1;typeNo<=typeCount[prod];typeNo++){
-				typeList+='<option>'+typeTitle[typeTitleIndex++]+'</option>';
+				typeList+='<option class=\"proType\">'+typeTitle[typeTitleIndex++]+'</option>';
 			}
 			$(".proSelect"+prod).html(typeList);
 			typeList="";
@@ -248,7 +243,7 @@ $(document).ready(function() {
 		console.log("modalContentID2:"+modalContentID);
 		$("div[id*=modalContent]").css("display","none");
 		$("div[id="+modalContentID+"]").css("display","block");
-//		$(option[value='selectVal']).prop('selected',true);
+//		$(this).toggle();
 		
 		nowIndex = targetIndex;
 		console.log("nowIndex2:"+nowIndex);
@@ -258,44 +253,23 @@ $(document).ready(function() {
 //		else if(nowIndex>targetIndex){
 //			
 //		}
-		
-		//切換到的type要做的事情,將此type顯示 > css("display","block"),其他的隱藏;
-//		switch(optionIndex){
-//			case 0: 
-//					$("div[id*=modalContent]").css("display","none");
-//					$("div[id*=modalContent1]").css("display","block");
-//				    break;
-//			case 1: 
-//					$("div[id*=modalContent]").css("display","none");
-//					$("div[id*=modalContent2]").css("display","block");
-//					break;
-//			case 2: 
-//					$("div[id*=modalContent]").css("display","none");
-//					$("div[id*=modalContent3]").css("display","block");
-//				    $(this).get(0).selectedIndex=index;
-//				    break;
-//		}
-
-		
-		//切換邏輯  當前選項1:選項2=選項1+1 、選項3=選項1+2
-		//  	     當前選項2:選項1=選項2-1 、選項3=選項2+1
-		//  	     當前選項3:選項1=選項3-2 、選項2=選項3-1
-		
-		//type數量(option數量):看typeId的Max值來決定
-		//option內容:依照typeTitle
 	})
+	
 //	設定modal內容的圖片點選時在目標位置放大顯示(未完成)
 	var targetImg = $(".targetImg");//目標圖片的櫃子
-	var modalContentImg = $(".smallImg");//點選圖片的櫃子
-	modalContentImg.click(function(){
-		console.log("modathis:"+this);
-		index = $(".proPicture").find(this).index();
-		console.log("modalContentImg:"+index);
-		testimggggg = $("#testImggg"+index).val();
-		console.log("testimggggg:"+testimggggg);
-		addImgEle = '<img src=\"'+   pageContext    +'/'+   testimggggg+    '\" width=\"200px\"></img>';
-		$("#targetImg"+index).html(addImgEle);
-		console.log("img:"+addImgEle);
+	var smallImgBox = $(".smallImgBox");//圖片的櫃子
+	
+	
+	$(".smallImg").click(function(){
+		id = $(this).attr("id");
+		index = id.replace("smallImg","");
+		console.log("id:"+id);
+		imgSrc = $(this).attr("src");
+		console.log("imgSrc:"+imgSrc);
+//		console.log("testimggggg:"+testimggggg);
+//		addImgEle = '<img src=\"'+   pageContext    +'/'+   testImggg+    '\" width=\"200px\"></img>';
+		$("#targetImg"+index).html('<img class="hoverProdImg"  src="' +imgSrc+ '" width="200px">' + '</img>');
+//		console.log("img:"+addImgEle);
 	})
 	
 	
@@ -329,38 +303,53 @@ $(document).ready(function() {
 		
     //m判斷是否開啟modal視窗,有開啟就將useModal設為true
    $('.myModal').on('shown.bs.modal', function (e) {
-      	console.log("openModal1");
+      	console.log("openModal");
       	useModal = true;
    })
 	
  //m判斷是否關閉 modal視窗,關閉就將useModal設為false
 	$('.myModal').on('hidden.bs.modal', function () {
-		console.log("hiddenModal1");
+		console.log("hiddenModal");
 		useModal = false;
-		var modalContent = $(".modalContent");
 		
 		//將modal內容恢復為初始狀態;
 		nowIndex=0;
-		modalContent.css("display","none");
-		$("div[id*=modalContent1]").css("display","block");
-		$("div[id*=modalContent4]").css("display","block");
-		$("div[id*=modalContent7]").css("display","block");
-	})  
-		var theCount = 0;
-		$(".addToCar").click(function(){
-			var id = $(this).attr("id");
-			console.log("theCount:"+(theCount+1));
+		$(".modalContent").css("display","none");
+		
+//		$("select .proType").first().css("background-color","green");
+	})
+
+//	按下詳細資料按鈕時,決定要開啟哪個商品modal
+	$(".myModal").click(function(){
+		var myModalTarget = $(this).attr("data-target");
+//		開啟選擇的myModal內的所有第一個modalContent
+		$(myModalTarget+" .modalContent").first().css("display","block");
+		
+	})
+	
+	var theCount = 0;
+	$(".addToCar").click(function(){
+		var id = $(this).attr("id");
 		
 // 		若id =press10,取數字部分10當index
 		var	index = id.replace("press","");
-			quantity = $(".quantity"+index);
-			qty = 0;
-			console.log("index:"+index);
+//			console.log("buttonIndex:"+index);
+		var quantity = $(".quantity"+index);
+		let qty = 0;
+//			console.log("index:"+index);
+//			console.log("useModal:"+useModal);
 		if(useModal){
-			qty = $(quantity.get(1)).val()
+			qty = quantity.val();
+//			qty = $(quantity.get(1)).val()
 		}else{
 			qty = $("#qty"+index).val();
+//			console.log("qtyelseID:"+"#qty"+index);
+//			console.log("qtyelse:"+qty);
 		}
+		console.log("$(#qty+index).length:"+$("#qty"+index).length);
+		console.log("$(#qty+index).value:"+$("#qty"+index).value);
+		console.log("qtyID:"+"#qty"+index);
+		console.log("qty:"+qty);
 			var product = 
 			{ 
 				productId   : $("#productId"+index).val(),

@@ -75,13 +75,25 @@
 			<c:forEach items="${prodsSet}" var="pbt" varStatus="vs2">
 <!-- 			proCount是紀錄商品數量,並作為索引代號 -->
 			<c:set var="proCount" value="${proCount+1}" />
-			<div class="products col-md-3 col-lg-4 Block_shadow_1" style="background-color:#CFDD8E;border:solid 1px;margin:3px;padding:1rem;text-align:center;" id="divTop${proCount}">
+			<div class="products col-md-3 Block_shadow_1" style="background-color:#ffefd0;border:solid 1px;margin:3px;padding:1rem;text-align:center;" id="divTop${proCount}">
 				<c:set var="image1" value="${pageContext.request.contextPath}/${imgArray[vs2.index]}" scope="session"></c:set>				
-				<p><img width="200px" height="200" class="img-circle" src="${pageContext.request.contextPath}/${imgArray[vs2.index]}"></img></p>
+				<p><img width="200px" height="200"  src="${pageContext.request.contextPath}/${imgArray[vs2.index]}"></img></p>
 				<c:set var="pbt" value="${pbt}" scope="session" />
+<%-- 				<p>${pros.productName}</p> --%>
 				<p>${pros.productName}</p>
-				<p>${pros.category}</p>
-				<p>${pbt.unitPrice}</p>
+				<p></p>
+ 				<c:choose>
+					<c:when test="${empty pbt.discount}">
+						<h4>價格:${pbt.unitPrice}</h4>
+   					</c:when>
+					<c:when test="${pbt.discount==1}">
+						<h4>價格:${pbt.unitPrice}</h4>
+   					</c:when>
+ 					<c:otherwise>
+   						<h3 style="color:red;">優惠價:<fmt:formatNumber pattern="#0" value="${pbt.unitPrice*pbt.discount}" type="currency" /></h3>
+						<h4><STRIKE>原價:${pbt.unitPrice}</STRIKE></h4>
+   					</c:otherwise>
+   				</c:choose>
 				<p><input style="margin:5px;" type="number" class="products${proCount} quantity${proCount}" id="qty${proCount}" value="1" min="1" max="99" /></p>
 				
 				<input type="hidden" class="products${proCount}" id="productId${proCount}" name="productId" value="${pros.productID}" />
@@ -122,7 +134,7 @@
   									<select class="selectpicker selectQty products${proCount} quantity${proCount}" id="qty${proCount}">
 									</select>
   									</li>
-  									<li class="list-group-item">商品庫存${pbt.unitStock}</li>
+<%--   									<li class="list-group-item">商品庫存${pbt.unitStock}</li> --%>
   									<li class="list-group-item"><button name="cmd" id="press${proCount}" class="addToCar btn btn-primary">
 												Add To Car
 									</button></li>

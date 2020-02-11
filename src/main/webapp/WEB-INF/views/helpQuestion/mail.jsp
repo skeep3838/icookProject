@@ -35,7 +35,17 @@
 <link
 	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
 	rel='stylesheet' type='text/css'>
+<style>
+	.error {
+  color: red;
+  margin-left: 5px;
+}
 
+
+label.error {
+  display: inline;
+}
+</style>
 </head>
 <body>
 	<!-- header -->
@@ -50,7 +60,7 @@
 		</div>
 	</div>
 	<!-- //banner1 -->
-
+	
 	<!-- mail -->
 	<div class="mail">
 		<div class="container">
@@ -60,21 +70,23 @@
 				style="padding: 0 200px 0 200px; width: 100%">
 				<br>
 				<br>
+				
 				<form action="<c:url value='/sendQuestion'/>" method="post" id="commontForm">
 					<div class="col-md-6 wthree_contact_left_grid">
-						<input type="text" name="Email" value="Email*"
-							class="email"
-							onfocus="this.value = '';"
-							onblur="checkmail()" required=""/>
+						<div><h5>&nbsp;&nbsp;Email * : </h5></div>
+						<input type="text" name="Email" value=""
+							onfocus="if (this.value == 'Email*') {this.value = '';}"
+							onblur="if (this.value == '') {this.value = '';}" required=""/>
 					</div>
 					<div class="col-md-6 wthree_contact_left_grid">
-						<input type="text" name="Title" value="Title*"
-							class="required "
-							onfocus="this.value = '';"
-							onblur="" required=""/>
+						<div><h5>&nbsp;&nbsp;Title * : </h5></div>
+						<input type="text" name="fname" value=""
+							onfocus="if (this.value == 'Title*') {this.value = '';}"
+							onblur="if (this.value == '') {this.value = '';}" required=""/>
 					</div>
 					<div class="clearfix"></div>
-					<textarea name="Message" onfocus="this.value = '';"
+					<textarea name="Message"  
+						onfocus="if (this.value == 'Message...') {this.value = '';}"
 						onblur="if (this.value == '') {this.value = 'Message...';}"
 						required="" >Message...</textarea>
 					<input class="submit" type="submit" value="提交"> 
@@ -90,21 +102,51 @@
 	<!-- //footer -->
 	<!-- for bootstrap working -->
 	<script>
-	$().ready(function() {
-		$("#commontForm").validate();
-	})
-		function checkmail() {
-			var e = document.getElementsByName('Email').value;
-// 			if (!/(\S)+[@]{1}(\S)+[.]{1}(\w)+/.test(e)) {
-// 				alert("请输入格式正确的 e-mail 地址！");
-// 			}
-
-// 			if(e.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)!= -1){
-// 			    alert("true");
-// 			}else{
-// 			    alert("false");
-// 			}​
-//  		}
+		$(function() {
+			$("#commontForm").validate({
+				rules: {
+					  fname: {
+			            required: true
+			          },
+			          phone:{
+			            required: true,
+			            minlength: 8,
+			                    number: true
+			          },
+			          address: 'required',
+			          url:{
+			            url: true
+			          },
+			          Email: {
+			            required: true,
+			            email: true
+			          },
+			        },
+			        messages: {
+			          fname: {
+			            required:'必填'
+			          },
+			          phone: {
+			            required:'必填',
+			            minlength:'不得少於8位',
+			            number:'電話需為數字'
+			          },
+			          address: '必填',
+			          Email: {
+			            required:'必填',
+			            email:'Email格式不正確'
+			          },
+			          url:'網址格式不正確'
+			        },
+			        submitHandler: function(form) {
+			        	var str = $("#Message").val();
+			        	alert(str);
+			       		content = content.replace(/\n|\r\n/g,"<br>");
+			        	form.submit();
+			        	alert("提交成功");
+			        }
+			});
+		})
 	</script>
 	<!-- //for bootstrap working -->
 

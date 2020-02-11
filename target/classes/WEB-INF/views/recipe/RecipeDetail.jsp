@@ -44,7 +44,7 @@
 	</div>
 
 	<div class="single">
-		<div class="container">
+		<div class="container" style="margin-left: 150px;">
 			<div class="col-md-4 agile_single_left">
 				<div class="agileits_recent_posts">
 					<h3>Recent Posts</h3>
@@ -103,14 +103,14 @@
 						<div class="clearfix"></div>
 					</div>
 				</div>
-				<div class="agileits_tags">
-					<h3>Tags</h3>
-					<ul>
-						<li><a href="#">泰式</a></li>
-						<li><a href="#">咖哩</a></li>
-						<li><a href="#">一鍋到底</a></li>
-					</ul>
-				</div>
+<!-- 				<div class="agileits_tags"> -->
+<!-- 					<h3>Tags</h3> -->
+<!-- 					<ul> -->
+<!-- 						<li><a href="#">泰式</a></li> -->
+<!-- 						<li><a href="#">咖哩</a></li> -->
+<!-- 						<li><a href="#">一鍋到底</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
 			</div>
 			<div class="col-md-8 agile_single_right">
 				<div class="w3_comments">
@@ -121,85 +121,85 @@
 						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
 							href="#">${recipe.memberBean.nickname}</a></li>
 						<!-- 						<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="#">2 Comments</a></li> -->
-						<li><span class="glyphicon glyphicon-tags" aria-hidden="true"></span><a
-							href="#">3 Tags</a></li>
+<!-- 						<li><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> -->
+<!-- 						<a href="#">3 Tags</a></li> -->
 					</ul>
-				</div>
+				</div><br>
 
 				<div class="w3_comments_bottom">
 					<img src="<c:url value='/getPicture/${recipe.recipeNo}'/>"
-						alt=" " class="img-responsive" />
+						alt=" " class="img-responsive" style="display: block; margin-left: auto;
+  															margin-right: auto; width: 70%;" />
 					<p>
 						<i>${recipe.description}</i>
 					</p>
 					<table class="table">
 						<thead>
 							<tr>
-								<th style="text-align: center">份量<br>${recipe.serving}
+								<th style="text-align: center">份量<br>${recipe.serving}人份
 								</th>
-								<th style="text-align: center">時間<br>${recipe.cookingTime}
+								<th style="text-align: center">製作時間<br>${recipe.cookingTime}分鐘
 								</th>
 							</tr>
 						</thead>
 						<tbody style="text-align: center">
 							<th>食材</th>
+							<c:forEach var="ingredList" items="${ingredList}">
 							<tr>
-								<td>雞肉</td>
-								<td>300g</td>
+								<td>${ingredList[0]}</td>
+								<td>${ingredList[1]}</td>
 							</tr>
+							</c:forEach>
+							<c:if test="${recipe.group1!=null}">
+							<th>${recipe.group1}</th>
+							<c:forEach var="group1List" items="${group1List}">
 							<tr>
-								<td>咖哩粉</td>
-								<td>3大匙</td>
+								<td>${group1List[0]}</td>
+								<td>${group1List[1]}</td>
 							</tr>
+							</c:forEach>
+							</c:if>
+							<c:if test="${recipe.group2!=null}">
+							<th>${recipe.group2}</th>
+							<c:forEach var="group2List" items="${group2List}">
 							<tr>
-								<td>馬鈴薯</td>
-								<td>1大顆</td>
+								<td>${group2List[0]}</td>
+								<td>${group2List[1]}</td>
 							</tr>
-							<th>調味料</th>
+							</c:forEach>
+							</c:if>
+							<c:if test="${recipe.group3!=null}">
+							<th>${recipe.group3}</th>
+							<c:forEach var="group3List" items="${group3List}">
 							<tr>
-								<td>鹽</td>
-								<td>少許</td>
+								<td>${group3List[0]}</td>
+								<td>${group3List[1]}</td>
 							</tr>
-							<tr>
-								<td>糖</td>
-								<td>少許</td>
-							</tr>
-							<tr>
-								<td>辣椒</td>
-								<td>1大把</td>
-							</tr>
+							</c:forEach>
+							</c:if>
 						</tbody>
 					</table>
 					<table class="table">
 						<tbody>
+							<th>步驟</th>
+							<c:forTokens var="step" varStatus="i" delims="," items="${recipe.step}">
 							<tr>
-								<td style="width: 30%; padding: 20px"><img
-									src="${pageContext.request.contextPath}/image/step1.jpg"
+								<td style="width: 30%; padding: 20px">
+								<img src="<c:url value='/getPicture/${recipe.recipeNo}/${i.index+1}'/>"
 									alt=" " class="img-responsive" /></td>
 								<td>
-									<h2>1</h2>
-									<p>蒜頭切末、小番茄切塊(每粒約切成3等份)，九層塔葉洗淨、檸檬榨汁備用。喜歡絞肉碎一點的口感可以請攤販老闆絞兩次。</p>
+									<h2>${i.index+1}</h2>
+									<p>${step}</p>
 								</td>
 							</tr>
-							<tr>
-								<td style="width: 30%; padding: 20px"><img
-									src="${pageContext.request.contextPath}/image/step2.jpg"
-									alt=" " class="img-responsive" /></td>
-								<td>
-									<h2>2</h2>
-									<p>飄出蒜香時就可以整鍋拌炒，炒至絞肉快熟的時候下調味料然後試一下鹹度(手腳慢的人這邊建議轉最小火慢慢來)，醬油的部分先下1大匙試鹹度。注意！檸檬汁先不要下。</p>
-								</td>
-							</tr>
-							<tr>
-								<td style="width: 30%; padding: 20px"><img
-									src="${pageContext.request.contextPath}/image/step3.jpg"
-									alt=" " class="img-responsive" /></td>
-								<td>
-									<h2>3</h2>
-									<p>鹹香下飯的泰式打拋豬完成！</p>
-								</td>
-							</tr>
+							</c:forTokens>
 						</tbody>
+						<tfoot>
+						<tr><td colspan="2">
+						<h2>備註</h2><hr>
+						<p>${recipe.remark}</p>
+						</td></tr>
+						</tfoot>
 					</table>
 				</div>
 			</div>
