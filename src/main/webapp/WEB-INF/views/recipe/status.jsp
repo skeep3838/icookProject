@@ -33,9 +33,9 @@
 <link
 	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
 	rel='stylesheet' type='text/css'>
-
+<meta http-equiv="refresh" content="5.5;url=<c:url value='/recipes/list?userId=${LoginOK.userId}'/>">
 </head>
-<body>
+<body onload="setTimeOut()">
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/fragment/TopNav.jsp" />
 	<!-- banner1 -->
@@ -45,9 +45,9 @@
 
 	<div class="single">
 		<div class="container" style="margin-left: 150px;">
-			<div class="col-md-4 agile_single_left">
-					<h2>${status}</h2>
-
+			<div class="col-md-8 agile_single_left">
+					<h2>${status}，畫面即將在<span id="count"></span>秒後轉跳至會員食譜頁面</h2><br>
+					<h2>或者點擊<a href="<c:url value='/' />"	class="btn btn-info">回首頁</a></h2>
 			</div>
 		</div>
 	</div>
@@ -55,7 +55,16 @@
 	<!-- for bootstrap working -->
 	<script src="js/bootstrap.js"></script>
 	<!-- //for bootstrap working -->
-
+	<script type="text/javascript">
+	function setTimeOut(){
+		var countDownDate = new Date().getSeconds()+6;
+		var x = setInterval(function() {
+			var now = new Date().getSeconds();
+			var distance = countDownDate - now;
+			document.getElementById("count").innerHTML = distance;
+		},500);
+	}
+	</script>
 
 </body>
 </html>

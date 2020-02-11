@@ -56,4 +56,14 @@ public class RecipeServiceImpl implements RecipeService {
 		dao.deleteRecipe(recipeNo);
 	}
 
+	@Override
+	public List<RecipeBean> getTop3RecipesByPV() {
+		return dao.getTop3RecipesByPV();
+	}
+
+	@Override
+	public void updatePageView(int recipeNo, int pageView) {
+		dao.updatePageView(recipeNo, pageView);
+	}
+
 }
