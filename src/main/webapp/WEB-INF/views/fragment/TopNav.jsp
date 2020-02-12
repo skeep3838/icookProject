@@ -170,7 +170,7 @@ z-index:1;
 		    var websocket = null;
 		    //判断当前浏览器是否支持WebSocket
 		    if ('WebSocket' in window) {
-		        websocket = new WebSocket("ws://localhost:8080/icookProjectSpringMVC200203/websocket");
+		        websocket = new WebSocket("ws://localhost:8080/icookBackstage02035/websocket");
 		    }
 		    else {
 		        alert('当前浏览器 Not support websocket')
