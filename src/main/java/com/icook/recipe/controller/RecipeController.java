@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,7 @@ public class RecipeController {
 		this.context = context;
 	}
 
+//	取得所有的食譜，傳回食譜列表
 	@RequestMapping("/recipes")
 	public String allRecipesList(Model model) {
 		List<RecipeBean> list = service.getAllRecipes();
@@ -58,18 +60,42 @@ public class RecipeController {
 		return "recipe/recipes";
 	}
 
+//	依照傳來的recipeNo，找到該筆食譜回傳
 	@RequestMapping("/recipe")
-	public String getRecipeByRecipeNo(@RequestParam("no") Integer recipeNo, Model model) {
+	public String getRecipeByRecipeNo(@RequestParam("no") Integer recipeNo, Model model, HttpServletRequest request) {
 		RecipeBean rb = service.getRecipeByRecipeNo(recipeNo);
+		List<RecipeBean> top3RecipesList = service.getTop3RecipesByPV();
 		ArrayList<String[]> ingredList = stringToList(rb.getIngredName(), rb.getIngredQty());
 		ArrayList<String[]> group1List = stringToList(rb.getGroup1IngredName(), rb.getGroup1IngredQty());
 		ArrayList<String[]> group2List = stringToList(rb.getGroup2IngredName(), rb.getGroup2IngredQty());
 		ArrayList<String[]> group3List = stringToList(rb.getGroup3IngredName(), rb.getGroup3IngredQty());
+		HttpSession Session = request.getSession();
+		
+//		先檢查Session有沒有pageView的Attribute，如果有的話，丟下去檢查有沒有看過
+		List pageView = new ArrayList();
+		if (Session.getAttribute("pageView") == null) {
+			Session.setAttribute("pageView", pageView);
+			pageView.add(recipeNo);
+			Integer pv = rb.getPageView() + 1;
+			rb.setPageView(pv);
+			service.updatePageView(rb.getRecipeNo(), pv);
+		} else {
+			pageView = (List) Session.getAttribute("pageView");
+			if (!pageViewed(pageView, recipeNo)) {
+				pageView.add(recipeNo);
+				Integer pv = rb.getPageView() + 1;
+				rb.setPageView(pv);
+				service.updatePageView(rb.getRecipeNo(), pv);
+			}
+		}
+
 		model.addAttribute("ingredList", ingredList);
 		model.addAttribute("group1List", group1List);
 		model.addAttribute("group2List", group2List);
 		model.addAttribute("group3List", group3List);
 		model.addAttribute("recipe", rb);
+//		食譜左側欄位需要的資料
+		model.addAttribute("top3Recipes", top3RecipesList);
 		return "recipe/RecipeDetail";
 	}
 
@@ -242,36 +268,36 @@ public class RecipeController {
 		Blob blob = null;
 		if (step.equals(1)) {
 			blob = bean.getStepPic01();
-		}else if (step.equals(2)) {
+		} else if (step.equals(2)) {
 			blob = bean.getStepPic02();
-		}else if (step.equals(3)) {
+		} else if (step.equals(3)) {
 			blob = bean.getStepPic03();
-		}else if (step.equals(4)) {
+		} else if (step.equals(4)) {
 			blob = bean.getStepPic04();
-		}else if (step.equals(5)) {
+		} else if (step.equals(5)) {
 			blob = bean.getStepPic05();
-		}else if (step.equals(6)) {
+		} else if (step.equals(6)) {
 			blob = bean.getStepPic06();
-		}else if (step.equals(7)) {
+		} else if (step.equals(7)) {
 			blob = bean.getStepPic07();
-		}else if (step.equals(8)) {
+		} else if (step.equals(8)) {
 			blob = bean.getStepPic08();
-		}else if (step.equals(9)) {
+		} else if (step.equals(9)) {
 			blob = bean.getStepPic09();
-		}else if (step.equals(10)) {
+		} else if (step.equals(10)) {
 			blob = bean.getStepPic10();
 		}
-			if (blob != null) {
-				try {
-					len = (int) blob.length();
-					media = blob.getBytes(1, len);
-				} catch (SQLException e) {
-					throw new RuntimeException("Controller的getPicture()發生SQLException:" + e.getMessage());
-				}
-			} else {
-				media = toByteArray(filePath);
+		if (blob != null) {
+			try {
+				len = (int) blob.length();
+				media = blob.getBytes(1, len);
+			} catch (SQLException e) {
+				throw new RuntimeException("Controller的getPicture()發生SQLException:" + e.getMessage());
 			}
-		
+		} else {
+			media = toByteArray(filePath);
+		}
+
 		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 		MediaType mediaType = MediaType.IMAGE_JPEG;
 		headers.setContentType(mediaType);
@@ -393,6 +419,16 @@ public class RecipeController {
 		String status = "刪除完成";
 		model.addAttribute("status", status);
 		return "recipe/status";
+	}
+
+//	判斷有沒有看過這一頁
+	public Boolean pageViewed(List pageViewedList, Integer recipeNo) {
+		for(int i=0; i<pageViewedList.size();i++) {
+			if(pageViewedList.get(i).equals(recipeNo)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
