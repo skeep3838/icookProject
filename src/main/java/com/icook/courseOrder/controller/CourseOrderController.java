@@ -199,7 +199,8 @@ public class CourseOrderController {
 				if(invoiceTitle == "") {
 					invoiceTitle = null;
 				}
-				double total =(double)(cb.getCoursePrice() *cb.getCourseDiscount()*orderQty);
+				Integer price = cb.getCoursePrice();
+				double total =(double)cb.getCoursePrice()*cb.getCourseDiscount()*orderQty;
 				System.out.println("total: " + total);
 				//取得總金額
 				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS");

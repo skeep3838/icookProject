@@ -2295,6 +2295,7 @@
 			cursor: default;
 			list-style: none;
 			padding-left: 0;
+			float: right
 		}
 
 			ul.actions > li {
@@ -2739,11 +2740,26 @@
 
 			.feature .image img {
 				max-width: 100%;
+				margin-left: 10px;
 			}
 
 		.feature .content {
-			padding: 2em 3em 0.1em 3em;
-			width: 52%;
+			padding: 0% 2%.1em 3%;
+   			 width: 60%;
+		}
+		
+		.feature .content h4{
+		 display : inline-block;
+		  overflow : hidden;
+		  text-overflow : ellipsis;
+		  white-space : nowrap;
+		  width: 100%;
+		    /* height: 0%; */
+		    margin-bottom: -10%;
+		}
+		
+		.feature .content h2{
+		margin-top: -5%;
 		}
 
 		@media screen and (max-width: 1280px) {
@@ -2772,7 +2788,7 @@
 			}
 
 				.feature .image img {
-					width: 100%;
+					height: 215px;
 				}
 
 			.feature .content {
@@ -2790,6 +2806,7 @@
 
 				.feature .content {
 					padding: 2em 1em 0.1em 1em;
+					height: 240px;
 				}
 
 		}
@@ -2848,13 +2865,14 @@
 /* Wrapper */
 
 	.wrapper {
-		padding: 8em 0 6em 0;
+		padding: 2em 0 6em 0;
 		position: relative;
+		
 	}
 
 		.wrapper > .inner {
 			margin: 0 auto;
-			width: 70em;
+			width: 80%;
 		}
 
 		.wrapper.style1 {

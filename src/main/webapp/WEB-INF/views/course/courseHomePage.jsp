@@ -22,29 +22,36 @@
 <body>
 	<jsp:include page="/WEB-INF/views/fragment/TopNav.jsp" />	
 	<!-- 搜尋功能 -->
-	<div class="contain align-items-center">
+	<div class="inner">
 		<fieldset >
 			<form method="POST" class="form-horizontal" style="text-align: center">
 				<div class="form-group row">
 				<input class="form-control" type="text"
-					placeholder="請輸入關鍵字" aria-label="Search" name="courseName">
-				&nbsp;&nbsp;<button class="btn btn-outline-success" type="submit">Search</button>
+					placeholder="請輸入關鍵字" aria-label="Search" name="courseName" style="margin-left: 30%;">
+				&nbsp;&nbsp;<button class="btn btn-outline-success" type="submit" style="height: 48px;">Search</button>
 				</div>
 			</form>
 		</fieldset>
 	</div>	
 			
-		<section id="one" class="wrapper style1">
-			<div class="inner">
-				<c:forEach var='course' items='${courses}'>
-					<article class="feature left">
-						<span class="image"><img src="../css/images/pic01.jpg" alt="" /></span>
+		<section id="one" class="wrapper style1 justify-content-center">
+			<div class="inner" >
+			<div class="container-fluid">     
+    <div class="row">
+		<div class="containCard" style="margin: 0 -10% 0 -10%;padding:0;">
+      
+      	<c:forEach var='course' items='${courses}'>
+		  <div class="col-6 col-sm-6" style="width:50%;" >
+					<article class="feature left" style="height: 250px;margin: 0 0% 5% 0%;">
+						<span class="image"><img src="<c:url value='/getPic/${course.courseId}' />"
+				class="img-responsive"/></span>
 						<div class="content">
-							<h2>${course.courseName}</h2>
-							<br>
-							<p>${course.courseCategory}</p>
-							<br>
-							<p>${course.courseIntrod}</p>
+						<table>
+							<tr><h2>${course.courseName}</h2>
+							<tr><h3>${course.courseCategory}</h3>
+							<tr><h4>內容簡介:</h4>
+							<tr><h4>${course.courseIntrod}</h4>
+						</table>
 							<br>
 							<ul class="actions">
 								<li>
@@ -53,7 +60,12 @@
 							</ul>
 						</div>
 					</article>
+					</div>
 				</c:forEach> 
+      </div>
+    </div>
+  </div>
+				
 			</div>
 		</section>
 	
