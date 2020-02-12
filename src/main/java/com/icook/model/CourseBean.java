@@ -163,10 +163,10 @@ public class CourseBean implements Serializable {
 		public void setCourseIntrod(String courseIntrod) {
 			this.courseIntrod = courseIntrod;
 		}
-		public String getCoursePrice() {
+		public Integer getCoursePrice() {
 			return coursePrice;
 		}
-		public void setCoursePrice(String coursePrice) {
+		public void setCoursePrice(Integer coursePrice) {
 			this.coursePrice = coursePrice;
 		}
 		
@@ -186,11 +186,11 @@ public class CourseBean implements Serializable {
 			return serialVersionUID;
 		}
 
-		public String getCourseDiscount() {
+		public Double getCourseDiscount() {
 			return courseDiscount;
 		}
 
-		public void setCourseDiscount(String courseDiscount) {
+		public void setCourseDiscount(Double courseDiscount) {
 			this.courseDiscount = courseDiscount;
 		}
 
