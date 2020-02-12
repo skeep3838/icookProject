@@ -40,10 +40,11 @@
     <div class="row">
 		<div class="containCard" style="margin: 0 -10% 0 -10%;padding:0;">
       
-      	<c:forEach var='course' items='${courses.courseId}'>
+      	<c:forEach var='course' items='${courses}'>
 		  <div class="col-6 col-sm-6" style="width:50%;" >
 					<article class="feature left" style="height: 250px;margin: 0 0% 5% 0%;">
-						<span class="image"><img src="../css/images/pic01.jpg" alt="" /></span>
+						<span class="image"><img src="<c:url value='/getPic/${course.courseId}' />"
+				class="img-responsive"/></span>
 						<div class="content">
 						<table>
 							<tr><h2>${course.courseName}</h2>

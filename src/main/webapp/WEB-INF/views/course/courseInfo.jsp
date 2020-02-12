@@ -34,7 +34,7 @@
 			</header>
 			<!-- 					卡車套件 -->
 			<a class="image fit"><img src="<c:url value='/getPic/${course.courseId}' />"
-				class="img-responsive" style="width:70%;" /></a>
+				class="img-responsive" style="width: 1140px;height: 400px" /></a>
 			<div class="services-breadcrumb">
 				<div class="container">
 					<ul>
@@ -49,26 +49,23 @@
 					<table>
 					<tr>
 						<TH><h4>課程時間</h4></TH>
-						<td><span class="glyphicon glyphicon-calendar" aria-hidden="true">
-							<h5>${course.courseStartDate}</h5>
-							</span></td>
+						<td><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> ${course.courseStartDate}
+						</td>
 					</tr>
 					<tr>
 						<TH><h4>上課地點</h4></TH>
-						<td><span class="glyphicon glyphicon-map-marker" aria-hidden="true">
-							<h5>台北市大安區復興南路一段390號 2,3號2樓 203號教室</h5>
-							</span></td>
+						<td>
+							<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 台北市大安區復興南路一段390號 2,3號2樓 203號教室
+						</td>
 					</tr>
 					<tr>
 						<TH><h4>課程簡介</h4></TH>
-						<td><span class="glyphicon glyphicon-list-alt" aria-hidden="true">
-							<h5>${course.courseIntrod}</h5></span>
+						<td><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> ${course.courseIntrod}
 						</td>
 					</tr>
 					<tr>
 						<TH><h4>課程費用</h4></TH>
-						<td><span class="glyphicon glyphicon-usd" aria-hidden="true">
-						<h5>${course.coursePrice}</h5>
+						<td><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> ${course.coursePrice}
 						</td>
 					</tr>
 					</table>
@@ -83,7 +80,9 @@
 						<c:choose>
 							<c:when test="${courseStock>0}">
 							<div class="card"
-						style="width: 18rem; -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);">
+						style="width: 18rem; -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); 
+						box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);margin: 10%";/>
+}">
 						<div class="card-body">
 								<h3 class="card-title">立即購買</h3>
 							<br>
