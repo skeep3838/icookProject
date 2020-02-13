@@ -1192,6 +1192,7 @@ h6,
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
+  font-family: Microsoft JhengHei;
 }
 h1 small,
 h2 small,
@@ -1220,6 +1221,7 @@ h6 .small,
   font-weight: normal;
   line-height: 1;
   color: #777;
+  font-family: Microsoft JhengHei;
 }
 h1,
 .h1,
@@ -1229,6 +1231,7 @@ h3,
 .h3 {
   margin-top: 20px;
   margin-bottom: 10px;
+  font-family: Microsoft JhengHei;
 }
 h1 small,
 .h1 small,
@@ -1243,6 +1246,7 @@ h2 .small,
 h3 .small,
 .h3 .small {
   font-size: 65%;
+  font-family: Microsoft JhengHei;
 }
 h4,
 .h4,
@@ -1252,6 +1256,7 @@ h6,
 .h6 {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-family: Microsoft JhengHei;
 }
 h4 small,
 .h4 small,
@@ -1266,33 +1271,41 @@ h5 .small,
 h6 .small,
 .h6 .small {
   font-size: 75%;
+  font-family: Microsoft JhengHei;
 }
 h1,
 .h1 {
   font-size: 36px;
+  font-family: Microsoft JhengHei;
 }
 h2,
 .h2 {
   font-size: 30px;
+  font-family: Microsoft JhengHei;
 }
 h3,
 .h3 {
   font-size: 24px;
+  font-family: Microsoft JhengHei;
 }
 h4,
 .h4 {
   font-size: 18px;
+  font-family: Microsoft JhengHei;
 }
 h5,
 .h5 {
   font-size: 14px;
+  font-family: Microsoft JhengHei;
 }
 h6,
 .h6 {
   font-size: 12px;
+  font-family: Microsoft JhengHei;
 }
 p {
   margin: 0 0 10px;
+  font-family: Microsoft JhengHei;
 }
 .lead {
   margin-bottom: 20px;

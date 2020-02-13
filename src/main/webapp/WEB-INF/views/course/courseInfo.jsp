@@ -30,7 +30,6 @@
 			<header class="major special">
 				<h2>${course.courseName}</h2>
 				<br>
-				<p></p>
 			</header>
 			<!-- 					卡車套件 -->
 			<a class="image fit"><img src="<c:url value='/getPic/${course.courseId}' />"
