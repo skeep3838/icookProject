@@ -48,7 +48,7 @@
 						<div class="content">
 						<table border="1">
 							<tr><h2>${course.courseName}</h2>
-							<tr><h3>主辦單位: ${course.hostName}</h3>
+							<tr><h3>課程價格:${course.coursePrice}</h3>
 							<tr><h4>內容簡介:</h4>
 							<tr><h4>${course.courseIntrod}</h4>
 						</table>

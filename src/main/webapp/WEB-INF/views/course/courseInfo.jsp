@@ -33,7 +33,7 @@
 			</header>
 			<!-- 					卡車套件 -->
 			<a class="image fit"><img src="<c:url value='/getPic/${course.courseId}' />"
-				class="img-responsive" style="width: 1140px;height: 400px" /></a>
+				class="img-responsive" style="width: 1140px;height: 400px;object-fit: cover;" /></a>
 			<div class="services-breadcrumb">
 				<div class="container">
 					<ul>
