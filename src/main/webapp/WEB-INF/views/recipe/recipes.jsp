@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
@@ -45,6 +46,9 @@
 				<div class="col-md-4 wthree_special_service_left" style="height: 420px">
 					<img src="<c:url value='/getPicture/${recipe.recipeNo}'/>" alt=" " class="img-responsive" />
 					<h4>${recipe.recipeName}</h4>
+					<h5><span class="glyphicon glyphicon-user" aria-hidden="true" style="color:#ff9900"></span>${recipe.memberBean.nickname}</h5>
+					<h5><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color:#ff9900"></span>${recipe.pageView}次觀看</h5>
+					<h5><span class="glyphicon glyphicon-calendar" aria-hidden="true" style="color:#ff9900"></span><fmt:formatDate value="${recipe.lastUpdated}" pattern="yyyy-MM-dd HH:mm" /></h5>
 					<div style='position:absolute;bottom:15px;right:15px;'>
 						<a href="<spring:url value='/recipe?no=${recipe.recipeNo}' />" class="btn btn-success">Detail</a>
 					</div>

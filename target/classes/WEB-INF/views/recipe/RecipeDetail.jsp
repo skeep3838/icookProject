@@ -39,6 +39,7 @@
 	pre {
 		border: 0px !important;
 		background-color: #ffffff !important;
+		white-space: pre-wrap !important;
 	}
 
 
