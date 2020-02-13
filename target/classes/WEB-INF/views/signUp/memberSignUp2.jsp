@@ -23,13 +23,33 @@
 span.error {
 	color: red;
 	display: inline-block;
-	font-size: 5pt;
+	font-size: 1em;
 }
+#confirm{
+    background: #ff9900;
+    color: #FFF;
+    font-size: 1em;
+    padding: 10px 0;
+    width: 100%;
+    outline: none;
+    border: none;
+    
+}
+#confirm.header{
+background:black;
+transition: .5s ease-in;
+    -webkit-transition: .5s ease-in;
+    -moz-transition: .5s ease-in;
+    -o-transition: .5s ease-in;
+    -ms-transition: .5s ease-in;
+    }
 </style>
+
 <script type="text/javascript">
 $(document).ready(function(){
+	//一鍵輸入正確資料
 	$("#correctmem").click(function(){
-		$("#account").val("xxu1566@gmail.com");
+		$("#account").val("aaa123@gmail.com");
 		$("#pw1").val("aA123456");
 		$("#pw2").val("aA123456");
 		$("#lastname").val("Ga");
@@ -39,7 +59,19 @@ $(document).ready(function(){
 		$("#gender").val("男生");
 		$("#phone").val("0977302207");
 		$("#address").val("臺中市豐原區豐東路190號");
-		
+	});
+	//一鍵輸入錯誤資料
+	$("#errormem").click(function(){
+		$("#account").val("aaa123@gmail.com");
+		$("#pw1").val("00000");
+		$("#pw2").val("00000");
+		$("#lastname").val("");
+		$("#firstname").val("");
+		$("#nickname").val("");
+		$("#birthday").val("");
+		$("#gender").val("");
+		$("#phone").val("0900000000");
+		$("#address").val("");
 	});
 	
 	$("#confirm").click(function(){

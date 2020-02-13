@@ -49,11 +49,13 @@
 			<div class="wthree_special_services">
 				<c:forEach var="recipe" items="${recipes}">
 					<div class="col-md-4 wthree_special_service_left"
-						style="height: 400px">
+						style="height: 420px">
 						<img src="<c:url value='/getPicture/${recipe.recipeNo}'/>" alt=" "
 							class="img-responsive" />
 						<h4>${recipe.recipeName}</h4>
-						<div class="inline-buttons">
+						<div class="inline-buttons" style='position:absolute;bottom:15px;right:15px;'>
+							<a href="<spring:url value='/recipe?no=${recipe.recipeNo}' />" 
+								class="btn btn-success">Detail</a>
 							<a href="<spring:url value='/recipes/updateRecipe?no=${recipe.recipeNo}' />"
 								class="btn btn-primary">Update</a> 
 							<a href="<spring:url value='/recipes/deleteRecipe?no=${recipe.recipeNo}' />"

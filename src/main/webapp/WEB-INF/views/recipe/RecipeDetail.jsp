@@ -35,6 +35,14 @@
 	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
 	rel='stylesheet' type='text/css'>
 
+<style type="text/css">
+	pre {
+		border: 0px !important;
+		background-color: #ffffff !important;
+	}
+
+
+</style>
 </head>
 <body>
 	<!-- header -->
@@ -71,33 +79,7 @@
 						<div class="clearfix"></div>
 					</div>
 					</c:forEach>
-<!-- 					<div class="agileits_recent_posts_grid"> -->
-<!-- 						<div class="agileits_recent_posts_gridl"> -->
-<%-- 							<img src="${pageContext.request.contextPath}/image/food2.jpg" --%>
-<!-- 								alt=" " class="img-responsive" /> -->
-<!-- 						</div> -->
-<!-- 						<div class="agileits_recent_posts_gridr"> -->
-<!-- 							<h4> -->
-<!-- 								<a href="single.html">五星級舒肥鮭魚排</a> -->
-<!-- 							</h4> -->
-<!-- 							<ul> -->
-<!-- 								<li><span class="glyphicon glyphicon-envelope" -->
-<!-- 									aria-hidden="true"></span><a href="#">5</a></li> -->
-<!-- 								<li><span class="glyphicon glyphicon-time" -->
-<!-- 									aria-hidden="true"></span>2019-12-12 14:30</li> -->
-<!-- 							</ul> -->
-<!-- 						</div> -->
-<!-- 						<div class="clearfix"></div> -->
-<!-- 					</div> -->
 				</div>
-<!-- 				<div class="agileits_tags"> -->
-<!-- 					<h3>Tags</h3> -->
-<!-- 					<ul> -->
-<!-- 						<li><a href="#">泰式</a></li> -->
-<!-- 						<li><a href="#">咖哩</a></li> -->
-<!-- 						<li><a href="#">一鍋到底</a></li> -->
-<!-- 					</ul> -->
-<!-- 				</div> -->
 			</div>
 			<div class="col-md-8 agile_single_right">
 				<div class="w3_comments">
@@ -107,8 +89,6 @@
 							href="#">作者 : ${recipe.memberBean.nickname}</a></li>
 						<li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>更新時間 : 
 						<fmt:formatDate value="${recipe.lastUpdated}" pattern="yyyy-MM-dd HH:mm" /></li>
-<!-- 						<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> -->
-<!-- 						<a href="#">2 Comments</a></li> -->
 						<li><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 						<a href="#">觀看次數 : ${recipe.pageView}次</a></li>
 					</ul>
@@ -118,9 +98,7 @@
 					<img src="<c:url value='/getPicture/${recipe.recipeNo}'/>"
 						alt=" " class="img-responsive" style="display: block; margin-left: auto;
   															margin-right: auto; width: 70%;" />
-					<p>
-						<i>${recipe.description}</i>
-					</p>
+					<pre>${recipe.description}</pre>
 					<table class="table">
 						<thead>
 							<tr>
@@ -177,7 +155,7 @@
 									alt=" " class="img-responsive" /></td>
 								<td>
 									<h2>${i.index+1}</h2>
-									<p>${step}</p>
+									<pre>${step}</pre>
 								</td>
 							</tr>
 							</c:forTokens>
@@ -186,7 +164,7 @@
 						<tfoot>
 						<tr><td colspan="2">
 						<h4>備註</h4><hr>
-						<p>${recipe.remark}</p>
+						<pre>${recipe.remark}</pre>
 						</td></tr>
 						</tfoot>
 						</c:if>

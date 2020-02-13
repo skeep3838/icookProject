@@ -64,14 +64,13 @@ public class RecipeController {
 	@RequestMapping("/recipe")
 	public String getRecipeByRecipeNo(@RequestParam("no") Integer recipeNo, Model model, HttpServletRequest request) {
 		RecipeBean rb = service.getRecipeByRecipeNo(recipeNo);
-		List<RecipeBean> top3RecipesList = service.getTop3RecipesByPV();
 		ArrayList<String[]> ingredList = stringToList(rb.getIngredName(), rb.getIngredQty());
 		ArrayList<String[]> group1List = stringToList(rb.getGroup1IngredName(), rb.getGroup1IngredQty());
 		ArrayList<String[]> group2List = stringToList(rb.getGroup2IngredName(), rb.getGroup2IngredQty());
 		ArrayList<String[]> group3List = stringToList(rb.getGroup3IngredName(), rb.getGroup3IngredQty());
-		HttpSession Session = request.getSession();
 		
 //		先檢查Session有沒有pageView的Attribute，如果有的話，丟下去檢查有沒有看過
+		HttpSession Session = request.getSession();
 		List pageView = new ArrayList();
 		if (Session.getAttribute("pageView") == null) {
 			Session.setAttribute("pageView", pageView);
@@ -95,6 +94,7 @@ public class RecipeController {
 		model.addAttribute("group3List", group3List);
 		model.addAttribute("recipe", rb);
 //		食譜左側欄位需要的資料
+		List<RecipeBean> top3RecipesList = service.getTop3RecipesByPV();
 		model.addAttribute("top3Recipes", top3RecipesList);
 		return "recipe/RecipeDetail";
 	}
@@ -216,8 +216,7 @@ public class RecipeController {
 		Date date = new Date();
 		System.out.println(date);
 		rb.setLastUpdated(date);
-//		rb.setIngredName(listToString(rb.getIngredNameList()));
-//		rb.setIngredQty(listToString(rb.getIngredQtyList()));
+		rb.setPageView(rb0.getPageView());
 		service.updateRecipe(rb);
 		String status = "修改完成";
 		model.addAttribute("status", status);
@@ -256,7 +255,6 @@ public class RecipeController {
 		return responseEntity;
 	}
 
-//	做到一半，還不能辨別要取哪張圖片
 	@RequestMapping(value = "/getPicture/{recipeNo}/{step}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getStepPicture(HttpServletResponse response, @PathVariable Integer recipeNo,
 			@PathVariable Integer step) {
@@ -329,7 +327,6 @@ public class RecipeController {
 
 	@RequestMapping(value = "/recipes/add", method = RequestMethod.POST)
 	public String getAddNewRecipeForm(@ModelAttribute("recipeBean") RecipeBean rb,
-//			@RequestParam("ingredNameList") String[] ingredNameList, @RequestParam("ingredQtyList") String[] ingredQtyList,
 			@RequestParam("StepImage") MultipartFile[] stepImg, HttpServletRequest request, Model model) {
 		MultipartFile coverImg = rb.getRecipeImage();
 		if (coverImg != null && !coverImg.isEmpty()) {
