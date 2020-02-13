@@ -1,13 +1,17 @@
 package com.icook.model;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="member", uniqueConstraints = { @UniqueConstraint(columnNames = "account") })
@@ -27,8 +31,12 @@ public class MemberBean implements Serializable {
 	String phone;
 	String address;
 	String checkstatus;
+	Blob userimg;
+	//String filename;
+	@Transient
+	MultipartFile userimage;
 	
-	public MemberBean(Integer userId, String account, String password, String lastname, String firstname, String nickname, String birthday, String gender, String phone, String address, String checkstatus) {
+	public MemberBean(Integer userId, String account, String password, String lastname, String firstname, String nickname, String birthday, String gender, String phone, String address, String checkstatus,Blob userimg) {
 		this.userId = userId;
 		this.account = account;
 		this.password = password;
@@ -40,6 +48,8 @@ public class MemberBean implements Serializable {
 		this.phone = phone;
 		this.address = address;
 		this.checkstatus = checkstatus;
+		this.userimg = userimg;
+		//this.filename = filename;
 	}
 	
 	public String getCheckstatus() {
@@ -114,6 +124,30 @@ public class MemberBean implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	public Blob getUserimg() {
+		return userimg;
+	}
+
+	public void setUserimg(Blob userimg) {
+		this.userimg = userimg;
+	}
+	
+	public MultipartFile getUserimage() {
+		return userimage;
+	}
+
+	public void setUserimage(MultipartFile userimage) {
+		this.userimage = userimage;
+	}
+
+//	public String getFileName() {
+//		return filename;
+//	}
+//
+//	public void setFileName(String fileName) {
+//		this.filename = fileName;
+//	}
 	
 }
 	

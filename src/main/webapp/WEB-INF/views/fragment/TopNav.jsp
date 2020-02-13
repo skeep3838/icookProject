@@ -71,9 +71,11 @@ z-index:1;
 						</c:when>
 						<c:otherwise>
 							<ul>
+								<li style="width:50px; height:60px;"><img style="border-radius: 50%;border: 1px solid rgba(255,0,0,1.00);" src="<c:url value='/getPic/${LoginOK.userId}' />" alt=" " class="img-responsive"/></li>
 								<li><h4>Hello, ${LoginOK.nickname} !!</h4>
 								<li><a href=<c:url value='/login/logout'/> style="margin: 10px"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>登出</a></li>
 								<li><a href=<c:url value='/SignUp/memUpdate'/> style="margin: 10px"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>會員資料</a></li>
+								
 							</ul>
 						</c:otherwise>
 					</c:choose>

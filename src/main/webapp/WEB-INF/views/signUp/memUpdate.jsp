@@ -70,6 +70,8 @@
 		<div align=center>
 	
 			<table width=60%>
+			<tr><td><img src="<c:url value='/getPic/${MemberBean.userId}' />" alt=" "
+											class="img-responsive" style="width:70%;"/>
 				<tr><td width=30%>會員編號:${MemberBean.userId}</td>
 				<tr><td>信箱:${MemberBean.account}</td>
 				<tr><td>姓:${MemberBean.lastname}</td>

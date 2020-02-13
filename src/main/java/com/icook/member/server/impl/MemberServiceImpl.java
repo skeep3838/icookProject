@@ -14,6 +14,7 @@ import com.icook.model.ProductOrder;
 
 
 
+
 @Service
 public class MemberServiceImpl implements MemberService {
 	MemberDao dao;
@@ -30,6 +31,12 @@ public class MemberServiceImpl implements MemberService {
 	}
     
    
+	@Transactional
+	@Override
+	public MemberBean getuserById(int userId) {
+		return dao.getuserById(userId);
+	}
+	
     @Transactional
 	@Override
 	public void insertMem(MemberBean memberBean) {
