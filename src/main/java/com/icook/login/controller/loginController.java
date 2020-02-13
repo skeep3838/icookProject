@@ -23,6 +23,8 @@ import com.icook.register.service.RegisterService;
 @Controller
 public class loginController {
 	RegisterService service;
+//	用於於去除URL路徑多餘的文字
+	String project = "/icookProjectSpringMVC200203";
 
 	@Autowired
 	public void setService(RegisterService service) {
@@ -73,7 +75,6 @@ public class loginController {
 //		WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(sc);
 
 		String requestURI = (String) session.getAttribute("requestURI");
-		System.out.println("進入Servlet，requestURI: "+requestURI);
 		MemberBean mb = null;
 
 		// 4. 進行 Business Logic 運算
@@ -97,12 +98,14 @@ public class loginController {
 		if (errorMsgMap.isEmpty()) {
 			if (requestURI != null) {
 				requestURI = (requestURI.length() == 0 ? request.getContextPath() : requestURI);
-				try {
-					response.sendRedirect(response.encodeRedirectURL(requestURI));
-					
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					response.sendRedirect(response.encodeRedirectURL(requestURI));
+//					
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+				requestURI = "redirect:"+requestURI.substring(project.length());
+				System.out.println("進入Servlet，requestURI: "+requestURI);
 				return requestURI;
 			} else {
 				try {

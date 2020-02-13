@@ -25,7 +25,7 @@
 	<div class="inner">
 		<fieldset >
 			<form method="POST" class="form-horizontal" style="text-align: center">
-				<div class="form-group row">
+				<div class="form-group row" style="margin-bottom: 1%; margin-top: 2%;">
 				<input class="form-control" type="text"
 					placeholder="請輸入關鍵字" aria-label="Search" name="courseName" style="margin-left: 30%;">
 				&nbsp;&nbsp;<button class="btn btn-outline-success" type="submit" style="height: 48px;">Search</button>
@@ -38,17 +38,20 @@
 			<div class="inner" >
 			<div class="container-fluid">     
     <div class="row">
-		<div class="containCard" style="margin: 0 -10% 0 -10%;padding:0;">
+		<div class="containCard" style="margin: 0 -1% 0 -13%;
+    padding: 0;
+    width: 1600px;
+}">
       
       	<c:forEach var='course' items='${courses}'>
-		  <div class="col-6 col-sm-6" style="width:50%;" >
-					<article class="feature left" style="height: 250px;margin: 0 0% 5% 0%;">
-						<span class="image"><img src="<c:url value='/getPic/${course.courseId}' />"
-				class="img-responsive"/></span>
+		  <div class="col-6 col-sm-6" style="width: 45%; " >
+					<article class="feature left">
+						<span><img src="<c:url value='/getPic/${course.courseId}'/>"
+				class="image" style="width: 300px;height: 220px;margin-left: 15px;"/></span>
 						<div class="content">
-						<table>
+						<table border="1">
 							<tr><h2>${course.courseName}</h2>
-							<tr><h3>${course.courseCategory}</h3>
+							<tr><h3 style="color:red">課程價格:${course.coursePrice}</h3>
 							<tr><h4>內容簡介:</h4>
 							<tr><h4>${course.courseIntrod}</h4>
 						</table>

@@ -42,11 +42,11 @@
 			<p class="quia">Recipes List</p>
 			<div class="wthree_special_services">
 			<c:forEach var="recipe" items="${recipes}">
-				<div class="col-md-4 wthree_special_service_left" style="height: 400px">
+				<div class="col-md-4 wthree_special_service_left" style="height: 420px">
 					<img src="<c:url value='/getPicture/${recipe.recipeNo}'/>" alt=" " class="img-responsive" />
 					<h4>${recipe.recipeName}</h4>
-					<div class="wthree_more wthree_more2">
-						<a href="<spring:url value='/recipe?no=${recipe.recipeNo}' />" class="button--wayra button--border-thick button--text-upper button--size-s">Read More</a>
+					<div style='position:absolute;bottom:15px;right:15px;'>
+						<a href="<spring:url value='/recipe?no=${recipe.recipeNo}' />" class="btn btn-success">Detail</a>
 					</div>
 				</div>
 			</c:forEach>
