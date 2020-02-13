@@ -2890,6 +2890,7 @@
 		.wrapper.style1 {
 			background-color: #EEE;
 			color: #777;
+			padding-bottom: 100%;
 		}
 
 			.wrapper.style1 input, .wrapper.style1 select, .wrapper.style1 textarea {
