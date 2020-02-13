@@ -17,6 +17,7 @@
 		font-size: 100%;
 		font: inherit;
 		vertical-align: baseline;
+		font-family: Microsoft JhengHei;
 		
 	}
 	h1, h2, h3, h4, h5, h6 {
@@ -2890,6 +2891,7 @@
 		.wrapper.style1 {
 			background-color: #EEE;
 			color: #777;
+			padding-bottom: 100%;
 		}
 
 			.wrapper.style1 input, .wrapper.style1 select, .wrapper.style1 textarea {

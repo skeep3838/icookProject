@@ -38,7 +38,7 @@
 			<div class="inner" >
 			<div class="container-fluid">     
     <div class="row">
-		<div class="containCard" style="margin: 0 -10% 0 -10%;padding:0;">
+		<div class="containCard" style="margin: 0 -15% 0 -7%;;padding:0;">
       
       	<c:forEach var='course' items='${courses}'>
 		  <div class="col-6 col-sm-6" style="width:50%; " >

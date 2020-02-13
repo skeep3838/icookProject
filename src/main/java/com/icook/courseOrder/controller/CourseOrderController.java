@@ -58,7 +58,7 @@ public class CourseOrderController {
 		HttpSession session = request.getSession();
 		String requestURI = (String) session.getAttribute("requestURI");
 //		System.out.println("courseInfo 的URL: " + requestURI);
-//		System.out.println("id: " + id);
+		System.out.println("id: " + id);
 
 		if (id == null) {
 			return "redirect:/course/courseHomePage";

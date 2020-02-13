@@ -30,7 +30,6 @@
 			<header class="major special">
 				<h2>${course.courseName}</h2>
 				<br>
-				<p></p>
 			</header>
 			<!-- 					卡車套件 -->
 			<a class="image fit"><img src="<c:url value='/getPic/${course.courseId}' />"
@@ -82,7 +81,7 @@
 							<div class="card"
 						style="width: 18rem; -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); 
 						box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);margin: 10%";/>
-}">
+
 						<div class="card-body">
 								<h3 class="card-title">立即購買</h3>
 							<br>
