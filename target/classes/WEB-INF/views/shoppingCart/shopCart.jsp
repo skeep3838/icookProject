@@ -29,8 +29,11 @@
 	rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/css/shoppingCart.css"
 	rel="stylesheet" type="text/css" media="all" />
+	<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"
+	rel="stylesheet" type="text/css" media="all" />
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/fragment/TopNav.jsp" />
@@ -81,9 +84,12 @@
 									<input type="hidden" id="listIndex${vs.index}" name="listIndex${vs.index}" value="${vs.index}" />
 					</c:forEach>
 			<form id="formSubmit" action="" method="GET">		
-			<tr class="success">
-				<td colspan="9"><input type="submit" id="submit" value="確定購買" />
-								 <input type="button" id="dd" value="刪除" />
+				<tr class="success">
+					<td colspan="9"><button id="btnSubmit">確定購買</button>
+<!-- 				<td colspan="9"><input type="submit" id="submit" value="確定購買" /> -->
+					<input type="button" id="dd" value="刪除" />
+				</td>
+				</tr>
 			</form>
 		</table>
 </div>

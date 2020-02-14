@@ -178,7 +178,8 @@ $(document).ready(function() {
 	})
 //==========================submit=================================	
 //	確認表單提交
-	$("form").submit(function(eventData){
+	$("#btnSubmit").click(function(){
+		console.log("HELLO");
 		var count=0;
 		$(".fromCheck").each(function(){
 			if($(this).prop("checked")){
@@ -188,14 +189,17 @@ $(document).ready(function() {
 		console.log("count:"+count);
 		if(count>0){
 			if(confirm("確定要購買這些商品 ?")){
-				checkOrder();
-				$("form[id=formSubmit]").attr("action",realPath+"/ShoppingCar/OrderCheck");	
-			}else{eventData.preventDefault();}
+				checkOrder();//會將有勾選和沒勾選的項目在更新map數量
+				$("#formSubmit").submit(function(eventData){
+//					eventData.preventDefault();//preventDefault():可阻止form提交表單
+					$("form[id=formSubmit]").attr("action",realPath+"/ShoppingCar/OrderCheck");	
+				})
+			}else{return false;}
 		}else{
-			eventData.preventDefault();//preventDefault():可阻止form提交表單
 			alert("請選擇要結帳的商品");
 		}
-	});
+	})
+	
 	
 //	提交表單
 	function checkOrder(){
@@ -258,6 +262,21 @@ $(document).ready(function() {
 //  所有td垂直置中
 	$("table[class*=sc_table]").find("td").css("vertical-align", "middle");
 
-
+	
+	var opt={"oLanguage":{"sProcessing":"處理中...",
+        "sLengthMenu":"顯示 _MENU_ 項結果",
+        "sZeroRecords":"沒有匹配結果",
+        "sInfo":"顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+        "sInfoEmpty":"顯示第 0 至 0 項結果，共 0 項",
+        "sInfoFiltered":"(從 _MAX_ 項結果過濾)",
+        "sSearch":"搜索:",
+        "oPaginate":{"sFirst":"首頁",
+                             "sPrevious":"上頁",
+                             "sNext":"下頁",
+                             "sLast":"尾頁"}
+        }
+};
+$("#table1").dataTable(opt);
+//	$('#table1').DataTable();
 
 })

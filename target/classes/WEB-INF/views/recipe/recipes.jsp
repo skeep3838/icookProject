@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 	<meta charset="UTF-8">
-	<title>熱門食譜</title>
+	<title>食譜列表</title>
 	<!-- for-mobile-apps -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -39,40 +39,21 @@
 
 	<div class="special-services">
 		<div class="container">
-			<h3>熱門食譜</h3>
-			<p class="quia">Popular Recipes</p>
+			<h3>食譜列表</h3>
+			<p class="quia">Recipes List</p>
 			<div class="wthree_special_services">
 			<c:forEach var="recipe" items="${recipes}">
-				<div class="col-md-4 wthree_special_service_left" style="height: 400px">
+				<div class="col-md-4 wthree_special_service_left" style="height: 420px">
 					<img src="<c:url value='/getPicture/${recipe.recipeNo}'/>" alt=" " class="img-responsive" />
 					<h4>${recipe.recipeName}</h4>
-<<<<<<< HEAD
 					<h5><span class="glyphicon glyphicon-user" aria-hidden="true" style="color:#ff9900"></span>${recipe.memberBean.nickname}</h5>
 					<h5><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color:#ff9900"></span>${recipe.pageView}次觀看</h5>
 					<h5><span class="glyphicon glyphicon-calendar" aria-hidden="true" style="color:#ff9900"></span><fmt:formatDate value="${recipe.lastUpdated}" pattern="yyyy-MM-dd HH:mm" /></h5>
 					<div style='position:absolute;bottom:15px;right:15px;'>
 						<a href="<spring:url value='/recipe?no=${recipe.recipeNo}' />" class="btn btn-success">Detail</a>
-=======
-					<div class="wthree_more wthree_more2">
-						<a href="<spring:url value='/recipe?no=${recipe.recipeNo}' />" class="button--wayra button--border-thick button--text-upper button--size-s">Read More</a>
->>>>>>> master
 					</div>
 				</div>
 			</c:forEach>
-<!-- 				<div class="col-md-4 wthree_special_service_left" style="height: 400px"> -->
-<!-- 					<img src="image/food2.jpg" alt=" " class="img-responsive" /> -->
-<!-- 					<h4>五星級舒肥鮭魚排</h4> -->
-<!-- 					<div class="wthree_more wthree_more2"> -->
-<%-- 						<a href="${pageContext.request.contextPath}/JSP/RecipeDetail.jsp" class="button--wayra button--border-thick button--text-upper button--size-s">Read More</a> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-md-4 wthree_special_service_left" style="height: 400px"> -->
-<!-- 					<img src="image/food3.jpg" alt=" " class="img-responsive" /> -->
-<!-- 					<h4>無敵惡魔舒芙蕾</h4> -->
-<!-- 					<div class="wthree_more wthree_more2"> -->
-<%-- 						<a href="${pageContext.request.contextPath}/JSP/RecipeDetail.jsp" class="button--wayra button--border-thick button--text-upper button--size-s">Read More</a> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
 				<div class="clearfix">
 				 </div>
 			</div>

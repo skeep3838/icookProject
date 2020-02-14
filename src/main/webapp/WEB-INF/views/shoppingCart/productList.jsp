@@ -25,6 +25,8 @@
 	rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/css/jquery-ui.css"
 	rel="stylesheet" type="text/css" media="all" />
+<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"
+	rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- 	加入文字編輯器ckEditor -->

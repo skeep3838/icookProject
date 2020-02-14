@@ -15,10 +15,8 @@
 <script type="application/x-javascript">
 	
 	
-	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 			function hideURLbar(){ window.scrollTo(0,1); } 
-
 
 
 </script>
@@ -69,7 +67,7 @@
 					<div class="form-group row">
 						<label for="RecipeDescription" class="col-sm-2 col-form-label">食譜描述</label>
 						<div class="col-sm-10">
-							<form:input type="text" class="form-control"
+							<form:textarea type="text" class="form-control" rows="5"
 								id="RecipeDescription" path="description" placeholder="請輸入食譜描述" />
 						</div>
 					</div>
@@ -208,7 +206,7 @@
 									</td>
 									<td style="width: 25%; text-align: center"><label
 										class="btn btn-info" id="uploadImg${i.index}"> <input
-											name="StepImage" class="stepUpl" id="upload_img"
+											name="StepImage" class="stepUpl" id="upload_img${i.index}"
 											onchange="ShowStepImg(this,${i.index})"
 											style="display: none;" type="file" accept="image/jpg"
 											multiple /> <i class="fa fa-photo"></i> 上傳步驟照片
@@ -261,35 +259,22 @@
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					var html = "";
-					html += "<img width='320px' height='200px' src='"+e.target.result+"'>";
+					html += "<img style='width:320px;height:200px' src='"+e.target.result+"'>";
 					$("#upload_img").html(html);
 				}
 				reader.readAsDataURL(input.files[0]);
 			}
 		}
 		function ShowStepImg(input,num) {
-// 			if (input.files && input.files.length>=1){
-// 				for (var i=0; i<input.files.length;i++){
-// 					var reader = new FileReader();
-// 					var c = i+1
-// 					reader.onload = function(e) {
-// 						var html = "";
-// 						html += "<img width='100px' src='"+e.target.result+"'>";
-// 						$("#stepImg"+c).html(html);
-// 					}
-// 					reader.readAsDataURL(input.files[i]);
-// 				}
-// 			}else{
-			
-					if (input.files && input.files[0]) {
-						var reader = new FileReader();
-						reader.onload = function(e) {
-							var html = "";
-							html += "<img width='100px' src='"+e.target.result+"'>";
-							$("#stepImg"+num).html(html);
-						}
-						reader.readAsDataURL(input.files[0]);
-					}
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					var html = "";
+					html += "<img width='100px' src='"+e.target.result+"'>";
+					$("#stepImg"+num).html(html);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
 		}
 		
 //-----------------------------------新增		

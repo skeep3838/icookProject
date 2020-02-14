@@ -194,7 +194,7 @@ $(document).ready(function() {
 //					eventData.preventDefault();//preventDefault():可阻止form提交表單
 					$("form[id=formSubmit]").attr("action",realPath+"/ShoppingCar/OrderCheck");	
 				})
-			}else{}
+			}else{return false;}
 		}else{
 			alert("請選擇要結帳的商品");
 		}
@@ -262,6 +262,21 @@ $(document).ready(function() {
 //  所有td垂直置中
 	$("table[class*=sc_table]").find("td").css("vertical-align", "middle");
 
-
+	
+	var opt={"oLanguage":{"sProcessing":"處理中...",
+        "sLengthMenu":"顯示 _MENU_ 項結果",
+        "sZeroRecords":"沒有匹配結果",
+        "sInfo":"顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+        "sInfoEmpty":"顯示第 0 至 0 項結果，共 0 項",
+        "sInfoFiltered":"(從 _MAX_ 項結果過濾)",
+        "sSearch":"搜索:",
+        "oPaginate":{"sFirst":"首頁",
+                             "sPrevious":"上頁",
+                             "sNext":"下頁",
+                             "sLast":"尾頁"}
+        }
+};
+$("#table1").dataTable(opt);
+//	$('#table1').DataTable();
 
 })

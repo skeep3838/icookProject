@@ -550,7 +550,6 @@ $(".pppInfo p img").css("width","80%");
 // 		否則就算有註解,${ShoppingCart}雖然不會有事,但${ShoppingCart.itemNumber}一定會死給你看,千萬要小心
 // 		alert("加入購物車成功");
 		console.log("加入購物車成功");
-		alert("加入購物車成功");
 //		$("#cartNo").load("");
 		})
 		function doAjax(targetUrl,inputData,outputData){
