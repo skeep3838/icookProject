@@ -22,36 +22,29 @@
 <body>
 	<jsp:include page="/WEB-INF/views/fragment/TopNav.jsp" />	
 	<!-- 搜尋功能 -->
-	<div class="inner">
+	<div class="contain align-items-center">
 		<fieldset >
 			<form method="POST" class="form-horizontal" style="text-align: center">
-				<div class="form-group row" style="margin-bottom: 1%; margin-top: 2%;">
+				<div class="form-group row">
 				<input class="form-control" type="text"
-					placeholder="請輸入關鍵字" aria-label="Search" name="courseName" style="margin-left: 30%;">
-				&nbsp;&nbsp;<button class="btn btn-outline-success" type="submit" style="height: 48px;">Search</button>
+					placeholder="請輸入關鍵字" aria-label="Search" name="courseName">
+				&nbsp;&nbsp;<button class="btn btn-outline-success" type="submit">Search</button>
 				</div>
 			</form>
 		</fieldset>
 	</div>	
 			
-		<section id="one" class="wrapper style1 justify-content-center">
-			<div class="inner" >
-			<div class="container-fluid">     
-    <div class="row">
-		<div class="containCard" style="margin: 0 -10% 0 -10%;padding:0;">
-      
-      	<c:forEach var='course' items='${courses}'>
-		  <div class="col-6 col-sm-6" style="width:50%; " >
+		<section id="one" class="wrapper style1">
+			<div class="inner">
+				<c:forEach var='course' items='${courses}'>
 					<article class="feature left">
-						<span><img src="<c:url value='/getPic/${course.courseId}'/>"
-				class="image" style="width: 300px;height: 220px;margin-left: 15px;"/></span>
+						<span class="image"><img src="../css/images/pic01.jpg" alt="" /></span>
 						<div class="content">
-						<table border="1">
-							<tr><h2>${course.courseName}</h2>
-							<tr><h3>主辦單位: ${course.hostName}</h3>
-							<tr><h4>內容簡介:</h4>
-							<tr><h4>${course.courseIntrod}</h4>
-						</table>
+							<h2>${course.courseName}</h2>
+							<br>
+							<p>${course.courseCategory}</p>
+							<br>
+							<p>${course.courseIntrod}</p>
 							<br>
 							<ul class="actions">
 								<li>
@@ -60,12 +53,7 @@
 							</ul>
 						</div>
 					</article>
-					</div>
 				</c:forEach> 
-      </div>
-    </div>
-  </div>
-				
 			</div>
 		</section>
 	

@@ -178,8 +178,7 @@ $(document).ready(function() {
 	})
 //==========================submit=================================	
 //	確認表單提交
-	$("#btnSubmit").click(function(){
-		console.log("HELLO");
+	$("form").submit(function(eventData){
 		var count=0;
 		$(".fromCheck").each(function(){
 			if($(this).prop("checked")){
@@ -189,17 +188,14 @@ $(document).ready(function() {
 		console.log("count:"+count);
 		if(count>0){
 			if(confirm("確定要購買這些商品 ?")){
-				checkOrder();//會將有勾選和沒勾選的項目在更新map數量
-				$("#formSubmit").submit(function(eventData){
-//					eventData.preventDefault();//preventDefault():可阻止form提交表單
-					$("form[id=formSubmit]").attr("action",realPath+"/ShoppingCar/OrderCheck");	
-				})
-			}else{return false;}
+				checkOrder();
+				$("form[id=formSubmit]").attr("action",realPath+"/ShoppingCar/OrderCheck");	
+			}else{eventData.preventDefault();}
 		}else{
+			eventData.preventDefault();//preventDefault():可阻止form提交表單
 			alert("請選擇要結帳的商品");
 		}
-	})
-	
+	});
 	
 //	提交表單
 	function checkOrder(){
