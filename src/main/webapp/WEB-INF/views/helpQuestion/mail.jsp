@@ -140,7 +140,6 @@ label.error {
 			        },
 			        submitHandler: function(form) {
 			        	var str = $("#Message").val();
-			        	alert(str);
 			       		content = content.replace(/\n|\r\n/g,"<br>");
 			        	form.submit();
 			        	alert("提交成功");

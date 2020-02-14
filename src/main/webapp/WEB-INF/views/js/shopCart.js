@@ -194,7 +194,7 @@ $(document).ready(function() {
 //					eventData.preventDefault();//preventDefault():可阻止form提交表單
 					$("form[id=formSubmit]").attr("action",realPath+"/ShoppingCar/OrderCheck");	
 				})
-			}else{return false;}
+			}else{}
 		}else{
 			alert("請選擇要結帳的商品");
 		}

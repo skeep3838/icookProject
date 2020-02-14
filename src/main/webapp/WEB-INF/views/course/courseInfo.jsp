@@ -17,6 +17,12 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/course/main.css" />
 <!-- //商品套版 -->
+<style>
+	.courseItem{
+		color:blue
+	}
+</style>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/fragment/TopNav.jsp" />
@@ -47,23 +53,23 @@
 				<div class="col-md-7">
 					<table>
 					<tr>
-						<TH><h4>課程時間</h4></TH>
+						<TH width=15%><h4 class="courseItem">課程時間</h4></TH>
 						<td><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> ${course.courseStartDate}
 						</td>
 					</tr>
 					<tr>
-						<TH><h4>上課地點</h4></TH>
+						<TH><h4 class="courseItem">上課地點</h4></TH>
 						<td>
 							<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 台北市大安區復興南路一段390號 2,3號2樓 203號教室
 						</td>
 					</tr>
 					<tr>
-						<TH><h4>課程簡介</h4></TH>
+						<TH><h4 class="courseItem">課程簡介</h4></TH>
 						<td><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> ${course.courseIntrod}
 						</td>
 					</tr>
 					<tr>
-						<TH><h4>課程費用</h4></TH>
+						<TH><h4 class="courseItem">課程費用</h4></TH>
 						<td><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> ${course.coursePrice}
 						</td>
 					</tr>
@@ -83,7 +89,7 @@
 						box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);margin: 10%";/>
 
 						<div class="card-body">
-								<h3 class="card-title">立即購買</h3>
+								<h3 class="card-title" style="color:red">立即購買</h3>
 							<br>
 							<h4>剩餘座位: ${courseStock}</h4>
 							<p class="card-text"></p>
@@ -91,8 +97,7 @@
 							<form action="${pageContext.request.contextPath}/courseOrder/courseCart">
 								<div class="form-row align-items-center">
 									<div class="col-auto my-1">
-										<select class="custom-select"
-											style="height: 30px; width: 100px;"
+										<select class="custom-select" style="height: 30px; width: 100px;"
 											onchange="calPrice(${course.coursePrice})" name="orderQty"
 											id="orderQty">
 											<option disable selected hidden>訂購數量</option>

@@ -69,7 +69,7 @@ public class RecipeDaoImpl implements RecipeDao {
 	@Override
 	public List<RecipeBean> getRecipesByMember(int userId) {
 		Session session = factory.getCurrentSession();
-		String hql = "From RecipeBean where userId=:uid";
+		String hql = "From RecipeBean where userId=:uid order by lastUpdated desc";
 		List<RecipeBean> list = new ArrayList<>();
 		try {
 			list = session.createQuery(hql).setParameter("uid", userId).getResultList();

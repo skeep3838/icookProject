@@ -14,8 +14,10 @@
 
 <script type="application/x-javascript">
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 			function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 </script>
 <!-- //for-mobile-apps ${pageContext.request.contextPath}-->
@@ -106,7 +108,7 @@
 						</div>
 						<div class="form-group col-md-4">
 							<label class="btn btn-info"><form:input
-									path="RecipeImage" onchange="readURL(this)"
+									path="RecipeImage" onchange="readURL(this)" id="RecipeImage"
 									style="display: none;" type="file" accept="image/jpg" /> <i
 								class="fa fa-photo"></i> 上傳封面圖片 </label>
 							<div id="upload_img"></div>
@@ -119,12 +121,14 @@
 							</tr>
 						</thead>
 						<tbody id='foodtbody0'>
-							<c:forEach begin="0" end="4">
+							<c:forEach begin="0" end="4" varStatus="i">
 								<tr>
 									<td style="width: 50%"><input name="ingredName"
-											type="text" class="form-control" placeholder="食材" /></td>
+										id="ingredName${i.index}" type="text" class="form-control"
+										placeholder="食材" /></td>
 									<td style="width: 25%"><input name="ingredQty"
-											type="text" class="form-control" placeholder="份量" /></td>
+										id="ingredQty${i.index}" type="text" class="form-control"
+										placeholder="份量" /></td>
 									<td><button type="button" class="btn btn-danger"
 											onclick="delRow(this,'foodtbody',0,0)">
 											<i class="fa fa-trash"></i>
@@ -141,13 +145,13 @@
 							</tr>
 						</tfoot>
 					</table>
-					
+
 					<div id='group'>
 						<table class="table" style="width: 90%" id='table1'>
 							<thead>
 								<tr>
 									<th><input name="group1" type="text" class="form-control"
-												placeholder="分組名稱" /></th>
+										placeholder="分組名稱" /></th>
 									<th>分組</th>
 								</tr>
 							</thead>
@@ -156,9 +160,9 @@
 									<tr>
 										<td style="width: 50%"><input name="group1IngredName"
 											type="text" class="form-control" placeholder="食材" /></td>
-										<td style="width: 25%"><input name="group1IngredQty" 
+										<td style="width: 25%"><input name="group1IngredQty"
 											type="text" class="form-control" placeholder="份量" /></td>
-										<td ><button type="button" class="btn btn-danger"
+										<td><button type="button" class="btn btn-danger"
 												onclick="delRow(this,'foodtbody',1,0)">
 												<i class="fa fa-trash"></i>
 											</button></td>
@@ -198,14 +202,15 @@
 								<tr id='tr${i.index}'>
 									<td style="width: 50%">
 										<h2 id='h2Number${i.index}'>${i.index}</h2> <textarea
-											name="step" class="form-control" rows="5"></textarea>
+											name="step" id="step${i.index}" class="form-control" rows="5"></textarea>
 									</td>
-									<td style="width: 25%; text-align: center"><label class="btn btn-info" id="uploadImg${i.index}">
-									<input name="StepImage"
-											class="stepUpl" id="upload_img"
+									<td style="width: 25%; text-align: center"><label
+										class="btn btn-info" id="uploadImg${i.index}"> <input
+											name="StepImage" class="stepUpl" id="upload_img${i.index}"
 											onchange="ShowStepImg(this,${i.index})"
-											style="display: none;" type="file" accept="image/jpg" /> <i
-											class="fa fa-photo"></i> 上傳步驟照片 </label>
+											style="display: none;" type="file" accept="image/jpg"
+											multiple /> <i class="fa fa-photo"></i> 上傳步驟照片
+									</label>
 										<div id="stepImg${i.index}"></div></td>
 									<td style="vertical-align: middle" id='deltd${i.index}'><button
 											type="button" class="btn btn-danger"
@@ -224,7 +229,7 @@
 							</tr>
 							<tr>
 								<td colspan="2">
-									<h2>Remark</h2> <form:textarea path="remark"
+									<h2>Remark</h2> <form:textarea path="remark" id="remark"
 										class="form-control" rows="5" placeholder="其他想說的請在這邊說" />
 								</td>
 							</tr>
@@ -237,6 +242,8 @@
 
 					<span>&emsp;</span>
 					<button type="reset" class="btn btn-default">清除</button>
+					<span>&emsp;</span>
+					<button type="button" class="btn btn-default" onclick="inputData()">一鍵輸入</button>
 				</div>
 			</form:form>
 			<br>
@@ -302,7 +309,7 @@
 			var num = document.getElementById(tableName + tableNumber).rows.length + 1;
 			if(num<11) {
 				var temp = "";
-				temp += "<tr id='tr"+num+"'><td style='width: 50%'><h2 id='h2Number"+num+"'>"+num+"</h2> <textarea name='step' class='form-control' rows='5'/></td>";
+				temp += "<tr id='tr"+num+"'><td style='width: 50%'><h2 id='h2Number"+num+"'>"+num+"</h2> <textarea name='step' id='step"+num+"' class='form-control' rows='5'/></td>";
 				temp += "<td style='width: 25%; text-align: center'><label class='btn btn-info' id='uploadImg"+num+"'><input name='StepImage' class='stepUpl' id='upload_img' onchange='ShowStepImg(this,"+num+")' style='display: none;' type='file' accept='image/jpg' /><i class='fa fa-photo'></i> 上傳步驟照片 </label> <div id='stepImg"+num+"'></div></td>";
 				temp += "<td style='vertical-align: middle' id='deltd"+num+"'><button type='button' class='btn btn-danger' onclick=\"delRow(this,'picture',0, "+num+")\"> <i class='fa fa-trash'> </i> </button> </td> </tr>";
 				$("#picture tbody").append(temp);
@@ -316,8 +323,8 @@
 			//知道table tbody裡現在有幾個tr
 			var quality = document.getElementById("foodtbody0").rows.length;
 			if(quality<10) {
-				var temp = "<tr><td style='width: 50%'><input name='ingredName' type='text' class='form-control' placeholder='食材'/>";
-				temp += "<td style='width: 25%'><input name='ingredQty' type='text' class='form-control' placeholder='份量' />";
+				var temp = "<tr><td style='width: 50%'><input name='ingredName' id='ingredName"+quality+"' type='text' class='form-control' placeholder='食材'/>";
+				temp += "<td style='width: 25%'><input name='ingredQty' id='ingredQty"+quality+"' type='text' class='form-control' placeholder='份量' />";
 				temp += "<td><button type='button' class='btn btn-danger' onclick=\"delRow(this,'foodtbody',"+ num +",0)\"><i class='fa fa-trash'></i></button>";
 				$("#table" + num + " tbody").append(temp);
 			}
@@ -372,6 +379,37 @@
 			}
 			return obj;
 		}
+		
+		function inputData(){
+			document.getElementById("RecipeName").value = "濃情蜜意❤ 焦糖烤布蕾";
+			document.getElementById("RecipeDescription").value = "手作的濃情蜜意來甜甜你的情人～\n雞蛋、鮮奶油、香草與砂糖，簡簡單單四樣材料營造柔嫩滑順的絲綢質感，在冰透的布蕾表面撒上細細砂糖，用噴火槍燒出成人版微苦帶甜的焦糖滋味，輕輕敲開脆殼，一探濃郁的奶蛋香，嘴裡散發百分百不摻水的濃醇，再挑嘴的情人都會被你牢牢收服。";
+			document.getElementById("CookTime").value = "60";
+			document.getElementById("serving").value ="5";
+			document.getElementById("ingredName0").value = "動物性高脂鮮奶油";
+			document.getElementById("ingredQty0").value = "2 杯";
+			document.getElementById("ingredName1").value = "鹽";
+			document.getElementById("ingredQty1").value = "1/8 小匙";
+			document.getElementById("ingredName2").value = "白砂糖";
+			document.getElementById("ingredQty2").value = "1/4 杯";
+			document.getElementById("ingredName3").value = "新鮮水果（表面裝飾用）";
+			document.getElementById("ingredQty3").value = "適量";
+			document.getElementById("ingredName4").value = "香草豆莢（或1小匙香草膏）";
+			document.getElementById("ingredQty4").value = "1 枝";
+			document.getElementById("ingredName5").value = "蛋黃";
+			document.getElementById("ingredQty5").value = "4顆";
+			document.getElementById("ingredName6").value = "細白砂糖（表面裝飾用）";
+			document.getElementById("ingredQty6").value = "適量";
+			document.getElementById("step1").value = "烤箱預熱300℉/150℃，烤盤底鋪上廚房紙巾，放上5個小烤盅，煮滾一壺開水備用";
+			document.getElementById("step2").value = "厚底湯鍋裡小火加熱鮮奶油與香草莢，煮至尚未滾沸、鍋邊出現微小泡泡狀態，離火稍稍放涼";
+			document.getElementById("step3").value = "中碗裡以手持打蛋器打發蛋黃、白砂糖及鹽，至色澤泛白蓬鬆";
+			document.getElementById("step4").value = "取出香草莢丟棄，在蛋黃裡一次一點加入溫熱的鮮奶油，攪拌至奶蛋液均勻無顆粒";
+			document.getElementById("step5").value = "將奶蛋液過濾後，平均倒入小烤盅裡，約七、八分滿（選擇寬淺、表面積大的烤盅效果更佳）";
+			document.getElementById("step6").value = "烤盤邊加入熱水約至烤盅1/2高度，送入300℉/150℃烤箱，烤約30~35分鐘，至邊緣凝固中間軟嫩\n\n※ 如果選用表面積小、深度較深的烤盅，記得要稍稍拉長烘烤時間";
+			document.getElementById("step7").value = "出爐後將烤盅取出於室溫放涼，覆上保鮮膜冷藏4小時或至冰透";
+			document.getElementById("step8").value = "食用前在布蕾表面均勻撒上細白砂糖，用廚房噴槍緩緩將糖粒烤成金黃色焦糖，放上水果即可";
+			document.getElementById("remark").value = "除了經典香草籽，我也喜歡換換口味，抹茶、巧克力、薰衣草、芝麻都很棒，最愛伯爵茶的香氣，只要在加熱鮮奶油時放入茶葉，待茶湯溶出濃濃奶茶色就可以了。\n搭配烤布蕾的水果，建議找酸味顯著的水果，如夏日盛產的草莓、覆盆莓、黑莓、藍莓、紅醋栗等莓果類，奇異果、油桃也很不錯。";
+		}
+		
 	</script>
 
 </body>

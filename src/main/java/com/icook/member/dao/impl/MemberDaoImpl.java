@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.icook.member.dao.MemberDao;
 import com.icook.model.MemberBean;
 
+
 @Repository
 public class MemberDaoImpl implements MemberDao {
 	SessionFactory factory;
@@ -44,6 +45,14 @@ public class MemberDaoImpl implements MemberDao {
 			return false;
 		}
 	}
+	
+	@Override
+	public MemberBean getuserById(int userId) {
+		Session session = factory.getCurrentSession();
+		MemberBean cb = session.get(MemberBean.class, userId);
+		return cb;
+	}
+	
 
 	@Override
 	public MemberBean searchMemberBean(String account) {// 搜尋會員資料
