@@ -70,6 +70,7 @@
 			</div>
 			
 						<div class="agile_back_home">
+							<a href="<c:url value='/login/loginView' />">馬上登入 </a>
 							<a href="<c:url value='/'/>">back to home</a>
 						</div>
 						</div>

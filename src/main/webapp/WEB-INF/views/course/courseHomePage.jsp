@@ -38,17 +38,20 @@
 			<div class="inner" >
 			<div class="container-fluid">     
     <div class="row">
-		<div class="containCard" style="margin: 0 -15% 0 -7%;;padding:0;">
+		<div class="containCard" style="margin: 0 -1% 0 -13%;
+    padding: 0;
+    width: 1600px;
+}">
       
       	<c:forEach var='course' items='${courses}'>
-		  <div class="col-6 col-sm-6" style="width:50%; " >
+		  <div class="col-6 col-sm-6" style="width: 45%; " >
 					<article class="feature left">
 						<span><img src="<c:url value='/getPic/${course.courseId}'/>"
 				class="image" style="width: 300px;height: 220px;margin-left: 15px;"/></span>
 						<div class="content">
 						<table border="1">
 							<tr><h2>${course.courseName}</h2>
-							<tr><h3>主辦單位: ${course.hostName}</h3>
+							<tr><h3 style="color:red">課程價格:${course.coursePrice}</h3>
 							<tr><h4>內容簡介:</h4>
 							<tr><h4>${course.courseIntrod}</h4>
 						</table>

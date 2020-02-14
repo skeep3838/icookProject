@@ -1,10 +1,7 @@
 $(document).ready(function() {
-	var pageContext = $("#pageContext").val();
-//		======================輪播圖設定==========================	
-	//邊邊不露白
-	$('.coverflow').css('max-width',$('.coverflow img').width());
+	
 //		======================輸入商品數量select==========================		
-	//設定select選單的商品數量
+	//輸入商品數量
 		var optionList='';
 		for(var optionSet=1;optionSet<=10;optionSet++){
 			optionList+='<option>'+optionSet+'</option>';
@@ -13,7 +10,7 @@ $(document).ready(function() {
 		
 // 		======================p分頁p==========================
 		
-		var pageSet = 4;//tip:每個分頁顯示的商品數量
+		var pageSet = 8;//tip:每個分頁顯示的商品數量
 		console.log( typeof(pageSet));//tip:typeof(pageSet)查看型態
 		var proCount = $("#proCount").val();//tip:商品數量
 		
@@ -52,6 +49,9 @@ $(document).ready(function() {
 			$(".pager").html(pageList);
 		}
 		console.log("finalPage:"+finalPage);
+		var btLi = $(".btLi"); //tip:沒用到,將同名class以List儲存,故提取時可以用.get(0)、get(1)、get(n)
+		console.log(btLi);// tip:此List[btn頁首、btn0、btn1、btn2、btn3、btn頁尾]		
+		
 		//產生到第X頁輸入頁碼
 //		function entryPage(){
 //			var pageNo='';
@@ -185,174 +185,35 @@ $(document).ready(function() {
 			});	
 // 			hidePreNext(page);
 		}
-// ========================Modal content商品內容=========================	
-		
-		
-//	初始關閉所有modal內容
-	$(".modalContent").css("display","none");
-
-	
-//	動態寫入type的數量、內容(完成,但想試著用ajax寫看看)
-	setSelectType();
-	function setSelectType(){
-		var typeList='';
-		var typeContent='';
-		var prods = $("#proCount").val();//商品數量
-		var typeCount = [];//每個商品的種類數量
-		var typeTitle = getAllTypeTitle();//全產品type的陣列
-		
-		for(var prodSet=1;prodSet<=prods;prodSet++){
-			typeCount[prodSet]=$("#typeCount"+prodSet).val();
-		}
-		
-		var typeTitleIndex=0;//產品type的索引
-		for(var prod=1;prod<=prods;prod++){
-			for(var typeNo=1;typeNo<=typeCount[prod];typeNo++){
-				typeList+='<option class=\"proType\">'+typeTitle[typeTitleIndex++]+'</option>';
-			}
-			$(".proSelect"+prod).html(typeList);
-			typeList="";
-		}
-		
-	}
-	//取得全產品type的陣列
-	function getAllTypeTitle(){
-		$("#setMap").append($("input[id*=typeTitle]").map(function(){
-			return $(this).val();
-		}).get().join(",")
-		);
-		return $("#setMap").text().split(",");
-	}	
-	
-//	console.log($("select").text());
-	var nowIndex = 0 ;
-//	設定modal內容的type切換(未完成,切換過去時的option selected不正確)
-	$("select[id*=proSelect]").change(function(){
-		var targetIndex = $(this).get(0).selectedIndex;//取得被選中項目的索引
-		console.log("nowIndex:"+nowIndex);
-		console.log("targetIndex:"+targetIndex);
-		var selectID = $(this).attr("id");//取得自己元素id
-		console.log("selectID:"+selectID);
-		
-		var selectVal = $(this).val();
-		console.log("selectVal:"+selectVal);
-		
-		var modalContentID = $(this).parents("div[id*=modalContent]").attr("id")//取得祖宗元素modalContent的id
-		console.log("modalContentID:"+modalContentID);
-		var move = Number(targetIndex)-Number(nowIndex);//位移值
-		var index = modalContentID.replace("modalContent","");
-		
-		modalContentID = "modalContent"+(Number(index)+move);//ID數字部分+位移值就是目標ID了
-		console.log("modalContentID2:"+modalContentID);
-		$("div[id*=modalContent]").css("display","none");
-		$("div[id="+modalContentID+"]").css("display","block");
-//		$(this).toggle();
-		
-		nowIndex = targetIndex;
-		console.log("nowIndex2:"+nowIndex);
-		
-//		if(nowIndex<targetIndex){
-//		}
-//		else if(nowIndex>targetIndex){
-//			
-//		}
-	})
-	
-//	設定modal內容的圖片點選時在目標位置放大顯示(未完成)
-	var targetImg = $(".targetImg");//目標圖片的櫃子
-	var smallImgBox = $(".smallImgBox");//圖片的櫃子
-	
-	
-	$(".smallImg").click(function(){
-		id = $(this).attr("id");
-		index = id.replace("smallImg","");
-		console.log("id:"+id);
-		imgSrc = $(this).attr("src");
-		console.log("imgSrc:"+imgSrc);
-//		console.log("testimggggg:"+testimggggg);
-//		addImgEle = '<img src=\"'+   pageContext    +'/'+   testImggg+    '\" width=\"200px\"></img>';
-		$("#targetImg"+index).html('<img class="hoverProdImg"  src="' +imgSrc+ '" width="200px">' + '</img>');
-//		console.log("img:"+addImgEle);
-	})
-	
-	
-	
-//	elementPosition();
-	//練習抓同class元素、索引	
-	function elementPosition(){
-		
-//		這時會抓到同class=hoverProdImg的第8個(索引7)元素
-		var taretElm = $(".hoverProdImg").get(7);
-		
-//		但抓到只是靜態元素,和能使用的DOM元素不同,
-//		要在放入jquery的方法  →  DOM元素 = $(靜態元素) 才會變成DOM元素
-		var setElm = $(taretElm);
-		
-		var testA= $(".hoverProdImg");
-//		元素(靜態元素)的方法網站(重要)
-//		https://developer.mozilla.org/zh-CN/docs/Web/API/Element
-		console.log(testA.get(0));
-		console.log(testA.length);
-		console.log(testA.get(0).id);
-		console.log(testA.get(0).attributes);
-		console.log(testA.get(-1).innerHTML);
-//		testA.each(function(index,data){
-//			console.log(index,data);
-//		});
-	}		
 // ========================a加入購物車a=========================		
 	//m判斷是否使用modal
 		var useModal = false;
 		
     //m判斷是否開啟modal視窗,有開啟就將useModal設為true
    $('.myModal').on('shown.bs.modal', function (e) {
-      	console.log("openModal");
+      	console.log("openModal1");
       	useModal = true;
    })
 	
  //m判斷是否關閉 modal視窗,關閉就將useModal設為false
 	$('.myModal').on('hidden.bs.modal', function () {
-		console.log("hiddenModal");
+		console.log("hiddenModal1");
 		useModal = false;
-		
-		//將modal內容恢復為初始狀態;
-		nowIndex=0;
-		$(".modalContent").css("display","none");
-		
-//		$("select .proType").first().css("background-color","green");
-	})
-
-//	按下詳細資料按鈕時,決定要開啟哪個商品modal
-	$(".myModal").click(function(){
-		var myModalTarget = $(this).attr("data-target");
-//		開啟選擇的myModal內的所有第一個modalContent
-		$(myModalTarget+" .modalContent").first().css("display","block");
-		
-	})
-	
+	})  
 	var theCount = 0;
 	$(".addToCar").click(function(){
 		var id = $(this).attr("id");
+		console.log("theCount:"+(theCount+1));
 		
 // 		若id =press10,取數字部分10當index
 		var	index = id.replace("press","");
-//			console.log("buttonIndex:"+index);
-		var quantity = $(".quantity"+index);
-		let qty = 0;
-//			console.log("index:"+index);
-//			console.log("useModal:"+useModal);
+			quantity = $(".quantity"+index);
+			qty = 0;
 		if(useModal){
-			qty = quantity.val();
-//			qty = $(quantity.get(1)).val()
+			qty = $(quantity.get(1)).val()
 		}else{
 			qty = $("#qty"+index).val();
-//			console.log("qtyelseID:"+"#qty"+index);
-//			console.log("qtyelse:"+qty);
 		}
-		console.log("$(#qty+index).length:"+$("#qty"+index).length);
-		console.log("$(#qty+index).value:"+$("#qty"+index).value);
-		console.log("qtyID:"+"#qty"+index);
-		console.log("qty:"+qty);
 			var product = 
 			{ 
 				productId   : $("#productId"+index).val(),
@@ -369,6 +230,7 @@ $(document).ready(function() {
 			console.log(dataJSONString);
 			//語法:JSON.parse(JSON格式字串or陣列) = 將JSON格式字串or陣列轉換成JSON物件
 			var dataJSONObject = JSON.parse(dataJSONString);
+			var pageContext = $("#pageContext").val();
 			var url = pageContext+"/shoppingCart/addToCar";
 			console.log(dataJSONObject);
 			doAjax(url,dataJSONObject);
@@ -378,6 +240,9 @@ $(document).ready(function() {
 			console.log("加入購物車成功");
 //			$("#cartNo").load("");
 		})
+// 		=======================s每x毫秒刷新頁面s==========================			
+		
+// 		使用ajax不刷新頁面執行控制器or前端(未實驗)
 		function doAjax(targetUrl,inputData,outputData){
 			$.ajax({
 				url:targetUrl,//後端controller的URL

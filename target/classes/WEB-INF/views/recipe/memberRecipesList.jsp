@@ -12,7 +12,10 @@
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<meta name="keywords"
+	content="Truckage Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 <script type="application/x-javascript">
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 			function hideURLbar(){ window.scrollTo(0,1); } 
@@ -50,10 +53,11 @@
 			<div class="wthree_special_services">
 				<c:forEach var="recipe" items="${recipes}">
 					<div class="col-md-4 wthree_special_service_left"
-						style="height: 420px">
+						style="height: 400px">
 						<img src="<c:url value='/getPicture/${recipe.recipeNo}'/>" alt=" "
 							class="img-responsive" />
 						<h4>${recipe.recipeName}</h4>
+<<<<<<< HEAD
 						<h5><span class="glyphicon glyphicon-calendar" aria-hidden="true" style="color:#ff9900"></span><fmt:formatDate value="${recipe.lastUpdated}" pattern="yyyy-MM-dd HH:mm" /></h5>
 						<div class="inline-buttons" style='position:absolute;bottom:15px;right:15px;'>
 							<a href="<spring:url value='/recipe?no=${recipe.recipeNo}' />" 
@@ -62,6 +66,14 @@
 								class="btn btn-primary">Update</a> 
 							<a href="<spring:url value='/recipes/deleteRecipe?no=${recipe.recipeNo}' />"
 								class="btn btn-danger" onclick="return confirm('確定要刪除這筆資料嗎?')">Delete</a> 
+=======
+						<div class="inline-buttons">
+							<a
+								href="<spring:url value='/recipes/updateRecipe?no=${recipe.recipeNo}' />"
+								class="btn btn-primary">Update</a> <a
+								href="<spring:url value='/recipes/deleteRecipe?no=${recipe.recipeNo}' />"
+								class="btn btn-danger">Delete</a>
+>>>>>>> master
 						</div>
 					</div>
 				</c:forEach>
@@ -71,7 +83,8 @@
 	<!-- for bootstrap working -->
 	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 	<!-- //for bootstrap working -->
-	
+
+
 
 </body>
 </html>

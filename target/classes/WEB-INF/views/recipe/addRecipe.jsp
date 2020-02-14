@@ -69,7 +69,7 @@
 					<div class="form-group row">
 						<label for="RecipeDescription" class="col-sm-2 col-form-label">食譜描述</label>
 						<div class="col-sm-10">
-							<form:textarea type="text" class="form-control" rows="5"
+							<form:input type="text" class="form-control"
 								id="RecipeDescription" path="description" placeholder="請輸入食譜描述" />
 						</div>
 					</div>
@@ -261,7 +261,7 @@
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					var html = "";
-					html += "<img style='width:320px;height:200px' src='"+e.target.result+"'>";
+					html += "<img width='320px' height='200px' src='"+e.target.result+"'>";
 					$("#upload_img").html(html);
 				}
 				reader.readAsDataURL(input.files[0]);

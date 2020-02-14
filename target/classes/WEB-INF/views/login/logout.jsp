@@ -34,11 +34,11 @@
 訪客${ nickname }，感謝您使用本系統。<BR>
 您已經登出<BR>
 </font>
-<%-- <jsp:useBean id="logoutBean" class="com.icook.login.model.LogoutBean" scope="page" /> --%>
+<jsp:useBean id="logoutBean" class="com.icook.login.model.LogoutBean" scope="page" />
     
-<%-- <c:set target='${logoutBean}' property='session' value='${pageContext.session}'/> --%>
+<c:set target='${logoutBean}' property='session' value='${pageContext.session}'/>
    
-<%-- ${logoutBean.logout} --%>
+${logoutBean.logout}
 
 <c:redirect url="/"/>
 
