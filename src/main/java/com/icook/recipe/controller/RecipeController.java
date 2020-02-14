@@ -68,7 +68,7 @@ public class RecipeController {
 		ArrayList<String[]> group1List = stringToList(rb.getGroup1IngredName(), rb.getGroup1IngredQty());
 		ArrayList<String[]> group2List = stringToList(rb.getGroup2IngredName(), rb.getGroup2IngredQty());
 		ArrayList<String[]> group3List = stringToList(rb.getGroup3IngredName(), rb.getGroup3IngredQty());
-		
+
 //		先檢查Session有沒有pageView的Attribute，如果有的話，丟下去檢查有沒有看過
 		HttpSession Session = request.getSession();
 		List pageView = new ArrayList();
@@ -342,19 +342,38 @@ public class RecipeController {
 		}
 		List<Blob> blobList = new ArrayList<>(
 				Arrays.asList(null, null, null, null, null, null, null, null, null, null));
-		for (int i = 0; i < stepImg.length; i++) {
-			if (stepImg[i] != null && !stepImg[i].isEmpty()) {
-				byte[] b;
-				try {
-					b = stepImg[i].getBytes();
-					Blob blob = new SerialBlob(b);
-					blobList.set(i, blob);
-				} catch (Exception e) {
-					e.printStackTrace();
-					throw new RuntimeException("檔案上傳發生異常:" + e.getMessage());
+//		原本i<stepImg.length，但前端改成可上傳多張照片，所以先改成i<10，之後有空再解決
+		if (stepImg.length <= 10) {
+			for (int i = 0; i < stepImg.length; i++) {
+				if (stepImg[i] != null && !stepImg[i].isEmpty()) {
+					byte[] b;
+					try {
+						b = stepImg[i].getBytes();
+						Blob blob = new SerialBlob(b);
+						blobList.set(i, blob);
+					} catch (Exception e) {
+						e.printStackTrace();
+						throw new RuntimeException("檔案上傳發生異常:" + e.getMessage());
+					}
+				} else {
+					blobList.set(i, null);
 				}
-			} else {
-				blobList.set(i, null);
+			}
+		}else {
+			for (int i = 0; i < 10; i++) {
+				if (stepImg[i] != null && !stepImg[i].isEmpty()) {
+					byte[] b;
+					try {
+						b = stepImg[i].getBytes();
+						Blob blob = new SerialBlob(b);
+						blobList.set(i, blob);
+					} catch (Exception e) {
+						e.printStackTrace();
+						throw new RuntimeException("檔案上傳發生異常:" + e.getMessage());
+					}
+				} else {
+					blobList.set(i, null);
+				}
 			}
 		}
 		rb.setStepPic01(blobList.get(0));
@@ -420,8 +439,8 @@ public class RecipeController {
 
 //	判斷有沒有看過這一頁
 	public Boolean pageViewed(List pageViewedList, Integer recipeNo) {
-		for(int i=0; i<pageViewedList.size();i++) {
-			if(pageViewedList.get(i).equals(recipeNo)) {
+		for (int i = 0; i < pageViewedList.size(); i++) {
+			if (pageViewedList.get(i).equals(recipeNo)) {
 				return true;
 			}
 		}

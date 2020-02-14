@@ -34,9 +34,20 @@
 		</fieldset>
 	</div>	
 			
+<<<<<<< HEAD
+		<section id="one" class="wrapper style1 justify-content-center">
+			<div class="inner" >
+			<div class="container-fluid">     
+    <div class="row">
+		<div class="containCard" style="margin: 0 -15% 0 -7%;;padding:0;">
+      
+      	<c:forEach var='course' items='${courses}'>
+		  <div class="col-6 col-sm-6" style="width:50%; " >
+=======
 		<section id="one" class="wrapper style1">
 			<div class="inner">
 				<c:forEach var='course' items='${courses}'>
+>>>>>>> master
 					<article class="feature left">
 						<span class="image"><img src="../css/images/pic01.jpg" alt="" /></span>
 						<div class="content">

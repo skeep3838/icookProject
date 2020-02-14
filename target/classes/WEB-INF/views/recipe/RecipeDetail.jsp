@@ -34,6 +34,18 @@
 	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
 	rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
+<style type="text/css">
+	pre {
+		border: 0px !important;
+		background-color: #ffffff !important;
+		white-space: pre-wrap !important;
+	}
+
+
+</style>
+=======
+>>>>>>> master
 </head>
 <body>
 	<!-- header -->

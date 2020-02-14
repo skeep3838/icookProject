@@ -48,7 +48,7 @@
 
 	<div class="container">
 		<div class="col-md-10 agile_single_right">
-			<h3 class="bars">新增食譜</h3>
+			<h3 class="bars">更新食譜</h3>
 			<form:form method='POST' modelAttribute="recipeBean"
 				action="${pageContext.request.contextPath}/recipes/updateRecipe"
 				enctype="multipart/form-data">
@@ -74,7 +74,6 @@
 							<label class="mr-sm-2" for="CookTime">烹調時間(分鐘)</label>
 							<form:select path="cookingTime" class="form-control"
 								id="CookTime">
-								<%-- 								<form:options items="${cookingTimeList}" /> --%>
 								<form:option value="null">預計烹調時間</form:option>
 								<form:option value="5">5</form:option>
 								<form:option value="10">10</form:option>
@@ -90,7 +89,6 @@
 						<div class="form-group col-md-4">
 							<label class="mr-sm-2" for="serving">份量(人份)</label>
 							<form:select path="serving" class="form-control" id="serving">
-								<%-- 								<form:options items="${servingList}" /> --%>
 								<form:option value="null">人份</form:option>
 								<form:option value="1">1</form:option>
 								<form:option value="2">2</form:option>
