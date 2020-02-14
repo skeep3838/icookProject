@@ -15,8 +15,10 @@
 <script type="application/x-javascript">
 	
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 			function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 </script>
@@ -206,6 +208,9 @@
 									</td>
 									<td style="width: 25%; text-align: center"><label
 										class="btn btn-info" id="uploadImg${i.index}"> <input
+											name="StepImage" class="stepUpl" id="upload_img"
+									<td style="width: 25%; text-align: center"><label
+										class="btn btn-info" id="uploadImg${i.index}"> <input
 											name="StepImage" class="stepUpl" id="upload_img${i.index}"
 											onchange="ShowStepImg(this,${i.index})"
 											style="display: none;" type="file" accept="image/jpg"
@@ -266,15 +271,28 @@
 			}
 		}
 		function ShowStepImg(input,num) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					var html = "";
-					html += "<img width='100px' src='"+e.target.result+"'>";
-					$("#stepImg"+num).html(html);
-				}
-				reader.readAsDataURL(input.files[0]);
-			}
+// 			if (input.files && input.files.length>=1){
+// 				for (var i=0; i<input.files.length;i++){
+// 					var reader = new FileReader();
+// 					var c = i+1
+// 					reader.onload = function(e) {
+// 						var html = "";
+// 						html += "<img width='100px' src='"+e.target.result+"'>";
+// 						$("#stepImg"+c).html(html);
+// 					}
+// 					reader.readAsDataURL(input.files[i]);
+// 				}
+// 			}else{
+			
+					if (input.files && input.files[0]) {
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							var html = "";
+							html += "<img width='100px' src='"+e.target.result+"'>";
+							$("#stepImg"+num).html(html);
+						}
+						reader.readAsDataURL(input.files[0]);
+					}
 		}
 		
 //-----------------------------------新增		

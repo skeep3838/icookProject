@@ -14,36 +14,11 @@
 	rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
 	rel='stylesheet' type='text/css'>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">	
 <!-- //卡車套版 -->
-<style>
-#reddiv {
-/* background-color: crimson; */
-/* 1. 試試看在這裡，加入三個屬性設定，可以模仿網頁上，將圖片固定在右下角? */
-
-/* 2. 在這邊設定一張圖片並調整大小 */
-width: 70px;
-height: 70px;
-position: fixed;
-right: 10px; 
-bottom: 85px;
-border-radius:50%;
-background-color: white;
-background-image: url("${pageContext.request.contextPath}/images/icook-logo.png");
-/* background-size: contain; */
-background-size: 100%;
-background-repeat: no-repeat;
-z-index:1;
-
-}
-</style>
 </head>
 
 <body>
 	<header>
-			<div id="dialog_div_reddiv" title="客戶問題"></div>
-			<div id='reddiv' onclick="sendMessage()"></div>
 			<div class="header">
 			<div class="container">
 				<div class="navbar-header">
@@ -170,7 +145,7 @@ z-index:1;
 		    var websocket = null;
 		    //判断当前浏览器是否支持WebSocket
 		    if ('WebSocket' in window) {
-		        websocket = new WebSocket("ws://localhost:8080/icookProjectSpringMVC200203/websocket");
+		        websocket = new WebSocket("ws://localhost:8080/icookBackstage02035/websocket");
 		    }
 		    else {
 		        alert('当前浏览器 Not support websocket')
@@ -218,4 +193,3 @@ z-index:1;
 		    }
 		
 </script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

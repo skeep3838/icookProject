@@ -130,12 +130,8 @@
 							<ul>
                                 <li style="width:50px; height:60px;"><img style="border-radius: 50%;border: 1px solid rgba(255,0,0,1.00);" src="<c:url value='/getPicMem/${LoginOK.userId}' />" alt=" " class="img-responsive"/></li>
 								<li><h4>Hello, ${LoginOK.nickname} !!</h4>
-								<li><a href=<c:url value='/login/logout'/>
-									style="margin: 10px"><span class="glyphicon glyphicon-user"
-										aria-hidden="true"></span>登出</a></li>
-								<li><a href=<c:url value='/SignUp/memUpdate'/>
-									style="margin: 10px"><span class="glyphicon glyphicon-user"
-										aria-hidden="true"></span>會員資料</a></li>
+								<li><a href=<c:url value='/login/logout'/> style="margin: 10px"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>登出</a></li>
+								<li><a href=<c:url value='/SignUp/memUpdate'/> style="margin: 10px"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>會員資料</a></li>
 							</ul>
 						</c:otherwise>
 					</c:choose>
@@ -225,31 +221,25 @@
 		websocket.onopen = function() {
 		}
 
-		//接收到消息的回调方法
-		websocket.onmessage = function(event) {
-			var message = JSON.parse(event.data);
-			if(message.type === "客戶") {
-				setMessageInnerHTML(message.text, message.name);
-			}
-			else {
-				setMessageInnerHTML(message.text, message.name);
-			}
-		}
+		    //接收到消息的回调方法
+		    websocket.onmessage = function (event) {
+		        setMessageInnerHTML(event.data);
+		    }
 
-		//连接关闭的回调方法
-		websocket.onclose = function() {
-		}
+		    //连接关闭的回调方法
+		    websocket.onclose = function () {
+		        setMessageInnerHTML("WebSocket连接关闭");
+		    }
 
 		//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
 		window.onbeforeunload = function() {
 			closeWebSocket();
 		}
 
-		var temp = "<div id='sendmessage'><input type='text' id='text' placeholder=''><button id='sendbutton' onclick=\"send("+ userId +",'"+ nickname +"')\" type='button'>傳送</button></div> <hr/><div id='message'>";
-		// 		    var temp = "<input id='text' type='text'/><button onclick='send()'>傳送</button><hr/><div id='message'>"
-		$("#dialog_div_reddiv").html(temp);
-		$("#dialog_div_reddiv").dialog("open");
-	}
+		    //将消息显示在网页上
+		    function setMessageInnerHTML(innerHTML) {
+		        document.getElementById('message').innerHTML += innerHTML + '<br/>';
+		    }
 
 	$(function() {
 		$("#dialog_div_reddiv").dialog({
@@ -285,35 +275,11 @@
 		websocket.close();
 	}
 
-	//发送消息
-	function send(userId,nickname) {
-		var message = document.getElementById('text').value;
-		saveMessage(userId,message);
-		var msg = {
-			    text: message,
-			    id: userId,
-			    name: nickname,
-			    type: "客戶"
-			  };
-		websocket.send(JSON.stringify(msg));
-	}
-	function saveMessage(userId,message) {
-		var packageName = getRealPath();
-		$.ajax({
-			type : "GET",
-			url : "/" + packageName + "/WebSocket",
-			data:{ Message: message , Id : userId },
-			dataType : "text",
-			success : function(data) {
-			},
-			error : function(error) {
-			},
-		});
-	}
-	//将消息显示在网页上
-	function setMessageInnerHTML(innerHTML, nickname) {
-		// 	        document.getElementById('message').innerHTML += nickname + "<br><div class='messagetemp'><div id='messagetemp'>" + innerHTML + "</div></div><br/><br>";
-		$("#message").prepend(nickname + "<br><div class='messagetemp'><div id='messagetemp'>" + innerHTML + "</div></div><br/><br>");
-	}
+		    //发送消息
+		    function send() {
+		        var message = document.getElementById('text').value;
+		        websocket.send(message);
+		    }
+		
 </script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

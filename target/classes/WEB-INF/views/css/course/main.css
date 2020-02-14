@@ -17,10 +17,14 @@
 		font-size: 100%;
 		font: inherit;
 		vertical-align: baseline;
+<<<<<<< HEAD
+		font-family: Microsoft JhengHei;
 		
 	}
 	h1, h2, h3, h4, h5, h6 {
 	font-family: Microsoft JhengHei;
+=======
+>>>>>>> master
 	}
 
 	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
@@ -2299,7 +2303,6 @@
 			cursor: default;
 			list-style: none;
 			padding-left: 0;
-			float: right
 		}
 
 			ul.actions > li {
@@ -2717,14 +2720,7 @@
 		-webkit-align-items: center;
 		-ms-align-items: center;
 		align-items: center;
-		
-		width: 700px;
-		height: 250px;
-		margin: 0 0% 5% 0%;
-		border-radius: 21px 21px 21px 21px;
-		-moz-border-radius: 21px 21px 21px 21px; 
-		-webkit-border-radius: 21px 21px 21px 21px;
-		border: 0px solid #000000;
+		margin-bottom: 6em;
 	}
 
 		.feature:last-child {
@@ -2746,32 +2742,16 @@
 		}
 
 		.feature .image {
+			width: 48%;
 		}
 
 			.feature .image img {
 				max-width: 100%;
-				margin-left: 10px;
 			}
 
 		.feature .content {
-			padding: 0% 2%.1em 3%;
-   			 width: 60%;
-		}
-		
-		.feature .content h4{
-		 display : inline-block;
-		  overflow : hidden;
-		  text-overflow : ellipsis;
-		  white-space : nowrap;
-		  width: 100%;
-		    /* height: 0%; */
-		    margin-bottom: -10%;
-		    width: 350px;
-}
-		}
-		
-		.feature .content h2{
-		margin-top: -5%;
+			padding: 2em 3em 0.1em 3em;
+			width: 52%;
 		}
 
 		@media screen and (max-width: 1280px) {
@@ -2800,7 +2780,7 @@
 			}
 
 				.feature .image img {
-					height: 215px;
+					width: 100%;
 				}
 
 			.feature .content {
@@ -2818,7 +2798,6 @@
 
 				.feature .content {
 					padding: 2em 1em 0.1em 1em;
-					height: 240px;
 				}
 
 		}
@@ -2877,19 +2856,19 @@
 /* Wrapper */
 
 	.wrapper {
-		padding: 2em 0 6em 0;
+		padding: 8em 0 6em 0;
 		position: relative;
-		
 	}
 
 		.wrapper > .inner {
 			margin: 0 auto;
-			width: 80%;
+			width: 70em;
 		}
 
 		.wrapper.style1 {
 			background-color: #EEE;
 			color: #777;
+			padding-bottom: 100%;
 		}
 
 			.wrapper.style1 input, .wrapper.style1 select, .wrapper.style1 textarea {

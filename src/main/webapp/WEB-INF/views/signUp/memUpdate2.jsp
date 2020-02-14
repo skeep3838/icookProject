@@ -76,7 +76,7 @@
 						<div>
 							<tr>
 								<td><div id="upload_img"><img
-									src="<c:url value='/getPicMem/${LoginOK.userId}' />" alt=" "
+									src="<c:url value='/getPic/${LoginOK.userId}' />" alt=" "
 									class="img-responsive" style="width: 70%;" /></div>
 							<tr>
 								<td><div>
