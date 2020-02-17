@@ -1,15 +1,16 @@
 package com.icook.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
 @Table(name = "socket")
 public class socketBean implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +19,8 @@ public class socketBean implements Serializable{
 	private Integer id;
 	private String message;
 	private String updateTime;
+	
+	public socketBean() {}
 	
 	public socketBean(Integer seq, Integer category, Integer id, String message, String updateTime) {
 		super();

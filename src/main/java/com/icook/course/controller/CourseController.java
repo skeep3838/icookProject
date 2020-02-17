@@ -119,7 +119,7 @@ public class CourseController {
 		return b;
 	}
 	
-	@InitBinder
+//	@InitBinder
 	public void whiteListing(WebDataBinder binder) {
 		binder.setAllowedFields(
 				"courseId",

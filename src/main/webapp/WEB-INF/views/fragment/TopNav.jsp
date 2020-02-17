@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <head>
 <!-- 卡車套版 -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
 <script type="application/x-javascript">
 	
 	
@@ -12,6 +13,9 @@
 
 
 </script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/AdminLTE-3.0.2/dist/css/adminlte.css">
 <link href="${pageContext.request.contextPath}/css/bootstrap.css"
 	rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/css/style.css"
@@ -22,14 +26,13 @@
 <link
 	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
 	rel='stylesheet' type='text/css'>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- //卡車套版 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/AdminLTE-3.0.2/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 <style>
 #reddiv {
-	/* background-color: crimson; */
-	/* 1. 試試看在這裡，加入三個屬性設定，可以模仿網頁上，將圖片固定在右下角? */
-	/* 2. 在這邊設定一張圖片並調整大小 */
 	width: 70px;
 	height: 70px;
 	position: fixed;
@@ -39,12 +42,19 @@
 	background-color: white;
 	background-image:
 		url("${pageContext.request.contextPath}/images/icook-logo.png");
-	/* background-size: contain; */
 	background-size: 100%;
 	background-repeat: no-repeat;
 	z-index: 1;
 }
-
+#messageBox {
+	width:100%;
+	position: fixed;
+	right: 0px;
+ 	bottom: -20px; 
+	z-index: 2;
+	padding-right: 0px;
+	padding-bottom: 0px;
+}
 .messagetemp {
 	border-radius: 37px 37px 37px 37px;
 	-moz-border-radius: 37px 37px 37px 37px;
@@ -69,7 +79,7 @@
 }
 
 #text {
-	width: 75%;
+	width: 71%;
 	padding: 6px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
@@ -94,6 +104,99 @@
 <body>
 	<header>
 		<div id="dialog_div_reddiv" title="客戶問題"></div>
+			<div class="col-md-3" id="messageBox">
+				<!-- DIRECT CHAT PRIMARY -->
+				<div class="card card-prirary cardutline direct-chat direct-chat-primary">
+					<div class="card-header">
+						<h3 class="card-title">客服人員</h3>
+
+						<div class="card-tools">
+<!-- 							<span data-toggle="tooltip" title="3 New Messages" -->
+<!-- 								class="badge bg-primary">3</span> -->
+<!-- 							<button type="button" class="btn btn-tool" -->
+<!-- 								data-card-widget="collapse"> -->
+<!-- 								<i class="fas fa-minus"></i> -->
+<!-- 							</button> -->
+<!-- 							<button type="button" class="btn btn-tool" data-toggle="tooltip" -->
+<!-- 								title="Contacts" data-widget="chat-pane-toggle"> -->
+<!-- 								<i class="fas fa-comments"></i> -->
+<!-- 							</button> -->
+							<button type="button" class="btn btn-tool"
+								data-card-widget="remove" onclick='closeMessageBox()'>
+								<i class="fas fa-times"></i>
+							</button>
+						</div>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<!-- Conversations are loaded here -->
+						<div class="direct-chat-messages" id='messageContent' style="padding: 11px;">
+							<!-- Message. Default to the left -->
+<!-- 							<div class="direct-chat-msg"> -->
+<!-- 								<div class="direct-chat-infos clearfix"> -->
+<!-- 									<span class="direct-chat-name float-left">Alexander -->
+<!-- 										Pierce</span> <span class="direct-chat-timestamp float-right">23 -->
+<!-- 										Jan 2:00 pm</span> -->
+<!-- 								</div> -->
+								<!-- /.direct-chat-infos -->
+<!-- 								<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" -->
+<!-- 									alt="Message User Image"> -->
+								<!-- /.direct-chat-img -->
+<!-- 								<div class="direct-chat-text" style='margin: 5px 50px 0 0;'>Is this template really for -->
+<!-- 									free? That's unbelievable!</div> -->
+								<!-- /.direct-chat-text -->
+<!-- 							</div> -->
+
+							<!-- /.direct-chat-msg -->
+
+							<!-- Message to the right -->
+<!-- 							<div class="direct-chat-msg right"> -->
+<!-- 								<div class="direct-chat-infos clearfix"> -->
+<!-- 									<span class="direct-chat-name float-right">Sarah Bullock</span> -->
+<!-- 									<span class="direct-chat-timestamp float-left">23 Jan -->
+<!-- 										2:05 pm</span> -->
+<!-- 								</div> -->
+<!-- 								<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" -->
+<!-- 									alt="Message User Image"> -->
+<!-- 								<div class="direct-chat-text" style="float:right;margin-right:0px;">You better believe it!</div> -->
+<!-- 							</div> -->
+							<!-- /.direct-chat-msg -->
+						</div>
+						<!--/.direct-chat-messages-->
+
+						<!-- Contacts are loaded here -->
+						<div class="direct-chat-contacts">
+							<ul class="contacts-list">
+								<li><a href="#"> <img class="contacts-list-img"
+										src="../dist/img/user1-128x128.jpg">
+
+										<div class="contacts-list-info">
+											<span class="contacts-list-name"> Count Dracula <small
+												class="contacts-list-date float-right">2/28/2015</small>
+											</span> <span class="contacts-list-msg">How have you been? I
+												was...</span>
+										</div> <!-- /.contacts-list-info -->
+								</a></li>
+								<!-- End Contact Item -->
+							</ul>
+							<!-- /.contatcts-list -->
+						</div>
+						<!-- /.direct-chat-pane -->
+					</div>
+					<!-- /.card-body -->
+					<div class="card-footer">
+							<div class="input-group" style="margin-bottom: 5px;">
+								<input type="text" id="text" name="message" style="width:83%"
+									class="form-control"> <span class="input-group-append">
+									<button type="button" class="btn btn-primary" onclick="saveMessage(${LoginOK.userId},'${LoginOK.nickname}')" >送出</button>
+								</span>
+							</div>
+					</div>
+					<!-- /.card-footer-->
+				</div>
+				<!--/.direct-chat -->
+			</div>
+			
 		<div class="header">
 			<div class="container">
 				<div class="navbar-header">
@@ -128,6 +231,7 @@
 						<c:otherwise>
 							<div id='reddiv' onclick="sendMessage('${LoginOK.nickname}',${LoginOK.userId})"></div>
 							<ul>
+                                <li style="width:50px; height:60px;"><img style="border-radius: 50%;border: 1px solid rgba(255,0,0,1.00);" src="<c:url value='/getPicMem/${LoginOK.userId}' />" alt=" " class="img-responsive"/></li>
 								<li><h4>Hello, ${LoginOK.nickname} !!</h4>
 								<li><a href=<c:url value='/login/logout'/>
 									style="margin: 10px"><span class="glyphicon glyphicon-user"
@@ -197,16 +301,22 @@
 <script>
 	$(document).ready(function() {
 		$("#cartNo").text("${ShoppingCart.itemNumber}");
+		$("#messageBox").hide();
 	})
 	function getRealPath() {
-				var curWwwPath = window.document.location.href;
-				var pathName = window.document.location.pathname;
-				var projectName = pathName.substring(1, pathName.substr(1).indexOf('/') + 1);
-				return projectName;
-			}
+		var curWwwPath = window.document.location.href;
+		var pathName = window.document.location.pathname;
+		var projectName = pathName.substring(1, pathName.substr(1).indexOf('/') + 1);
+		return projectName;
+	}
+	
+	function closeMessageBox(){
+		$("#messageBox").slideUp(500);
+	}
 	
 	var websocket = null;
 	function sendMessage(nickname,userId) {
+		$("#messageBox").slideDown(500);
 		//判断当前浏览器是否支持WebSocket
 		if ('WebSocket' in window) {
 			websocket = new WebSocket(
@@ -226,61 +336,42 @@
 
 		//接收到消息的回调方法
 		websocket.onmessage = function(event) {
-			setMessageInnerHTML(event.data, nickname);
+			var message = JSON.parse(event.data);
+			if(message.type === "客戶") {
+				setMessageInnerHTML(message.text, message.name,message.type,message.Date);
+			}
+			else {
+				setMessageInnerHTML(message.text, message.name,message.type,message.Date);
+			}
 		}
 
 		//连接关闭的回调方法
 		websocket.onclose = function() {
-			setMessageInnerHTML("WebSocket连接关闭");
+// 			alert("close");
 		}
 
 		//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
 		window.onbeforeunload = function() {
 			closeWebSocket();
 		}
-
-		var temp = "<div id='sendmessage'><input type='text' id='text' placeholder=''><button id='sendbutton' onclick='send("+ userId +")' type='button'>傳送</button></div> <hr/><div id='message'>";
-		// 		    var temp = "<input id='text' type='text'/><button onclick='send()'>傳送</button><hr/><div id='message'>"
-		$("#dialog_div_reddiv").html(temp);
-		$("#dialog_div_reddiv").dialog("open");
 	}
-
-	$(function() {
-		$("#dialog_div_reddiv").dialog({
-			//固定視窗
-			maxHeight : 510,
-			maxWidth : 370,
-			minHeight : 510,
-			minWidth : 370,
-			position : {
-				my : "center",
-				at : "left+1800px top+550px",
-				of : window
-			},
-			//拖移設定
-			draggable : true,
-			//dialog建立自動開啟設定
-			autoOpen : false,
-			//視窗外無法操作設定
-			modal : false,
-			//open事件發生時, 將dialog樣式右上的x顯示
-			open : function(event, ui) {
-				$(".ui-dialog-titlebar-close").show();
-			},
-		// 			        buttons: {
-		// 			            "發送": function() {
-		// 			            	send();
-		// 			            }
-		// 			        }
-		});
-	});
 	//关闭WebSocket连接
 	function closeWebSocket() {
 		websocket.close();
 	}
 
 	//发送消息
-	function send(userId) {
+	function send(userId,nickname,message,date) {
+		var msg = {
+			    text: message,
+			    id: userId,
+			    name: nickname,
+			    type: "客戶",
+			    Date: date
+			  };
+		websocket.send(JSON.stringify(msg));
+	}
+	function saveMessage(userId,nickname) {
 		var message = document.getElementById('text').value;
 		var packageName = getRealPath();
 		$.ajax({
@@ -289,20 +380,31 @@
 			data:{ Message: message , Id : userId },
 			dataType : "text",
 			success : function(data) {
-				alert(data);
+				//傳回來儲存日期的資料
+				send(userId,nickname,message,data);
 			},
 			error : function(error) {
 			},
 		});
-		websocket.send(message);
 	}
 	//将消息显示在网页上
-	function setMessageInnerHTML(innerHTML, nickname) {
+	function setMessageInnerHTML(innerHTML, nickname, type, date) {
 		// 	        document.getElementById('message').innerHTML += nickname + "<br><div class='messagetemp'><div id='messagetemp'>" + innerHTML + "</div></div><br/><br>";
-		$("#message").prepend(
-				nickname
-						+ "<br><div class='messagetemp'><div id='messagetemp'>"
-						+ innerHTML + "</div></div><br/><br>");
+		if(type === "客服人員") {
+			$("#messageContent").append("<div class='direct-chat-msg'><div class='direct-chat-infos clearfix'>" + 
+					"<span class='direct-chat-name float-left'>"+ nickname +"</span>" +  
+					"<span class='direct-chat-timestamp float-right'>"+ date +"</span></div>" + 
+					"<div class='direct-chat-text' style='margin: 5px 50px 0 0; float: left; width: 60%;'>"+ innerHTML +"</div></div>");
+			//讓訊息框保持至底
+			$('#messageContent').scrollTop( $('#messageContent')[0].scrollHeight );
+		}
+		else {
+			$("#messageContent").append("<div class='direct-chat-msg right'><div class='direct-chat-infos clearfix'>" + 
+			"<span class='direct-chat-name float-right'>"+ nickname +"</span>" + 
+			"<span class='direct-chat-timestamp float-left'>"+ date +"</span></div>" +
+		    "<div class='direct-chat-text' style='float:right; margin-right:0px; width: 60%;'><div style='float:right;'>"+ innerHTML +"</div></div></div>");
+			$('#messageContent').scrollTop( $('#messageContent')[0].scrollHeight );
+		}
 	}
 </script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
