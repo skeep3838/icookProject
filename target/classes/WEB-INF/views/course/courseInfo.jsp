@@ -30,7 +30,10 @@
 			<header class="major special">
 				<h2>${course.courseName}</h2>
 				<br>
+<<<<<<< HEAD
+=======
 				<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
+>>>>>>> master
 			</header>
 			<!-- 					卡車套件 -->
 			<a href="#" class="image fit"><img src="../css/images/pic11.jpg"
@@ -62,8 +65,18 @@
 				</div>
 				<div class="col-md-4">
 					<br> <br>
+<<<<<<< HEAD
+					
+						<c:choose>
+							<c:when test="${courseStock>0}">
+							<div class="card"
+						style="width: 18rem; -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); 
+						box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);margin: 10%";/>
+
+=======
 					<div class="card"
 						style="width: 18rem; -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);">
+>>>>>>> master
 						<div class="card-body">
 							<h3 class="card-title">立即購買</h3>
 							<br>

@@ -34,18 +34,15 @@
 		</fieldset>
 	</div>	
 			
-		<section id="one" class="wrapper style1 justify-content-center">
+<!-- 		<section id="one" class="wrapper style1 justify-content-center"> -->
 			<div class="inner" >
 			<div class="container-fluid">     
     <div class="row">
-		<div class="containCard" style="margin: 0 -1% 0 -13%;
-    padding: 0;
-    width: 1600px;
-}">
+<!-- 		<div class="containCard" > -->
       
       	<c:forEach var='course' items='${courses}'>
-		  <div class="col-6 col-sm-6" style="width: 45%; " >
-					<article class="feature left">
+		  <div class="col-6 col-sm-6"  >
+					<article class="feature left" style="margin-left: 8%;">
 						<span><img src="<c:url value='/getPic/${course.courseId}'/>"
 				class="image" style="width: 300px;height: 220px;margin-left: 15px;"/></span>
 						<div class="content">
@@ -65,12 +62,12 @@
 					</article>
 					</div>
 				</c:forEach> 
-      </div>
+<!--       </div> -->
     </div>
   </div>
 				
 			</div>
-		</section>
+<!-- 		</section> -->
 	
 	<!-- 		Scripts -->
 	<script src="/js/course/jquery.min.js"></script>

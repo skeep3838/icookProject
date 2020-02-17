@@ -48,9 +48,8 @@ public class ProductListController {
 	}
 	
 	@GetMapping(value = "shoppingCart/productList")
-	public String productList_get(Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String productList_get(Model model, HttpServletRequest request) {
 		System.out.println("進入controller1");
-		response.setContentType("text/html; charset=utf-8");
 		HttpSession session = request.getSession(false);
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("ShoppingCart");
 		ShoppingCart cart2 = (ShoppingCart) session.getAttribute("ShoppingCart2");

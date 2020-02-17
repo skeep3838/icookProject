@@ -17,5 +17,7 @@ public interface MemberService {
 
 	MemberBean searchMemberBean(String account);
 	
-	public void modifyVerificationStatus(String userId); 
+	public void modifyVerificationStatus(String userId);
+
+	MemberBean getuserById(int userId); 
 }

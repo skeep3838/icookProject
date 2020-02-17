@@ -120,24 +120,24 @@ public class CourseController {
 	}
 	
 //	@InitBinder
-	public void whiteListing(WebDataBinder binder) {
-		binder.setAllowedFields(
-				"courseId",
-				"hostId",
-				"courseName",
-				"courseCategory",
-				"courseImage",
-				"hostName",
-				"courseStartDate",
-				"courseEndDate",
-				"roomNo",
-				"courseIntrod",
-				"coursePrice",
-				"saleStartDate",
-				"saleEndDate",
-				"coursePhone",
-				"courseMail"
-				);
-	}
+//	public void whiteListing(WebDataBinder binder) {
+//		binder.setAllowedFields(
+//				"courseId",
+//				"hostId",
+//				"courseName",
+//				"courseCategory",
+//				"courseImage",
+//				"hostName",
+//				"courseStartDate",
+//				"courseEndDate",
+//				"roomNo",
+//				"courseIntrod",
+//				"coursePrice",
+//				"saleStartDate",
+//				"saleEndDate",
+//				"coursePhone",
+//				"courseMail"
+//				);
+//	}
 
 }

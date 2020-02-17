@@ -25,8 +25,12 @@
 	rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/css/jquery-ui.css"
 	rel="stylesheet" type="text/css" media="all" />
+<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"
+	rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- 	加入文字編輯器ckEditor -->
+<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 <style>
   /*滑入商品圖的效果*/
   .block_effect:hover {
@@ -113,10 +117,21 @@
 			</form>
 		</fieldset>
 </div>
-
-
-<div class="prosDiv container-fluid">
-	<fieldset>
+<div class="container containerPage">
+  		<h2 style="margin:20px; text-align:center;display:none;">有<c:out value="${proCount}"/>件商品</h2>                
+  		<h2 style="margin:20px; text-align:center;display:none;">有<c:out value="${picCount}"/>張商品圖</h2>                 
+<!--   		<h3 style="text-align:center;">每頁&nbsp; -->
+<!--   			<select class="selectCountPage" id="selectCountPage"> -->
+<!--   				<option>4</option> -->
+<!--   				<option selected>8</option> -->
+<!--   				<option>12</option> -->
+<!--   				<option>36</option> -->
+<!--   			</select>項商品 &nbsp; -->
+<!--   		到第&nbsp;<select class="selectPage" id="selectPage"></select>&nbsp;頁</h3> -->
+  		<ul class="pager"></ul>
+</div>
+<div class="prosDiv container-fluid" style="width:100%;height:100%;">
+	<fieldset style="width:100%;height:500px;margin:50px;display:inline-block;">
 		<c:forEach items="${prosList}" var="pros" varStatus="vs">
 			<c:set var="prodsSet" value="${pros.type}"></c:set>
 <!-- 			proCount是紀錄商品數量,並作為外部索引代號 -->
@@ -124,13 +139,23 @@
 <!-- 			ImgList = {圖片陣列1(產品1),圖片陣列2(產品2),圖片陣列3(產品2),....圖片陣列n} -->
 			<c:set var="imgArray" value="${ImgList[vs.index]}"></c:set>
 <!-- 	border:solid 1px;background-color:#ffefd0; -->
-			<div  class="products myModal col-md-3 block_effect" 
+			<div  class="products myModal block_effect" 
 				  data-toggle="modal" data-target="#myModal${proCount}"
-				  style="width:400px;height:300px;margin:3px;padding:1rem;text-align:center;cursor:pointer;" 
+				  style="width:30%;margin:3px;cursor:pointer;display:inline-block;text-align:center;" 
 				   id="divTop${proCount}">
-		     	<p>${pros.productID}</p>
-		     	<p>
       			<c:choose>
+      				<c:when test="${pros.productID==1}">
+					    <c:choose>
+      						<c:when test="${fn:substring(imgArray[3], 0, 4)=='http'}">
+								<img class="img-rounded block_effect" width="300px" height="200px"  
+						     	src="${imgArray[3]}"></img>
+      						</c:when>
+      						<c:otherwise>
+								<img class="img-rounded block_effect" width="300px" height="200px"  
+						     	src="${pageContext.request.contextPath}/${imgArray[3]}"></img>
+      						</c:otherwise>
+      					</c:choose>	
+      				</c:when>
       				<c:when test="${pros.productID==4}">
 					    <c:choose>
       						<c:when test="${fn:substring(imgArray[3], 0, 4)=='http'}">
@@ -168,7 +193,6 @@
       					</c:choose>	
       				</c:otherwise>
       			</c:choose>		     	
-				</p>
 <%-- 				<p>${pros.productName}</p> --%>	
 				<p><h3>${pros.productName}</h3></p>
 				      			<c:choose>
@@ -194,44 +218,44 @@
 						<p class="text_decribe"></p>
       				</c:otherwise>
       			</c:choose>
-    			
-<%--     				<button name="cmd" id="press${proCount}" class="addToCar btn btn-primary"> --%>
-<!-- 							Add To Car -->
-<!-- 					</button> -->
-<%--  					<button type="button" class="myModal btn btn-primary" data-toggle="modal" data-target="#myModal${proCount}"> --%>
-<!--  						詳細資訊 -->
-<!--  					</button> -->
-<%-- 					購買數量<p><input style="margin:5px;" type="number" class="products${proCount} quantity${proCount}" id="qty${proCount}" value="1" min="1" max="99" /></p> --%>
 				</div>
-				
 
  					<!-- Modal商品卡  可加入aria-hidden="true" data-backdrop="static"設定後,只能用[X]or Close來關閉Modal --> 
   				<div class="modal fade myModal" id="myModal${proCount}" role="dialog">
     				<div class="modal-dialog">	
     				  <c:set var="imgArrayType" value="${ImgList[vs.index]}"></c:set>
 					  
-					  <c:forEach items="${prodsSet}" var="pbt" varStatus="vs2">
+					  <c:forEach items="${prodsSet}" var="pbtt" varStatus="vs2">
 					  
 					  <!-- 	proCount是紀錄商品總數量(含款式),並作為索引代號 -->
 						<c:set var="proContentCount" value="${proContentCount+1}" />
-					  
+					   <input type="hidden" id="proContentCount" value="${proContentCount}"/>
 					  	<c:forEach items="${prodsSet}" var="pbts" varStatus="vs3">
 					 	 <!-- 	typeCount是紀錄每項商品有幾種款式 -->
 								<c:set var="typeCount" value="${vs3.count}" />
 					  	</c:forEach>
 					  	<!-- 	取得每項商品款式數量 -->		
 						<input type="hidden" id="typeCount${proCount}" value="${typeCount}"/>
-					  	
+					  </c:forEach>
       					<!-- Modal content商品卡內容-->
-      					<div class="modal-content modalContent" id="modalContent${proContentCount}" style="height:800px;">
+      					<div class="modal-content modalContent" id="modalContent${proCount}" style="width:100%;">
         					<div class="modal-header" style="text-align:center;">
           						<button type="button" class="close"data-dismiss="modal">&times;</button>
-          						<h4 class="modal-title">${pros.productName}(${pbt.typeTitle})</h4>
+          						<h4 class="modal-title">${pros.productName}</h4>
         					</div>
-        					<div class="modal-body" data-ride="carousel" style="height:600px">
-      								<div class="item">
+        					<div class="modal-body" data-ride="carousel" style="position:relative;">
+      								<div class="dropdown">
+      									<h5>【款式】</h5>
+  						    			<select class="proSelect${proCount}" id="proSelect${proCount}" name="proSelect"
+  						    				style="font-size:10pt;">
+										</select>
+									</div>
+									<c:forEach items="${prodsSet}" var="pbt" varStatus="vs2">
+<!-- 									給每個item依照type樹編號 -->
+									<c:set var="typeCount2" value="${vs2.count}"></c:set>
+      								<div class="item${typeCount2}" id="item${typeCount2}" style="width:100%;">
       									<div class="proPicture" style="float:left;width:60%;">
-      										<div class="targetImg block_effect" id="targetImg${proContentCount}" style="height:300px;text-align:center;">
+      										<div class="targetImg block_effect" id="targetImg${proCount}" style="height:220px;text-align:center;">
       											<c:choose>
       												<c:when test="${empty imgArray[vs2.index]}">
 						                                <c:choose>
@@ -263,28 +287,28 @@
       												</c:otherwise>
       											</c:choose>
       										<br><br>
-      										<div>
-      											<p><h5>【商品資訊】</h5></p>
-      											<p class="text_decribe2">${pros.productInfo}</p>
-      										</div>
       										</div>
       										<!-- picCount是紀錄圖片數量,並作為索引代號 -->
 											<c:set var="picCount" value="${picCount+1}" />
+											<div class="container">
       										<c:forEach items="${imgArray}" var="prodImg" varStatus="vsImg">
-      											<input type="hidden" id="testImggg${picCount}" value="${prodImg}"/>
+<%--       											<input type="hidden" id="testImggg${picCount}" value="${prodImg}"/> --%>
         										<div class="smallImgBox block_effect" id="prodImg${picCount}" style="float:left;margin:2px;cursor:pointer;">
-        											<img class="smallImg img-rounded"  id="smallImg${picCount}" src="${pageContext.request.contextPath}/${prodImg}" width="100px">
+      												<c:choose>
+      					                            	<c:when test="${fn:substring(prodImg, 0, 4)=='http'}">
+        													<img class="smallImg img-rounded"  id="smallImg${picCount}" src="${prodImg}" width="100px" height="80px">
+      					                            	</c:when>
+      					                            	<c:otherwise>
+        													<img class="smallImg img-rounded"  id="smallImg${picCount}" src="${pageContext.request.contextPath}/${prodImg}" width="100px">
+      					                             	</c:otherwise>
+      					                            </c:choose>
+      											
       											</div>
       										</c:forEach>
+											</div>
       									</div>
       									<div class="proContent" style="float:right;width:40%;">
       										<section>
-      											<div class="dropdown">
-      												<h5>【款式】</h5>
-  						    						<select class="proSelect${proCount}" id="proSelect${proCount}" name="proSelect"
-  						    						    style="font-size:10pt;">
-													</select>
-												</div>
       										</section>
       										<section>
       										<c:choose>
@@ -302,24 +326,25 @@
       										<c:choose>
 												<c:when test="${pbt.unitStock==0}">
 													<p style="color:red">缺貨中</p>
-   												</c:when>
-												<c:when test="${pbt.unitStock>=10}">
-													<p>購買數量
+													<p>
 														<select class="selectpicker selectQty products${proContentCount} quantity${proContentCount}" id="qty${proContentCount}"
 																style="font-size:10pt;">
 														</select>
 													</p>
    												</c:when>
  												<c:otherwise>
- 													<p>購買數量
-														<input style="margin:5px;" type="number" class="products${proContentCount} quantity${proContentCount}" id="qty${proContentCount}" value="1" min="1" max="${pbt.unitStock}" />
+ 													<p>購買數量</p>
+ 													<p>
+														<select class="selectpicker selectQty products${proContentCount} quantity${proContentCount}" id="qty${proContentCount}"
+																style="font-size:10pt;">
+														</select>
 													</p>
 	   											</c:otherwise>
    											</c:choose>
    											
    											<c:choose>
 												<c:when test="${pbt.unitStock==0}">
-   													<button class="btn btn-primary">
+   													<button class="btn btn-primary" id="sendMsg">
 														到貨後立即通知
 													</button>
    												</c:when>
@@ -341,22 +366,25 @@
  													<p>庫存量${pbt.unitStock}</p>
    												</c:otherwise>
    											</c:choose>
-   											
-      										
       										</section>
-						                    <input type="hidden" class="products${proContentCount}" id="productId${proContentCount}" name="productId" value="${pros.productID}" />
-						                    <input type="hidden" class="products${proContentCount}" id="productName${proContentCount}" name="productName" value="${pros.productName}" />
-						                    <input type="hidden" class="products${proContentCount}" id="productInfo${proContentCount}" name="productInfo" value="${pros.productInfo}" />
-						                    <input type="hidden" class="products${proContentCount}" id="typeId${proContentCount}"  name="typeId" value="${pbt.typeID}" />
-						                    <input type="hidden" class="products${proContentCount}" id="typeTitle${proContentCount}"  name="typeTitle" value="${pbt.typeTitle}" />
-						                    <input type="hidden" class="products${proContentCount}" id="image1${proContentCount}"  name="image1" value="${pros.image1}" />
-						                    <input type="hidden" class="products${proContentCount}" id="unitPrice${proContentCount}"  name="unitPrice" value="${pbt.unitPrice}" />
-						                    <input type="hidden" class="products${proContentCount}" id="unitStock${proContentCount}"  name="unitStock" value="${pbt.unitStock}" />
-						                    <input type="hidden" class="products${proContentCount}" id="describe${proContentCount}"  name="describe" value="${pros.productName}(${pbt.typeTitle})" />
-						                    <input type="hidden" class="products${proContentCount}" id="discount${proContentCount}"  name="discount" value="${pbt.discount}" />   					
+						                    <input type="hidden" class="products${proContentCount} productId${proContentCount}"   id="pId${proContentCount}"     		name="productId" value="${pros.productID}" />
+						                    <input type="hidden" class="products${proContentCount} productName${proContentCount}" id="pName${proContentCount}"   		name="productName" value="${pros.productName}" />
+						                    <input type="hidden" class="products${proContentCount} productInfo${proContentCount}" id="pInfo${proContentCount}"   		name="productInfo" value="" />
+<%-- 						                    <input type="hidden" class="products${proContentCount} productInfo${proContentCount}" id="pInfo${proContentCount}"   		name="productInfo" value="${pros.productInfo}" /> --%>
+						                    <input type="hidden" class="products${proContentCount} typeId${proContentCount}"      id="tTypeId${proContentCount}" 		name="typeId" value="${pbt.typeID}" />
+						                    <input type="hidden" class="products${proContentCount} typeTitle${proContentCount}"   id="tTitle${proContentCount}"  		name="typeTitle" value="${pbt.typeTitle}" />
+						                    <input type="hidden" class="products${proContentCount} image1${proContentCount}"      id="tImage1${proContentCount}" 		name="image1" value="${prodImg}" />
+						                    <input type="hidden" class="products${proContentCount} unitPrice${proContentCount}"   id="uPrice${proContentCount}"  		name="unitPrice" value="${pbt.unitPrice}" />
+						                    <input type="hidden" class="products${proContentCount} unitStock${proContentCount}"   id="uStock${proContentCount}"  		name="unitStock" value="${pbt.unitStock}" />
+						                    <input type="hidden" class="products${proContentCount} describe${proContentCount}"    id="theDescribe${proContentCount}"    name="describe" value="${pros.productName}(${pbt.typeTitle})" />
+						                    <input type="hidden" class="products${proContentCount} discount${proContentCount}"    id="theDiscount${proContentCount}"    name="discount" value="${pbt.discount}" />   					
       									</div>
       								</div>
-      							
+      								</c:forEach>
+      								<div class="container pppInfo" style="width:100%">
+      									${pros.productInfo}
+      								</div>
+      								
 <!--     							</div> -->
     													
 <!--         					</div> -->
@@ -365,30 +393,17 @@
           						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         					</div>
       					</div>
-      				  </c:forEach>
       				</div>
-
 			</div>				
-			
 		</c:forEach>
 	</fieldset>
 </div>
-<div class="container containerPage">
-  		<h2 style="margin:20px; text-align:center;">有<c:out value="${proCount}"/>件商品</h2>                
-  		<h2 style="margin:20px; text-align:center;">有<c:out value="${picCount}"/>張商品圖</h2>                
-<!--   		<h3 style="text-align:center;">每頁&nbsp; -->
-<!--   			<select class="selectCountPage" id="selectCountPage"> -->
-<!--   				<option>4</option> -->
-<!--   				<option selected>8</option> -->
-<!--   				<option>12</option> -->
-<!--   				<option>36</option> -->
-<!--   			</select>項商品 &nbsp; -->
-<!--   		到第&nbsp;<select class="selectPage" id="selectPage"></select>&nbsp;頁</h3> -->
-  		<ul class="pager"></ul>
-</div>
+
 <input type="hidden" id="pageContext" value="${pageContext.request.contextPath}">
 <input type="hidden" id="proCount" value="${proCount}">
-<div class="container" id="setMap" style="display:none;"></div>
+<!-- <div class="container" id="setMap" style="display:none;"></div> -->
+<div class="container" id="setMap"  style="display:none;"></div>
+<div class="container" id="setMap2" style="display:none;"></div>
 <!-- for bootstrap working -->
 <!-- 放到head會導致modal無法使用 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

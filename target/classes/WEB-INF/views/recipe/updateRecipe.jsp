@@ -13,12 +13,8 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <script type="application/x-javascript">
-	
-	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 			function hideURLbar(){ window.scrollTo(0,1); } 
-
-
 </script>
 <!-- //for-mobile-apps ${pageContext.request.contextPath}-->
 <link href="${pageContext.request.contextPath}/css/bootstrap.css"
@@ -52,7 +48,7 @@
 
 	<div class="container">
 		<div class="col-md-10 agile_single_right">
-			<h3 class="bars">新增食譜</h3>
+			<h3 class="bars">更新食譜</h3>
 			<form:form method='POST' modelAttribute="recipeBean"
 				action="${pageContext.request.contextPath}/recipes/updateRecipe"
 				enctype="multipart/form-data">
@@ -67,7 +63,7 @@
 					<div class="form-group row">
 						<label for="RecipeDescription" class="col-sm-2 col-form-label">食譜描述</label>
 						<div class="col-sm-10">
-							<form:input type="text" class="form-control"
+							<form:textarea type="text" class="form-control" rows="5"
 								id="RecipeDescription" path="description" />
 						</div>
 					</div>
@@ -78,7 +74,6 @@
 							<label class="mr-sm-2" for="CookTime">烹調時間(分鐘)</label>
 							<form:select path="cookingTime" class="form-control"
 								id="CookTime">
-								<%-- 								<form:options items="${cookingTimeList}" /> --%>
 								<form:option value="null">預計烹調時間</form:option>
 								<form:option value="5">5</form:option>
 								<form:option value="10">10</form:option>
@@ -94,7 +89,6 @@
 						<div class="form-group col-md-4">
 							<label class="mr-sm-2" for="serving">份量(人份)</label>
 							<form:select path="serving" class="form-control" id="serving">
-								<%-- 								<form:options items="${servingList}" /> --%>
 								<form:option value="null">人份</form:option>
 								<form:option value="1">1</form:option>
 								<form:option value="2">2</form:option>
@@ -114,7 +108,7 @@
 									style="display: none;" type="file" accept="image/jpg" /> <i
 								class="fa fa-photo"></i> 上傳封面圖片 </label>
 							<div id="upload_img">
-								<img src="<c:url value='/getPicture/${recipeBean.recipeNo}' />"
+								<img style='width:320px;height:200px' src="<c:url value='/getPicture/${recipeBean.recipeNo}' />"
 									alt=" " class="img-responsive" />
 							</div>
 						</div>
@@ -280,12 +274,14 @@
 											name="step" class="form-control" rows="5"><c:out
 												value='${step}' /></textarea>
 									</td>
-									<td style="width: 25%; text-align: center"><label
-										class="btn btn-info" id="uploadImg${i.index+1}"> <input
+									<td style="width: 25%; text-align: center">
+									<label
+										class="btn btn-info" id="uploadImg${i.index+1}"> 
+										<input
 											name="StepImage" class="stepUpl" id="upload_img"
 											onchange="ShowStepImg(this,${i.index+1})"
-											style="display: none;" type="file" accept="image/jpg" /> <i
-											class="fa fa-photo"></i> 上傳步驟照片
+											style="display: none;" type="file" accept="image/jpg" /> 
+											<i class="fa fa-photo"></i> 上傳步驟照片
 									</label>
 										<div id="stepImg${i.index+1}">
 										<img src="<c:url value='/getPicture/${recipeBean.recipeNo}/${i.index+1}' />"
@@ -337,7 +333,7 @@
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					var html = "";
-					html += "<img width='320px' height='200px' src='"+e.target.result+"'>";
+					html += "<img style='width:320px;height:200px' src='"+e.target.result+"'>";
 					$("#upload_img").html(html);
 				}
 				reader.readAsDataURL(input.files[0]);

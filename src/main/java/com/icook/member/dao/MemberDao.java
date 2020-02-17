@@ -18,5 +18,7 @@ public interface MemberDao {
 	MemberBean searchMemberBean(String account);
 
 	public void verificationLetter(String userId);
+
+	MemberBean getuserById(int userId);
 	
 }
