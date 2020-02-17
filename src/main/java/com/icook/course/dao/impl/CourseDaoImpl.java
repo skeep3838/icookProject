@@ -29,7 +29,7 @@ public class CourseDaoImpl implements CourseDao{
 		
 		List<CourseBean> courses = new ArrayList<>();
 		Session session = factory.getCurrentSession();
-		String hql = "FROM CourseBean order by courseId desc";
+		String hql = "FROM CourseBean order by courseStartDate desc";
 		courses = session.createQuery(hql).getResultList();
 		return courses;
 	}
@@ -42,7 +42,7 @@ public class CourseDaoImpl implements CourseDao{
 		
 		List<CourseBean> courses = new ArrayList<>();
 		Session session = factory.getCurrentSession();
-		String hql = "FROM CourseBean c WHERE c.courseName like :name order by courseId desc";
+		String hql = "FROM CourseBean c WHERE c.courseName like :name order by courseStartDate desc";
 		courses = session.createQuery(hql).setParameter("name", "%"+courseName+"%").getResultList();
 		
 		return courses;

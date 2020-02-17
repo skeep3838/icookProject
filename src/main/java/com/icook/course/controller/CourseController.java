@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -48,6 +49,16 @@ public class CourseController {
 		System.out.println("進入controller: searchCoursesForm");
 		String courseName = null;
 		List<CourseBean> list = service.queryAllCourse();
+		for(CourseBean cb:list) {
+			
+			String courTime = cb.getCourseTime().substring(0,2);
+			Integer i = Integer.parseInt(courTime)+cb.getCourseHour();
+			cb.setCourseTime(
+					cb.getCourseTime().substring(0,5)+"~"+
+					Integer.toString(i)+
+					cb.getCourseTime().substring(2, 5));
+			
+		}
 		model.addAttribute("courseName", courseName);
 		model.addAttribute("courses", list);
 		return "course/courseHomePage";

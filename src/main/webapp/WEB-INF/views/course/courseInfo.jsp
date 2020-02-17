@@ -65,7 +65,7 @@
 					</tr>
 					<tr>
 						<TH><h4 class="courseItem">課程簡介</h4></TH>
-						<td><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> ${course.courseIntrod}
+						<td><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <pre style="font-size: 16px;">${course.courseIntrod}</pre>
 						</td>
 					</tr>
 					<tr>

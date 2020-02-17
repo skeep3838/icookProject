@@ -42,13 +42,15 @@
       
       	<c:forEach var='course' items='${courses}'>
 		  <div class="col-6 col-sm-6"  >
-					<article class="feature left" style="margin-left: 8%;">
+					<article class="feature left" style="margin-left: 3%;">
 						<span><img src="<c:url value='/getPic/${course.courseId}'/>"
 				class="image" style="width: 300px;height: 220px;margin-left: 15px;"/></span>
 						<div class="content">
 						<table border="1">
-							<tr><h2>${course.courseName}</h2>
-							<tr><h3 style="color:red">課程價格:${course.coursePrice}</h3>
+							<tr><h3>${course.courseName}</h3>
+							<tr><h4 style="color:red">課程價格: ${course.coursePrice}</h4>
+							<tr><h4 id="coursetime">上課日期: ${course.courseStartDate}</h4>
+							<tr><h4 id="coursetime">上課時間: ${course.courseTime}</h4>
 							<tr><h4>內容簡介:</h4>
 							<tr><h4>${course.courseIntrod}</h4>
 						</table>
