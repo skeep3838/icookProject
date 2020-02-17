@@ -23,13 +23,40 @@
 span.error {
 	color: red;
 	display: inline-block;
-	font-size: 5pt;
+	font-size: 1em;
+}
+#confirm{
+    background: #ff9900;
+    color: #FFF;
+    font-size: 1em;
+    padding: 10px 0;
+    width: 100%;
+    outline: none;
+    border: none;
+    
+}
+#confirm.header{
+background:black;
+transition: .5s ease-in;
+    -webkit-transition: .5s ease-in;
+    -moz-transition: .5s ease-in;
+    -o-transition: .5s ease-in;
+    -ms-transition: .5s ease-in;
+    }
+    
+#div_wait {
+ margin-left: 33%;
+}
+#ui-id-3 {
+ margin-left: 38%;
 }
 </style>
+
 <script type="text/javascript">
 $(document).ready(function(){
+	//一鍵輸入正確資料
 	$("#correctmem").click(function(){
-		$("#account").val("xxu1566@gmail.com");
+		$("#account").val("aaa123@gmail.com");
 		$("#pw1").val("aA123456");
 		$("#pw2").val("aA123456");
 		$("#lastname").val("Ga");
@@ -39,6 +66,19 @@ $(document).ready(function(){
 		$("#gender").val("男生");
 		$("#phone").val("0977302207");
 		$("#address").val("臺中市豐原區豐東路190號");
+	});
+	//一鍵輸入錯誤資料
+	$("#errormem").click(function(){
+		$("#account").val("aaa123@gmail.com");
+		$("#pw1").val("00000");
+		$("#pw2").val("00000");
+		$("#lastname").val("");
+		$("#firstname").val("");
+		$("#nickname").val("");
+		$("#birthday").val("");
+		$("#gender").val("");
+		$("#phone").val("0900000000");
+		$("#address").val("");
 		
 	});
 	
@@ -68,7 +108,14 @@ $(document).ready(function(){
 	 				if(password == password2){
 		 				$("#p1").html("<span style='color:green'>密碼一致</span>");
 		 				//$("#p2").html("<span style='color:green'>密碼一致</span>");
-		 			$("#submit").click();
+		 			if(password.length >7){
+		 			
+		 				
+		 				$("#submit").click();
+		 			}else{
+		 				$("#p1").html("<span style='color:red'>密碼需大於8個字元</span>")
+		 			}
+
 	 				}
 					else {
 						//e.preventDefault();
@@ -77,7 +124,7 @@ $(document).ready(function(){
 //						document.getElementById("pw1").value = "";
 //						document.getElementById("pw2").value = "";
 					}
-	 	//		}
+// 	 			}
 	// 			else{
 //	 				$("#p1").html("<span style='color:red'>密碼必須超過8碼</span>");
 	// 			}
@@ -122,7 +169,7 @@ $(document).ready(function(){
 	 		
 	 		
 	 		
-	 		
+	    
 	});
  	
 });
@@ -152,6 +199,8 @@ $(document).ready(function(){
 <!-- load-more -->
 
 <!-- //load-more -->
+<link rel="stylesheet"
+ href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link
 	href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic'
 	rel='stylesheet' type='text/css'>
@@ -164,6 +213,7 @@ $(document).ready(function(){
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/fragment/TopNav.jsp" />
 	<!-- banner1 -->
+	<div id="dialog_div_wait" title="等待中"></div>
 	<div class="banner1">
 		<div class="container"></div>
 	</div>
@@ -182,6 +232,8 @@ $(document).ready(function(){
 	<div class="login">
 		<div class="container">
 			<h6>註冊</h6>
+			
+
 
 			<form:form method="post" modelAttribute="MemberBean"
 				enctype='multipart/form-data'>
@@ -215,7 +267,7 @@ $(document).ready(function(){
 						<td>確認密碼<span style="color: red;">*</span>:
 						</td>
 						<td><input type="password" class="form-control"
-							name="password2" id="pw2" /><span id="p2"> </span></td>
+							name="password2" id="pw2"/><span id="p2"> </span></td>
 					</tr>
 					<tr>
 						<td>姓<span style="color: red;">*</span> :
@@ -269,11 +321,17 @@ $(document).ready(function(){
 								name="address" id="address" /> <form:errors path="address"
 								cssClass="error" /></td>
 					</tr>
+					<tr>
+						<td>照片:
+						</td>
+						<td><form:input path="userimage" class="form-control" type='file'
+								name="userimage" id="userimage" /> </td>
+					</tr>
 
 				</table>
 				<br>
 				<input type="button" id="confirm" value="註冊" />
-				<input type="submit" id="submit" value="註冊" style='display: none' />
+				<input type="submit" id="submit" value="註冊" style='display: none' onclick='waitDialog()'/>
 				<input type="button" id="errormem" value="一鍵輸入錯誤資料" />
 				<input type="button" id="correctmem" value="一鍵輸入正確資料" />
 
@@ -287,4 +345,28 @@ $(document).ready(function(){
 	<!-- // -->
 
 </body>
+<script>
+function waitDialog() {
+	$("#dialog_div_wait").html("<div id='div_wait'><img src='../images/ajaxload.gif'>&nbsp&nbsp<span>寄送中...</span></div>");
+	$("#dialog_div_wait").dialog("open");
+}
+$(function() {
+    $("#dialog_div_wait").dialog({
+     //固定視窗
+     maxHeight: 110,
+     maxWidth: 110,
+     minHeight: 110,
+     minWidth: 110,
+     //拖移設定
+     draggable: true,
+     //dialog建立自動開啟設定
+        autoOpen: false,
+        //視窗外無法操作設定
+        modal : true,
+        //open事件發生時, 將dialog樣式右上的x顯示
+        open:function(event,ui){$(".ui-dialog-titlebar-close").hide();},
+    });
+});
+</script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </html>

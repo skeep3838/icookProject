@@ -28,7 +28,7 @@
 				<div class="form-group row" style="margin-bottom: 1%; margin-top: 2%;">
 				<input class="form-control" type="text"
 					placeholder="請輸入關鍵字" aria-label="Search" name="courseName" style="margin-left: 30%;">
-				&nbsp;&nbsp;<button class="btn btn-outline-success" type="submit" style="height: 48px;">Search</button>
+				<button class="btn btn-outline-success" type="submit" style="height: 48px;">Search</button>
 				</div>
 			</form>
 		</fieldset>

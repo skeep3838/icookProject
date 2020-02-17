@@ -17,6 +17,12 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/course/main.css" />
 <!-- //商品套版 -->
+<style>
+	.courseItem{
+		color:blue
+	}
+</style>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/fragment/TopNav.jsp" />
@@ -30,42 +36,51 @@
 			<header class="major special">
 				<h2>${course.courseName}</h2>
 				<br>
-<<<<<<< HEAD
-=======
-				<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
->>>>>>> master
 			</header>
 			<!-- 					卡車套件 -->
-			<a href="#" class="image fit"><img src="../css/images/pic11.jpg"
-				alt="" /></a>
+			<a class="image fit"><img src="<c:url value='/getPic/${course.courseId}' />"
+				class="img-responsive" style="width: 1140px;height: 400px;object-fit: cover;" /></a>
 			<div class="services-breadcrumb">
 				<div class="container">
 					<ul>
 <%-- 						<li><a href="<c:url value='/courseOrder/courseCart' />">購物車</a><i>|</i></li> --%>
-						<li><a href="<c:url value='/course/courseHomePage' />">返回列表</a></li>
+						<li><a href="<c:url value='/course/courseHomePage' />" style="font-size: 20px;">返回列表</a></li>
 					</ul>
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-md-8">
-
-					<br> <br>
-					<h4>課程時間</h4>
-					<h5>${course.courseStartDate}~${course.courseStartDate}</h5>
-					<br> <br>
-					<h4>上課地點</h4>
-					<h5>台北市大安區復興南路一段390號 2,3號2樓 ${course.roomNo}號教室</h5>
-					<br> <br>
-					<h4>課程簡介</h4>
-					<h5>${course.courseIntrod}</h5>
-					<br> <br>
-					<h4>課程費用</h4>
-					<h5>${course.coursePrice}</h5>
+			<div class="row" style="margin-top: 5%;">
+				<div class="col-md-7">
+					<table>
+					<tr>
+						<TH width=15%><h4 class="courseItem">課程時間</h4></TH>
+						<td><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> ${course.courseStartDate}
+						</td>
+					</tr>
+					<tr>
+						<TH><h4 class="courseItem">上課地點</h4></TH>
+						<td>
+							<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 台北市大安區復興南路一段390號 2,3號2樓 203號教室
+						</td>
+					</tr>
+					<tr>
+						<TH><h4 class="courseItem">課程簡介</h4></TH>
+						<td><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> ${course.courseIntrod}
+						</td>
+					</tr>
+					<tr>
+						<TH><h4 class="courseItem">課程費用</h4></TH>
+						<td><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> ${course.coursePrice}
+						</td>
+					</tr>
+					</table>
+					<iframe
+			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14459.209555474516!2d121.54840684864891!3d25.040779468751495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abd379a5ec97%3A0xedc006d25a9e35df!2z6LOH562W5pyDIOaVuOS9jeaVmeiCsueglOeptuaJgCDmlbjkvY3kurrmiY3ln7nogrLkuK3lv4M!5e0!3m2!1szh-TW!2stw!4v1578560581668!5m2!1szh-TW!2stw"
+			frameborder="0" style="border: 0; text-align: center; width: 100%;"
+			allowfullscreen=""></iframe>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-5">
 					<br> <br>
-<<<<<<< HEAD
 					
 						<c:choose>
 							<c:when test="${courseStock>0}">
@@ -73,12 +88,8 @@
 						style="width: 18rem; -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); 
 						box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);margin: 10%";/>
 
-=======
-					<div class="card"
-						style="width: 18rem; -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25); box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);">
->>>>>>> master
 						<div class="card-body">
-							<h3 class="card-title">立即購買</h3>
+								<h3 class="card-title" style="color:red">立即購買</h3>
 							<br>
 							<h4>剩餘座位: ${courseStock}</h4>
 							<p class="card-text"></p>
@@ -86,12 +97,11 @@
 							<form action="${pageContext.request.contextPath}/courseOrder/courseCart">
 								<div class="form-row align-items-center">
 									<div class="col-auto my-1">
-										<select class="custom-select"
-											style="height: 30px; width: 100px;"
+										<select class="custom-select" style="height: 30px; width: 100px;"
 											onchange="calPrice(${course.coursePrice})" name="orderQty"
 											id="orderQty">
-											<option selected>訂購數量</option>
-											<c:forEach var="i" begin="0" end="${courseStock}">
+											<option disable selected hidden>訂購數量</option>
+											<c:forEach var="i" begin="1" end="${courseStock}">
 												<option value="${i}">${i}</option>
 											</c:forEach>
 										</select>
@@ -103,8 +113,17 @@
 <!-- 									class="btn btn-primary">結帳</a>  																	 -->
 								<input type="submit" class="btn btn-primary" id="addCourseVart" value="結帳"></a> 
 							</form>
-						</div>
+							</div>
 					</div>
+							</c:when>
+							<c:otherwise>
+								<br><br>
+								<img src="https://i.imgur.com/0Aldafd.png" alt="" style="height: 500px;">
+								<br><br>
+							</c:otherwise>
+						</c:choose>
+								
+						
 				</div>
 			</div>
 		</div>
@@ -112,10 +131,7 @@
 
 	<!-- 		google地圖 -->
 	<div class="w3ls_map align-items-center">
-		<iframe
-			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14459.209555474516!2d121.54840684864891!3d25.040779468751495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abd379a5ec97%3A0xedc006d25a9e35df!2z6LOH562W5pyDIOaVuOS9jeaVmeiCsueglOeptuaJgCDmlbjkvY3kurrmiY3ln7nogrLkuK3lv4M!5e0!3m2!1szh-TW!2stw!4v1578560581668!5m2!1szh-TW!2stw"
-			frameborder="0" style="border: 0; text-align: center; width: 500px;"
-			allowfullscreen=""></iframe>
+		
 	</div>
 
 	<!-- Footer -->

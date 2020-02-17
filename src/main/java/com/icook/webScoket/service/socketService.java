@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.icook.model.chatMember;
 import com.icook.model.socketBean;
 import com.icook.webScoket.dao.socketDao;
 
@@ -27,5 +28,17 @@ public class socketService implements socketServiceDao {
 		if(result == true) return true;
 		else return false;
 	}
+	@Override
+	public boolean checkChatMemberExist(int userId,chatMember temp) {
+		boolean result = dao.checkChatMember(userId);
+		if(result == true) {
+			return true;
+		}
+		else {
+			dao.saveChatMember(temp);
+			return false;
+		}
+	}
+	
 	
  }

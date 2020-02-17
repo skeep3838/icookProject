@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.icook.model.chatMember;
 import com.icook.model.socketBean;
 import com.icook.webScoket.service.socketServiceDao;
 
@@ -53,5 +54,15 @@ public class SocketController {
 		else {
 			return "error";
 		}
+	}
+	
+	@RequestMapping(value = "/searchChatMember")
+	@ResponseBody
+	public boolean searchChatMember(@RequestParam("userId") int userId,@RequestParam("nickname") String nickname,HttpServletRequest request,HttpServletResponse response, Model model) throws IOException {
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS");
+		String date = sdFormat.format(new Date());
+		chatMember temp = new chatMember(null,userId,nickname,date);
+		boolean result = service.checkChatMemberExist(userId,temp);
+		return true;
 	}
 }

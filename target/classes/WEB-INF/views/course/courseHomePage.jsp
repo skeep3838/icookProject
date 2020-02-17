@@ -22,40 +22,36 @@
 <body>
 	<jsp:include page="/WEB-INF/views/fragment/TopNav.jsp" />	
 	<!-- 搜尋功能 -->
-	<div class="contain align-items-center">
+	<div class="inner">
 		<fieldset >
 			<form method="POST" class="form-horizontal" style="text-align: center">
-				<div class="form-group row">
+				<div class="form-group row" style="margin-bottom: 1%; margin-top: 2%;">
 				<input class="form-control" type="text"
-					placeholder="請輸入關鍵字" aria-label="Search" name="courseName">
-				&nbsp;&nbsp;<button class="btn btn-outline-success" type="submit">Search</button>
+					placeholder="請輸入關鍵字" aria-label="Search" name="courseName" style="margin-left: 30%;">
+				<button class="btn btn-outline-success" type="submit" style="height: 48px;">Search</button>
 				</div>
 			</form>
 		</fieldset>
 	</div>	
 			
-<<<<<<< HEAD
-		<section id="one" class="wrapper style1 justify-content-center">
+<!-- 		<section id="one" class="wrapper style1 justify-content-center"> -->
 			<div class="inner" >
 			<div class="container-fluid">     
     <div class="row">
-		<div class="containCard" style="margin: 0 -15% 0 -7%;;padding:0;">
+<!-- 		<div class="containCard" > -->
       
       	<c:forEach var='course' items='${courses}'>
-		  <div class="col-6 col-sm-6" style="width:50%; " >
-=======
-		<section id="one" class="wrapper style1">
-			<div class="inner">
-				<c:forEach var='course' items='${courses}'>
->>>>>>> master
-					<article class="feature left">
-						<span class="image"><img src="../css/images/pic01.jpg" alt="" /></span>
+		  <div class="col-6 col-sm-6"  >
+					<article class="feature left" style="margin-left: 8%;">
+						<span><img src="<c:url value='/getPic/${course.courseId}'/>"
+				class="image" style="width: 300px;height: 220px;margin-left: 15px;"/></span>
 						<div class="content">
-							<h2>${course.courseName}</h2>
-							<br>
-							<p>${course.courseCategory}</p>
-							<br>
-							<p>${course.courseIntrod}</p>
+						<table border="1">
+							<tr><h2>${course.courseName}</h2>
+							<tr><h3 style="color:red">課程價格:${course.coursePrice}</h3>
+							<tr><h4>內容簡介:</h4>
+							<tr><h4>${course.courseIntrod}</h4>
+						</table>
 							<br>
 							<ul class="actions">
 								<li>
@@ -64,9 +60,14 @@
 							</ul>
 						</div>
 					</article>
+					</div>
 				</c:forEach> 
+<!--       </div> -->
+    </div>
+  </div>
+				
 			</div>
-		</section>
+<!-- 		</section> -->
 	
 	<!-- 		Scripts -->
 	<script src="/js/course/jquery.min.js"></script>
