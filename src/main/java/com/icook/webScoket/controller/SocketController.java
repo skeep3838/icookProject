@@ -33,7 +33,7 @@ public class SocketController {
 	
 	@RequestMapping(value = "/WebSocket")
 	@ResponseBody
-	public boolean WebSocket(@RequestParam("Message") String message,@RequestParam("Id") int userId,HttpServletRequest request,HttpServletResponse response, Model model) throws IOException {
+	public String WebSocket(@RequestParam("Message") String message,@RequestParam("Id") int userId,HttpServletRequest request,HttpServletResponse response, Model model) throws IOException {
 		boolean checkResult = service.checkMessageExist(userId);
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS");
 		String date = sdFormat.format(new Date());
@@ -46,6 +46,12 @@ public class SocketController {
 //			saveResult = service.saveMessage(temp);
 //		}
 		saveResult = true;
-		return saveResult;
+		if(saveResult == true) {
+			date = date.substring(0,16);
+			return date;
+		}
+		else {
+			return "error";
+		}
 	}
 }

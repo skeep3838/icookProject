@@ -78,7 +78,7 @@ text-align:center;
 <!-- //login -->
 
 <!-- for bootstrap working -->
-	<script src="/js/bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <!-- //for bootstrap working -->
 
 	
